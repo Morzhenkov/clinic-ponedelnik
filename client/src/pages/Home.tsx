@@ -1,186 +1,532 @@
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { ChevronDown, Check, X, MapPin, Phone, Mail, Clock } from "lucide-react";
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
 
 /**
  * Design Philosophy: Medical Minimalism with Warm Humanity
- * - Dark Forest Green (#1B5E3F): stability, medical authority
- * - Warm Beige (#F5F1ED): welcoming, intimate atmosphere
- * - Soft Gold (#D4A574): warmth, care, human touch
- * - Typography: Playfair Display (headlines), Inter (body)
- * - Spacing: Generous whitespace, breathing room between sections
- * - Animations: Smooth fade-in, unhurried transitions
+ * - Premium wellness clinic aesthetic with IV therapy focus
+ * - Color palette: Dark green (#1B5E3F), warm beige (#F5F1ED), soft gold (#D4A574)
+ * - Typography: Playfair Display (headers), Inter (body)
+ * - Emphasis on medical credibility, safety, and personalized approach
  */
 
-const HERO_IMAGE = "https://private-us-east-1.manuscdn.com/sessionFile/fKNQTjMYd592QJUtYjDbou/sandbox/Bfwpt8JRAXT72yUsWL2VoA-img-1_1772021284000_na1fn_aGVyby1jbGluaWMtcmVjZXB0aW9u.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvZktOUVRqTVlkNTkyUUpVdFlqRGJvdS9zYW5kYm94L0Jmd3B0OEpSQVhUNzJ5VXNXTDJWb0EtaW1nLTFfMTc3MjAyMTI4NDAwMF9uYTFmbl9hR1Z5YnkxamJHbHVhV010Y21WalpYQjBhVzl1LnBuZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=n-OmuWFZoHRPtAgbSxqDkYsonkDTCb6BDj1IPs6NrGOHGbSeWcNOtRgj5-hLt~H94wM6iGbcdCUpar0RRBqHmWVvhiGF-6r85PPt4qd3UDcMdiiCYUKVzT1PKhPOgtqSTYeNn-T6-gKUCJDoQ9TNJ1HHGa85YlA2v7fNvqc7Hl1S3iSES5OUsZVByASWAxIcbEIuW4Fe3l9J0Xq89aWIJieOb6NAdksJhopd6uG3ys5s7LmfzNGbNqqqZ1ciFX6cn4dNOP378oMFI25035yX5RI7my3gi9cchfil7Pz-XdaFXP4JRbCvtKcuqktRgiZ4O9oPUvSIibaoQ6lpZ2PmFg__";
-const CONSULTATION_IMAGE = "https://private-us-east-1.manuscdn.com/sessionFile/fKNQTjMYd592QJUtYjDbou/sandbox/Bfwpt8JRAXT72yUsWL2VoA-img-2_1772021294000_na1fn_Y29uc3VsdGF0aW9uLXJvb20tY2FsbQ.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvZktOUVRqTVlkNTkyUUpVdFlqRGJvdS9zYW5kYm94L0Jmd3B0OEpSQVhUNzJ5VXNXTDJWb0EtaW1nLTJfMTc3MjAyMTI5NDAwMF9uYTFmbl9ZMjl1YzNWc2RHRjBhVzl1TFhKdmIyMHRZMkZzYlEucG5nP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLHdfMTkyMCxoXzE5MjAvZm9ybWF0LHdlYnAvcXVhbGl0eSxxXzgwIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzk4NzYxNjAwfX19XX0_&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=VS13JNHpr0cvNd2~3tnYQ4S2R1cUU8Zmpgd1Tw14As9Na1UFhtCFmDYC3BPFdydsT0mNwH-vqD~G-zOcZjFlMbmAQS~QLQ8Ff~9wkNmdJ2jQx~HacWhwa1jisSZz38wXMPnqb1sJoJbZS~EYTJJKzaooPordv7RJJwGboC5JwUfyDHh7G7XYlZ6v208vqniTJLcKMJndid3Q2suP2maiRP6YIPuR8bkamRykAdoRQvvDSqBZKTE3EpKrRzkBHfFlUVqyalbZSmlkgJ-Bpa~KQzOcyp4p2k8e-ZNO~Urp7WhqikLQaTD-FD3bPBhth-hlEO59Bh02KkuA6wchcy42~A__";
-const WAITING_IMAGE = "https://private-us-east-1.manuscdn.com/sessionFile/fKNQTjMYd592QJUtYjDbou/sandbox/Bfwpt8JRAXT72yUsWL2VoA-img-3_1772021285000_na1fn_d2FpdGluZy1hcmVhLXdlbGxuZXNz.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvZktOUVRqTVlkNTkyUUpVdFlqRGJvdS9zYW5kYm94L0Jmd3B0OEpSQVhUNzJ5VXNXTDJWb0EtaW1nLTNfMTc3MjAyMTI4NTAwMF9uYTFmbl9kMkZwZEdsdVp5MWhjbVZoTFhkbGJHeHVaWE56LnBuZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=QBqtRtYe9hMymf0ItMLahiKskbNg1-VZ5alfy5pPH2PUnNReY9cIQ1CBivMDwqb8cz1mv0c5EHhkMZiADTtWwLT9ty3BUjJxjACFo4FyIVfnHWjo3ApEGZY-aWFfuXFZ17YQF0j-1nvI0QLCuZPa6MtiG~2YSXVopkuwjRkCYY8ErkXdVgO8GwDaljct1OozZxbCazTdKxPjgZiKahiRtVMwolkHKgs5cHxjlNmvdlwmEfmQUqkuhFyY93gs6QLkASpMYCSsSYKnZsCswgQRhdNt3PYMVixkalo6V~MvWyq5TCWLE-w1i7ojWizAtGEDVLgZPYKvR7Fb-57OSkFBug__";
-
-interface FAQItem {
-  question: string;
-  answer: string;
-}
-
-interface StoryItem {
-  title: string;
-  description: string;
-}
-
-interface TrustMarker {
-  text: string;
-}
-
 export default function Home() {
-  const [openFAQ, setOpenFAQ] = useState<number | null>(null);
+  const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
   const [formData, setFormData] = useState({ name: "", phone: "" });
+  const [submitted, setSubmitted] = useState(false);
 
-  const faqItems: FAQItem[] = [
-    {
-      question: "Я уже всё пробовал",
-      answer: "Мы начинаем с диагностики причин, а не с очередной диеты. Это совсем другой подход.",
-    },
-    {
-      question: "А если снова откатит",
-      answer: "Этап анти-откат 3–6 месяцев — это часть программы. Мы не уходим после первых результатов.",
-    },
-    {
-      question: "Я боюсь лекарств",
-      answer: "Лекарства — только если нужны. Сначала мы разбираемся с причинами. Всё обсуждается.",
-    },
-    {
-      question: "Меня будут стыдить",
-      answer: "Нет. Это медицинский процесс. Никакого осуждения, только помощь.",
-    },
-    {
-      question: "Можно онлайн",
-      answer: "Да, первая консультация может быть онлайн. Обсудим подробнее при встрече.",
-    },
-    {
-      question: "Это дорого",
-      answer: "Цена зависит от программы. Первая консультация — это разговор о возможностях.",
-    },
-    {
-      question: "Сколько длится",
-      answer: "Обычно 3–6 месяцев. Зависит от ваших целей и особенностей организма.",
-    },
-    {
-      question: "Будут жёсткие диеты",
-      answer: "Нет. План строится под вашу реальную жизнь, без режима «всё или ничего».",
-    },
-    {
-      question: "Если сорвусь",
-      answer: "Это нормально. Мы корректируем план и продолжаем. Без осуждения.",
-    },
-    {
-      question: "Это про красоту или здоровье",
-      answer: "Про здоровье. Красота — это следствие.",
-    },
-  ];
-
-  const stories: StoryItem[] = [
-    {
-      title: "«Устала от циклов»",
-      description:
-        "Минус 15 кг, потом плюс 20. Оказалось, нужна была не диета, а понимание своего метаболизма.",
-    },
-    {
-      title: "«Боялась врачей»",
-      description:
-        "Первый раз без стыда поговорила о весе. Оказалось, это просто медицинская задача.",
-    },
-    {
-      title: "«Не верила в результат»",
-      description:
-        "Результат держится уже 8 месяцев. Потому что мы работали с причинами, не с симптомами.",
-    },
-  ];
-
-  const trustMarkers: TrustMarker[] = [
-    { text: "Мы начинаем с диагностики" },
-    { text: "Нет универсальной схемы" },
-    { text: "Есть мониторинг" },
-    { text: "Есть корректировки" },
-    { text: "Есть этап закрепления" },
-    { text: "Нет стыда" },
-    { text: "Медицинский подход" },
-    { text: "Поддержка на каждом этапе" },
-    { text: "Результат, который держится" },
-    { text: "Без марафонов" },
-    { text: "Без давления" },
-    { text: "Только честный разговор" },
-  ];
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log("Form submitted:", formData);
+    setSubmitted(true);
+    setTimeout(() => setSubmitted(false), 3000);
   };
+
+  // Main programs
+  const programs = [
+    {
+      id: 1,
+      name: "Старт",
+      subtitle: "запуск программы похудения",
+      description:
+        "Первая ступень, чтобы безопасно войти в процесс снижения веса. Персональная консультация, базовая диагностика и стартовый курс, который мягко разгружает организм и подготавливает к более глубокой трансформации.",
+      features: [
+        "Персональная и корректирующая консультация врача",
+        "Подбор iv‑терапии и плана по снижению веса",
+        "Рекомендации по питанию и образу жизни",
+      ],
+      duration: "Индивидуально, стартовый курс",
+      price: "65 000 ₽",
+    },
+    {
+      id: 2,
+      name: "Основная программа трансформации",
+      description:
+        "Главная программа для заметного снижения веса и изменения самочувствия. Глубокая работа с метаболизмом, аппетитом и привычками под постоянным контролем врача.",
+      features: [
+        "Персональные и промежуточные консультации врача",
+        "Курс капельниц для жиросжигания, детокса и энергии",
+        "Подбор плана питания и режима под ваш ритм жизни",
+        "Коррекция программы по ходу курса",
+      ],
+      duration: "Курс из нескольких этапов",
+      price: "98 000 ₽",
+    },
+    {
+      id: 3,
+      name: "Поддержка и стабилизация",
+      subtitle: "результата",
+      description:
+        "Этап, который помогает закрепить достигнутый вес и не откатиться назад. Поддерживающие капельницы, контроль врача и мягкая коррекция образа жизни.",
+      features: [
+        "Персональные и корректирующие консультации врача",
+        "Поддерживающие капельницы для метаболизма и энергии",
+        "Рекомендации по питанию и режиму для удержания веса",
+      ],
+      duration: "Курс поддерживающих визитов",
+      price: "52 000 ₽",
+    },
+  ];
+
+  // Additional services
+  const additionalServices = [
+    {
+      category: "Метаболизм и похудение",
+      items: [
+        {
+          name: "Метаболическая поддержка",
+          price: "13 000 ₽",
+          description:
+            "Запуск активного жиросжигания и ускорение метаболизма. Улучшает работу печени, усиливает расщепление жиров и повышает уровень энергии.",
+        },
+        {
+          name: "Экспресс‑похудение",
+          price: "11 000 ₽",
+          description:
+            "Интенсивная капельница для быстрого запуска снижения веса. Помогает активировать процессы жиросжигания, уменьшить объёмы.",
+        },
+        {
+          name: "Антиинсулинорезистентность",
+          price: "11 000 ₽",
+          description:
+            "Нормализация углеводного обмена и чувствительности к инсулину. Стабилизирует уровень глюкозы в крови.",
+        },
+        {
+          name: "Метаболическая активация",
+          price: "11 000 ₽",
+          description:
+            "Насыщает клетки энергией, повышает выносливость и увеличивает сжигание жиров организмом.",
+        },
+      ],
+    },
+    {
+      category: "Детокс и восстановление",
+      items: [
+        {
+          name: "Экспресс детокс",
+          price: "12 000 ₽",
+          description:
+            "Быстрое и качественное очищение организма от токсинов. Помогает снять чувство тяжести и вернуть комфорт в теле.",
+        },
+        {
+          name: "AfterParty",
+          price: "15 000 ₽",
+          description:
+            "Восстановительная капельница после интоксикаций. Улучшает работу печени, возвращает энергию и ясность ума.",
+        },
+        {
+          name: "Супер детокс",
+          price: "17 000 ₽",
+          description:
+            "Комплексное очищение организма на всех уровнях и восстановление клеток.",
+        },
+        {
+          name: "Витаминная",
+          price: "15 000 ₽",
+          description:
+            "Комплексная поддержка печени и детоксикации за счёт витаминов.",
+        },
+      ],
+    },
+    {
+      category: "Восполнение дефицитов",
+      items: [
+        {
+          name: "Восполнение железа",
+          price: "9 000 ₽",
+          description:
+            "Восстановление уровня железа и профилактика анемии. Снижает усталость, улучшает концентрацию.",
+        },
+        {
+          name: "Витаминная (B, C, D)",
+          price: "12 000 ₽",
+          description:
+            "Комплексное насыщение организма витаминами. Поддержка иммунитета и обмена веществ.",
+        },
+        {
+          name: "Минеральная",
+          price: "11 000 ₽",
+          description:
+            "Восстановление минерального баланса и устранение обезвоживания.",
+        },
+        {
+          name: "Протеиновая",
+          price: "13 000 ₽",
+          description:
+            "Восполняет дефицит белка, делает кожу более упругой, ногти крепкими.",
+        },
+      ],
+    },
+    {
+      category: "Красота и сосуды",
+      items: [
+        {
+          name: "Восстановление волос",
+          price: "13 000 ₽",
+          description:
+            "Поддержка роста и укрепление волос изнутри. Снижает ломкость и выпадение.",
+        },
+        {
+          name: "Сияющая кожа",
+          price: "16 000 ₽",
+          description:
+            "Придаёт коже сияние, уменьшает пигментацию и повышает упругость.",
+        },
+        {
+          name: "Поддержка сосудов",
+          price: "13 000 ₽",
+          description:
+            "Комплекс для микроциркуляции и сосудистого тонуса. Улучшает кровоснабжение тканей.",
+        },
+        {
+          name: "Золушка",
+          price: "10 000 ₽",
+          description:
+            "Комплекс антиоксидантов для молодости и красоты. Помогает коже выглядеть свежей.",
+        },
+      ],
+    },
+    {
+      category: "Энергия и спорт",
+      items: [
+        {
+          name: "Заряд энергии",
+          price: "13 000 ₽",
+          description:
+            "Помогает эффективно восстановиться и вернуть силы для новых задач.",
+        },
+        {
+          name: "Энерго+",
+          price: "11 000 ₽",
+          description:
+            "Повышает уровень энергии, улучшает переносимость нагрузок.",
+        },
+        {
+          name: "Миланский коктейль",
+          price: "15 000 ₽",
+          description:
+            "Повышает выносливость, силовые показатели и эффективность тренировок.",
+        },
+      ],
+    },
+    {
+      category: "Омоложение, стресс и сон",
+      items: [
+        {
+          name: "Antiage",
+          price: "21 000 ₽",
+          description:
+            "Омоложение на клеточном уровне. Поддержка кожи, тканей и общего тонуса организма.",
+        },
+        {
+          name: "NAD+ 2.0",
+          price: "20 000 ₽",
+          description:
+            "Усиленная капельница клеточного восстановления. Энергия, концентрация и мощная анти‑эйдж поддержка.",
+        },
+        {
+          name: "Антистресс",
+          price: "16 000 ₽",
+          description:
+            "Помогает восстановиться после длительного стресса и справиться с тревожностью.",
+        },
+        {
+          name: "Здоровый сон",
+          price: "11 500 ₽",
+          description:
+            "Снимает нервное напряжение, помогает быстро заснуть и проснуться полным сил.",
+        },
+      ],
+    },
+    {
+      category: "Мозг и концентрация",
+      items: [
+        {
+          name: "Ясный ум",
+          price: "13 500 ₽",
+          description:
+            "Улучшает когнитивные функции, помогает справиться с интенсивной умственной нагрузкой.",
+        },
+        {
+          name: "Супер IQ",
+          price: "12 500 ₽",
+          description:
+            "Интеллектуальная капельница для ясности мышления и устойчивой концентрации.",
+        },
+      ],
+    },
+  ];
+
+  // FAQ items
+  const faqItems = [
+    {
+      question: "Насколько это безопасно?",
+      answer:
+        "Все процедуры проводятся под контролем опытных врачей. Состав и дозировки подбираются индивидуально по результатам анализов. Мы используем только проверенные и безопасные компоненты.",
+    },
+    {
+      question: "Обязательно ли сдавать анализы?",
+      answer:
+        "Да, анализы — это основа для подбора правильной программы. Они помогают врачу понять ваш метаболический статус и выбрать оптимальный состав капельницы.",
+    },
+    {
+      question: "Можно ли совмещать программы с спортом?",
+      answer:
+        "Конечно! Физическая активность хорошо дополняет программы похудения. Врач даст вам рекомендации по интенсивности и типу нагрузок.",
+    },
+    {
+      question: "Сколько процедур нужно для результата?",
+      answer:
+        "Это зависит от ваших целей и исходного состояния. Обычно первые результаты видны уже после 3–5 процедур. Полный курс подбирается индивидуально.",
+    },
+    {
+      question: "Поможет ли, если я уже пробовал/пробовала диеты?",
+      answer:
+        "Да, наш подход отличается от диет. Мы работаем с причинами, а не с симптомами. IV-терапия помогает нормализовать метаболизм и аппетит, что часто не удаётся диетами.",
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Section 1: Hero */}
-      <section
-        className="relative w-full h-screen min-h-[600px] flex items-center justify-center overflow-hidden"
-        style={{
-          backgroundImage: `url(${HERO_IMAGE})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="absolute inset-0 bg-black/30"></div>
-        <div className="relative z-10 container mx-auto px-4 text-center max-w-2xl">
-          <h1 className="text-white mb-6 leading-tight">
-            Вы не слабовольный.
-            <br />
-            Лишний вес — это метаболическая задача.
+      {/* Navigation */}
+      <nav className="sticky top-0 z-50 bg-white border-b border-border shadow-sm">
+        <div className="container flex items-center justify-between h-16">
+          <div className="text-xl font-bold text-primary">Понедельник</div>
+          <div className="hidden md:flex gap-8">
+            <a href="#programs" className="text-sm text-foreground hover:text-primary">
+              Программы
+            </a>
+            <a href="#how-it-works" className="text-sm text-foreground hover:text-primary">
+              Как это работает
+            </a>
+            <a href="#doctors" className="text-sm text-foreground hover:text-primary">
+              Врачи
+            </a>
+            <a href="#results" className="text-sm text-foreground hover:text-primary">
+              Результаты
+            </a>
+            <a href="#faq" className="text-sm text-foreground hover:text-primary">
+              Вопросы
+            </a>
+            <a href="#contacts" className="text-sm text-foreground hover:text-primary">
+              Контакты
+            </a>
+          </div>
+          <div className="flex gap-3">
+            <Button variant="outline" size="sm">
+              Подобрать программу
+            </Button>
+            <Button size="sm" className="bg-primary hover:bg-primary/90">
+              Записаться
+            </Button>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="relative py-20 overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage:
+              "url('https://d2xsxph8kpxj0f.cloudfront.net/310519663096993096/hdtQvaxiWb9W7weDTCV6tP/iv-therapy-procedure-HrfhGSzZrzp7Ymjgf9SXUg.webp')",
+          }}
+        >
+          <div className="absolute inset-0 bg-black/40"></div>
+        </div>
+        <div className="container relative z-10 max-w-3xl">
+          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 font-display">
+            Похудение с врачами, а не диетами
           </h1>
-          <p className="text-white/90 text-lg mb-8 leading-relaxed">
-            Мы начинаем с диагностики причин и ведём до устойчивого результата — с этапом
-            анти-откат 3–6 месяцев.
+          <p className="text-xl text-white/90 mb-8 leading-relaxed">
+            Инфузионные капельницы, check‑up и питание по анализам — безопасный путь к минус
+            сантиметрам и килограммам
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              variant="outline"
-              size="lg"
-              className="bg-white/20 border-white text-white hover:bg-white/30"
-            >
-              Хочу понять причины
-            </Button>
-            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
-              Записаться на консультацию
-            </Button>
+
+          {/* UTP Block */}
+          <div className="grid md:grid-cols-2 gap-4 mb-12">
+            <div className="bg-white/95 p-4 rounded-lg">
+              <div className="flex gap-3">
+                <div className="w-6 h-6 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-white text-sm font-bold">
+                  ✓
+                </div>
+                <p className="text-sm text-foreground">
+                  Медицинский подход к снижению веса, а не модные диеты
+                </p>
+              </div>
+            </div>
+            <div className="bg-white/95 p-4 rounded-lg">
+              <div className="flex gap-3">
+                <div className="w-6 h-6 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-white text-sm font-bold">
+                  ✓
+                </div>
+                <p className="text-sm text-foreground">
+                  Капельницы, которые работают точечно по причинам набора веса
+                </p>
+              </div>
+            </div>
+            <div className="bg-white/95 p-4 rounded-lg">
+              <div className="flex gap-3">
+                <div className="w-6 h-6 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-white text-sm font-bold">
+                  ✓
+                </div>
+                <p className="text-sm text-foreground">
+                  Check-up, чтобы не навредить здоровью и усилить результат
+                </p>
+              </div>
+            </div>
+            <div className="bg-white/95 p-4 rounded-lg">
+              <div className="flex gap-3">
+                <div className="w-6 h-6 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-white text-sm font-bold">
+                  ✓
+                </div>
+                <p className="text-sm text-foreground">
+                  Процедуры без боли и стресса: просто прилечь и расслабиться
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Hero Form */}
+          <div className="bg-white rounded-lg p-8 shadow-lg">
+            <p className="text-sm text-muted-foreground mb-4">
+              Оставьте контакты — подберём программу похудения за 5 минут. Первая консультация врача
+              — в подарок.
+            </p>
+            <form onSubmit={handleFormSubmit} className="space-y-4">
+              <div>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Ваше имя"
+                  value={formData.name}
+                  onChange={handleFormChange}
+                  className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                  required
+                />
+              </div>
+              <div>
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="+7 (999) 999-99-99"
+                  value={formData.phone}
+                  onChange={handleFormChange}
+                  className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                  required
+                />
+              </div>
+              <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-white">
+                Получить программу
+              </Button>
+            </form>
+            {submitted && (
+              <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg text-green-700 text-sm">
+                ✓ Ваша заявка принята! Мы свяжемся с вами в течение 5 минут.
+              </div>
+            )}
           </div>
         </div>
       </section>
 
-      {/* Section 2: Positioning */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-primary mb-6">Это не «похудение». Это медицинский процесс.</h2>
-            <p className="text-lg text-foreground/80 leading-relaxed mb-8">
-              Вы не «ленивый» и не «слабовольный». Чаще всего лишний вес — это гормональные,
-              метаболические и поведенческие механизмы. Мы работаем с причинами, а не с запретами.
+      {/* Our Approach Section */}
+      <section className="py-16 bg-white">
+        <div className="container">
+          <h2 className="text-4xl font-bold text-center mb-4 font-display text-primary">
+            Наш подход к похудению
+          </h2>
+          <div className="max-w-3xl mx-auto bg-accent/30 p-8 rounded-lg">
+            <p className="text-lg text-foreground mb-4 leading-relaxed">
+              Мы работаем не с диетами, а с истинными причинами лишнего веса — через iv‑терапию,
+              интегративный и превентивный подход. Капельницы помогают мягко снижать вес, убирать
+              тягу к еде, очищать организм, выравнивать гормональный фон и возвращать энергию.
+            </p>
+            <p className="text-foreground leading-relaxed">
+              <strong>Фокус направлений:</strong> уменьшение жировой прослойки, управление
+              аппетитом, детокс и восстановление после срывов и хронического стресса, поддержка
+              работы щитовидной железы и гормонов, защита кожи во время похудения.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Programs Section */}
+      <section id="programs" className="py-16 bg-background">
+        <div className="container">
+          <h2 className="text-4xl font-bold text-center mb-12 font-display text-primary">
+            Программы похудения
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            {programs.map((program) => (
+              <div key={program.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                <div className="p-6 border-b border-border">
+                  <h3 className="text-2xl font-bold text-primary mb-2 font-display">{program.name}</h3>
+                  {program.subtitle && (
+                    <p className="text-sm text-muted-foreground">{program.subtitle}</p>
+                  )}
+                </div>
+                <div className="p-6">
+                  <p className="text-sm text-foreground mb-4">{program.description}</p>
+                  <div className="mb-6">
+                    <p className="text-xs font-semibold text-primary mb-3">Что внутри:</p>
+                    <ul className="space-y-2">
+                      {program.features.map((feature, idx) => (
+                        <li key={idx} className="flex gap-2 text-sm text-foreground">
+                          <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="border-t border-border pt-4 mb-4">
+                    <p className="text-xs text-muted-foreground mb-1">Длительность:</p>
+                    <p className="text-sm font-semibold text-foreground mb-3">{program.duration}</p>
+                    <p className="text-2xl font-bold text-primary">от {program.price}</p>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button variant="outline" className="flex-1">
+                      Подробнее
+                    </Button>
+                    <Button className="flex-1 bg-primary hover:bg-primary/90">
+                      Записаться
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Additional Services Note */}
+          <div className="bg-accent/20 p-6 rounded-lg mb-12">
+            <p className="text-center text-foreground">
+              <strong>Разовая консультация врача</strong> — 5 000 ₽ | <strong>Набор анализов + iv‑терапия</strong> — 24 000 ₽
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {[
-              "Диагностика причин",
-              "План под вашу реальную жизнь",
-              "Контроль безопасности",
-              "Анти-откат 3–6 месяцев",
-            ].map((marker, idx) => (
-              <div
-                key={idx}
-                className="p-6 bg-white rounded-lg border border-border shadow-sm hover:shadow-md transition-shadow"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0 mt-1">
-                    <div className="w-2 h-2 rounded-full bg-primary"></div>
-                  </div>
-                  <p className="font-medium text-foreground">{marker}</p>
+          {/* Additional Services */}
+          <div className="mb-12">
+            <p className="text-center text-foreground mb-8">
+              Капельницы можно подключать к основным программам похудения как усиление эффекта или
+              проходить отдельными курсами. Ниже — дополнительные направления: метаболизм, детокс,
+              иммунитет, красота, энергия, сон, стресс и когнитивная продуктивность.
+            </p>
+
+            {additionalServices.map((serviceGroup, groupIdx) => (
+              <div key={groupIdx} className="mb-12">
+                <h3 className="text-2xl font-bold text-primary mb-6 font-display">
+                  {serviceGroup.category}
+                </h3>
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {serviceGroup.items.map((item, idx) => (
+                    <div key={idx} className="bg-white p-4 rounded-lg border border-border hover:shadow-md transition-shadow">
+                      <h4 className="font-semibold text-foreground mb-1">{item.name}</h4>
+                      <p className="text-primary font-bold text-lg mb-3">{item.price}</p>
+                      <p className="text-xs text-muted-foreground">{item.description}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
             ))}
@@ -188,193 +534,138 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Section 3: How It Works */}
-      <section className="py-20 bg-secondary/30">
-        <div className="container mx-auto px-4">
-          <h2 className="text-center text-primary mb-16">Как работает метод</h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-12">
-            {[
-              {
-                step: "1",
-                title: "Понимаем причины",
-                description: "Диагностика метаболических и гормональных факторов.",
-              },
-              {
-                step: "2",
-                title: "Строим персональный план",
-                description: 'Без режима "всё или ничего".',
-              },
-              {
-                step: "3",
-                title: "Закрепляем результат",
-                description: "Сопровождение 3–6 месяцев.",
-              },
-            ].map((item, idx) => (
-              <div key={idx} className="text-center">
-                <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-lg mx-auto mb-4">
-                  {item.step}
-                </div>
-                <h3 className="text-xl font-semibold text-foreground mb-3">{item.title}</h3>
-                <p className="text-foreground/70">{item.description}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center">
-            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
-              Получить план действий
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 4: Why Relapse Happens */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-primary mb-8 text-center">Почему откатывает</h2>
-            <div className="bg-white p-8 rounded-lg border border-border">
-              <p className="text-foreground/80 leading-relaxed mb-4">
-                Если вес возвращался — это не слабость.
-              </p>
-              <p className="text-foreground/80 leading-relaxed mb-4">
-                Организм защищает привычный метаболический режим.
-              </p>
-              <p className="text-foreground/80 leading-relaxed">
-                Поэтому удержание — отдельный этап лечения.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 5: What We're Not */}
-      <section className="py-20 bg-secondary/30">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-center text-primary mb-12">Чем мы не являемся</h2>
-            <div className="space-y-4 mb-8">
+      {/* How It Works Section */}
+      <section id="how-it-works" className="py-16 bg-white">
+        <div className="container">
+          <h2 className="text-4xl font-bold text-center mb-12 font-display text-primary">
+            Как проходят процедуры
+          </h2>
+          <div className="max-w-4xl mx-auto">
+            <div className="space-y-4 mb-12">
               {[
-                "Мы не марафон.",
-                "Мы не диета на силе воли.",
-                "Мы не быстрый минус любой ценой.",
-                "Мы не оставляем после первых результатов.",
-              ].map((text, idx) => (
-                <div key={idx} className="flex items-start gap-4 p-4 bg-white rounded-lg">
-                  <div className="text-primary font-bold text-xl">✕</div>
-                  <p className="text-foreground/80">{text}</p>
+                "Онлайн-заявка или звонок",
+                "Консультация врача (оффлайн/онлайн), сбор анамнеза, назначение анализов",
+                "Check-up (анализы крови, оценка гормонального и метаболического статуса)",
+                "Подбор индивидуальной программы похудения (капельницы + питание + режим)",
+                "Прохождение процедур в клинике (мягкие кресла, чай, музыка, 30–90 минут)",
+                "Контрольные визиты, корректировка программы",
+              ].map((step, idx) => (
+                <div key={idx} className="flex gap-4">
+                  <div className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold flex-shrink-0">
+                    {idx + 1}
+                  </div>
+                  <div className="flex items-center">
+                    <p className="text-foreground">{step}</p>
+                  </div>
                 </div>
               ))}
             </div>
-            <div className="bg-primary text-primary-foreground p-6 rounded-lg text-center">
-              <p className="text-lg font-medium">Мы лечим причины и ведём до устойчивости.</p>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Section 6: Trust */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-            <div>
-              <h2 className="text-primary mb-8">Почему нам можно доверять</h2>
-              <div className="grid grid-cols-2 gap-4">
-                {trustMarkers.map((marker, idx) => (
-                  <div key={idx} className="flex items-start gap-3">
-                    <div className="w-5 h-5 rounded-full bg-accent flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <div className="w-1.5 h-1.5 rounded-full bg-primary"></div>
-                    </div>
-                    <p className="text-foreground/80 text-sm">{marker.text}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="rounded-lg overflow-hidden h-96">
-              <img
-                src={CONSULTATION_IMAGE}
-                alt="Consultation room"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 7: Who It's For */}
-      <section className="py-20 bg-secondary/30">
-        <div className="container mx-auto px-4">
-          <h2 className="text-center text-primary mb-12">Кому подойдёт / не подойдёт</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <div>
-              <h3 className="text-lg font-semibold text-primary mb-6">Подойдёт:</h3>
-              <ul className="space-y-3">
-                {["Устали начинать заново", "Хотите удержать результат", "Нужна система"].map(
-                  (item, idx) => (
-                    <li key={idx} className="flex items-start gap-3">
-                      <span className="text-accent font-bold">✓</span>
-                      <span className="text-foreground/80">{item}</span>
+            {/* IV Benefits */}
+            <div className="grid md:grid-cols-2 gap-8 mb-12">
+              <div
+                className="rounded-lg p-8 text-white"
+                style={{
+                  backgroundImage:
+                    "url('https://d2xsxph8kpxj0f.cloudfront.net/310519663096993096/hdtQvaxiWb9W7weDTCV6tP/doctor-consultation-NkoBpyY75JQTKVbprpHfXZ.webp')",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              >
+                <div className="bg-black/50 p-6 rounded-lg">
+                  <h3 className="text-2xl font-bold mb-4 font-display">Преимущества IV-введения</h3>
+                  <ul className="space-y-3">
+                    <li className="flex gap-2">
+                      <Check className="w-5 h-5 flex-shrink-0" />
+                      <span>Полезные вещества попадают сразу в кровь, минуя ЖКТ, усвоение близко к 100%</span>
                     </li>
-                  )
-                )}
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold text-primary mb-6">Не подойдёт:</h3>
-              <ul className="space-y-3">
-                {[
-                  "Ищете быстро любой ценой",
-                  "Нужен волшебный способ",
-                  "Не готовы к наблюдению",
-                ].map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-3">
-                    <span className="text-destructive font-bold">✕</span>
-                    <span className="text-foreground/80">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 8: Stories */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <h2 className="text-center text-primary mb-12">Истории узнавания</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {stories.map((story, idx) => (
-              <div key={idx} className="bg-white p-6 rounded-lg border border-border">
-                <h3 className="text-foreground font-semibold mb-3">{story.title}</h3>
-                <p className="text-foreground/70 text-sm leading-relaxed">{story.description}</p>
+                    <li className="flex gap-2">
+                      <Check className="w-5 h-5 flex-shrink-0" />
+                      <span>Эффект чувствуете уже в первые минуты/часы после процедуры</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
-            ))}
+
+              <div
+                className="rounded-lg p-8 text-white"
+                style={{
+                  backgroundImage:
+                    "url('https://d2xsxph8kpxj0f.cloudfront.net/310519663096993096/hdtQvaxiWb9W7weDTCV6tP/clinic-reception-jmJdCtFncFimLXSjfDkaXj.webp')",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              >
+                <div className="bg-black/50 p-6 rounded-lg">
+                  <h3 className="text-2xl font-bold mb-4 font-display">Комфорт и безопасность</h3>
+                  <ul className="space-y-3">
+                    <li className="flex gap-2">
+                      <Check className="w-5 h-5 flex-shrink-0" />
+                      <span>Мягкие кресла с реклайнером</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <Check className="w-5 h-5 flex-shrink-0" />
+                      <span>Чай/кофе, спокойная музыка, возможность работать с ноутбуком</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <Check className="w-5 h-5 flex-shrink-0" />
+                      <span>Процедуры под постоянным наблюдением медперсонала</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <Check className="w-5 h-5 flex-shrink-0" />
+                      <span>Состав и дозировки подбирает врач по анализам и анамнезу</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Section 9: FAQ */}
-      <section className="py-20 bg-secondary/30">
-        <div className="container mx-auto px-4">
-          <h2 className="text-center text-primary mb-12">Часто задаваемые вопросы</h2>
-          <div className="max-w-3xl mx-auto space-y-3">
+      {/* Results Section */}
+      <section id="results" className="py-16 bg-background">
+        <div className="container">
+          <h2 className="text-4xl font-bold text-center mb-4 font-display text-primary">
+            Результаты до/после
+          </h2>
+          <p className="text-center text-foreground mb-12 max-w-2xl mx-auto">
+            За время работы нашу методику похудения опробовали люди разных возрастов и запросов —
+            вот их результаты
+          </p>
+          <div
+            className="rounded-lg overflow-hidden h-96 bg-cover bg-center"
+            style={{
+              backgroundImage:
+                "url('https://d2xsxph8kpxj0f.cloudfront.net/310519663096993096/hdtQvaxiWb9W7weDTCV6tP/wellness-results-CCDrWAnx4WMRuRR4bDSn54.webp')",
+            }}
+          ></div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section id="faq" className="py-16 bg-white">
+        <div className="container max-w-3xl">
+          <h2 className="text-4xl font-bold text-center mb-12 font-display text-primary">
+            Частые вопросы
+          </h2>
+          <div className="space-y-3">
             {faqItems.map((item, idx) => (
-              <div key={idx} className="bg-white rounded-lg border border-border overflow-hidden">
+              <div key={idx} className="border border-border rounded-lg overflow-hidden">
                 <button
-                  onClick={() => setOpenFAQ(openFAQ === idx ? null : idx)}
-                  className="w-full px-6 py-4 flex items-center justify-between hover:bg-secondary/20 transition-colors"
+                  onClick={() => setExpandedFaq(expandedFaq === idx ? null : idx)}
+                  className="w-full p-4 flex items-center justify-between hover:bg-accent/10 transition-colors text-left"
                 >
-                  <span className="font-medium text-foreground text-left">{item.question}</span>
+                  <span className="font-semibold text-foreground">{item.question}</span>
                   <ChevronDown
                     className={`w-5 h-5 text-primary transition-transform ${
-                      openFAQ === idx ? "rotate-180" : ""
+                      expandedFaq === idx ? "rotate-180" : ""
                     }`}
                   />
                 </button>
-                {openFAQ === idx && (
-                  <div className="px-6 py-4 bg-secondary/10 border-t border-border">
-                    <p className="text-foreground/70">{item.answer}</p>
+                {expandedFaq === idx && (
+                  <div className="p-4 bg-accent/5 border-t border-border">
+                    <p className="text-foreground text-sm leading-relaxed">{item.answer}</p>
                   </div>
                 )}
               </div>
@@ -383,106 +674,103 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Section 10: Anti-Relapse */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-            <div className="rounded-lg overflow-hidden h-96">
-              <img src={WAITING_IMAGE} alt="Waiting area" className="w-full h-full object-cover" />
-            </div>
-            <div>
-              <h2 className="text-primary mb-6">Главное начинается после первых результатов.</h2>
-              <p className="text-foreground/80 leading-relaxed mb-6">
-                Мы сопровождаем 3–6 месяцев, чтобы вес не возвращался. Мониторинг, корректировки,
-                поддержка в риск-точках.
-              </p>
-              <p className="text-foreground/70 text-sm italic">
-                Это не просто программа похудения. Это переход на новый уровень здоровья.
-              </p>
-            </div>
-          </div>
+      {/* Final CTA Section */}
+      <section className="py-16 bg-primary text-white">
+        <div className="container max-w-2xl text-center">
+          <h2 className="text-4xl font-bold mb-4 font-display">
+            Остались вопросы по программам похудения?
+          </h2>
+          <p className="text-lg mb-8 opacity-90">
+            Получите консультацию специалиста. Первая консультация врача — бесплатно. Подберём
+            программу под ваши анализы и образ жизни.
+          </p>
+          <form onSubmit={handleFormSubmit} className="space-y-4">
+            <input
+              type="text"
+              placeholder="Ваше имя"
+              className="w-full px-4 py-3 rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-white"
+              required
+            />
+            <input
+              type="tel"
+              placeholder="+7 (999) 999-99-99"
+              className="w-full px-4 py-3 rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-white"
+              required
+            />
+            <Button type="submit" variant="outline" className="w-full">
+              Получить консультацию
+            </Button>
+          </form>
         </div>
       </section>
 
-      {/* Section 11: Final CTA + Form */}
-      <section className="py-20 bg-secondary/30">
-        <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-primary mb-6">
-                Если вы устали бороться — вам не нужно снова доказывать себе, что вы «можете».
-              </h2>
-              <p className="text-foreground/80 text-lg">
-                Нужно понять причины и получить медицинский план.
-              </p>
+      {/* Contacts Section */}
+      <section id="contacts" className="py-16 bg-white">
+        <div className="container">
+          <h2 className="text-4xl font-bold text-center mb-12 font-display text-primary">
+            Контакты
+          </h2>
+          <div className="grid md:grid-cols-2 gap-12">
+            <div>
+              <h3 className="text-2xl font-bold mb-6 font-display text-primary">Адрес клиники</h3>
+              <div className="space-y-4">
+                <div className="flex gap-3">
+                  <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
+                  <div>
+                    <p className="font-semibold text-foreground">г. Москва</p>
+                    <p className="text-foreground">ул. Адмирала Макарова 6А</p>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <Clock className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
+                  <div>
+                    <p className="font-semibold text-foreground">График работы</p>
+                    <p className="text-foreground">Ежедневно с 8:00 до 21:00</p>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <Phone className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
+                  <div>
+                    <p className="font-semibold text-foreground">Телефон</p>
+                    <p className="text-foreground">+7 (999) 999-99-99</p>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <Mail className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
+                  <div>
+                    <p className="font-semibold text-foreground">Email</p>
+                    <p className="text-foreground">info@ponedelnik.clinic</p>
+                  </div>
+                </div>
+              </div>
             </div>
-
-            <form onSubmit={handleFormSubmit} className="bg-white p-8 rounded-lg border border-border">
-              <div className="space-y-4 mb-6">
+            <div>
+              <h3 className="text-2xl font-bold mb-6 font-display text-primary">Как добраться</h3>
+              <div className="space-y-4">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-                    Имя
-                  </label>
-                  <Input
-                    id="name"
-                    type="text"
-                    placeholder="Ваше имя"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full"
-                  />
+                  <p className="font-semibold text-foreground mb-2">Метро</p>
+                  <p className="text-foreground">
+                    Ближайшие станции: Парк культуры, Смоленская (5–10 минут пешком)
+                  </p>
                 </div>
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">
-                    Телефон
-                  </label>
-                  <Input
-                    id="phone"
-                    type="tel"
-                    placeholder="+7 (999) 999-99-99"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full"
-                  />
+                  <p className="font-semibold text-foreground mb-2">Парковка</p>
+                  <p className="text-foreground">
+                    Бесплатная парковка на территории клиники для пациентов
+                  </p>
                 </div>
               </div>
-
-              <div className="bg-secondary/20 p-4 rounded-lg mb-6 text-sm text-foreground/70">
-                <p className="mb-3">
-                  <strong>Мы не будем «продавать».</strong>
-                </p>
-                <p>Сначала разберём причины и возможные решения.</p>
-              </div>
-
-              <div className="space-y-2 mb-6 text-sm text-foreground/70">
-                <p>
-                  <strong>Это обязательство?</strong> Нет.
-                </p>
-                <p>
-                  <strong>Меня будут оценивать?</strong> Нет.
-                </p>
-                <p>
-                  <strong>Можно онлайн?</strong> Да.
-                </p>
-              </div>
-
-              <Button
-                type="submit"
-                size="lg"
-                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
-              >
-                Получить консультацию
-              </Button>
-            </form>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-primary text-primary-foreground py-8">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-sm opacity-90">
-            © 2024 Клиника медицинского снижения веса «Понедельник». Все права защищены.
+      <footer className="bg-primary text-white py-8">
+        <div className="container text-center">
+          <p className="mb-2">© 2024 Клиника медицинского снижения веса «Понедельник»</p>
+          <p className="text-sm opacity-75">
+            Все права защищены. Информация на сайте не является публичной офертой.
           </p>
         </div>
       </footer>

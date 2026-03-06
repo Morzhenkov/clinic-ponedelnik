@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
-import { ChevronDown, Check, X, MapPin, Phone, Mail, Clock } from "lucide-react";
+import { ChevronDown, Check, MapPin, Phone, Mail, Clock } from "lucide-react";
 import { useState } from "react";
 
 /**
  * Design Philosophy: Medical Minimalism with Warm Humanity
- * - Premium wellness clinic aesthetic with IV therapy focus
+ * - Premium wellness clinic aesthetic with peptide therapy focus
  * - Color palette: Dark green (#1B5E3F), warm beige (#F5F1ED), soft gold (#D4A574)
  * - Typography: Playfair Display (headers), Inter (body)
  * - Emphasis on medical credibility, safety, and personalized approach
@@ -13,9 +13,10 @@ import { useState } from "react";
 export default function Home() {
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
   const [formData, setFormData] = useState({ name: "", phone: "" });
+  const [selectedProgram, setSelectedProgram] = useState("Старт");
   const [submitted, setSubmitted] = useState(false);
 
-  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -30,44 +31,54 @@ export default function Home() {
     {
       id: 1,
       name: "Старт",
-      subtitle: "запуск программы похудения",
+      subtitle: "безопасное начало программы снижения веса",
       description:
-        "Первая ступень, чтобы безопасно войти в процесс снижения веса. Персональная консультация, базовая диагностика и стартовый курс, который мягко разгружает организм и подготавливает к более глубокой трансформации.",
+        "Первая ступень программы снижения веса. На этом этапе врач проводит диагностику, составляет индивидуальный план терапии, запускает процесс снижения веса и подготавливает организм к дальнейшей работе.",
       features: [
-        "Персональная и корректирующая консультация врача",
-        "Подбор iv‑терапии и плана по снижению веса",
-        "Рекомендации по питанию и образу жизни",
+        "Консультация врача - назначение и оценка анализов, выявление причин набора веса и составление индивидуального плана терапии",
+        "Пептидная терапия - 4 процедуры. Помогает контролировать аппетит, улучшает метаболизм и запускает процесс снижения веса",
+        "Поддержка организма IV-терапией - восполнение дефицитов витаминов, микроэлементов и аминокислот",
+        "Рекомендации по питанию и образу жизни. План, который поддерживает результат программы",
       ],
-      duration: "Индивидуально, стартовый курс",
-      price: "65 000 ₽",
+      results: ["Уходят первые 3-5 кг", "Уходит отечность", "Запускается метаболизм", "Начинается терапия"],
+      duration: "4 недели",
+      price: "от 65 000 ₽",
+      pricePerWeek: "~ 16 250 ₽ в неделю",
     },
     {
       id: 2,
-      name: "Основная программа трансформации",
+      name: "Интенсив",
+      subtitle: "усиление терапии",
       description:
-        "Главная программа для заметного снижения веса и изменения самочувствия. Глубокая работа с метаболизмом, аппетитом и привычками под постоянным контролем врача.",
+        "На этом этапе усиливается терапия, корректируются дозировки препаратов и подключаются дополнительные методы поддержки организма.",
       features: [
-        "Персональные и промежуточные консультации врача",
-        "Курс капельниц для жиросжигания, детокса и энергии",
-        "Подбор плана питания и режима под ваш ритм жизни",
-        "Коррекция программы по ходу курса",
+        "Персональное сопровождение врача - регулярные консультации и корректировка терапии",
+        "Пептидная терапия с увеличением дозировок - усиление эффекта снижения веса и контроля аппетита",
+        "Курс капельниц для восполнения дефицитов - витамины, микроэлементы и аминокислоты",
+        "Бустеры метаболизма - препараты, усиливающие эффективность программы",
       ],
-      duration: "Курс из нескольких этапов",
-      price: "98 000 ₽",
+      results: ["Увеличиваются дозировки", "Восполняются дефициты", "Основное снижение веса"],
+      duration: "1 цикл программы — 4 недели. Большинство пациентов проходят 1–3 цикла программы.",
+      price: "от 89 600 ₽",
+      pricePerWeek: "",
     },
     {
       id: 3,
-      name: "Поддержка и стабилизация",
-      subtitle: "результата",
+      name: "Стабилизация результата",
+      subtitle: "",
       description:
         "Этап, который помогает закрепить достигнутый вес и не откатиться назад. Поддерживающие капельницы, контроль врача и мягкая коррекция образа жизни.",
       features: [
-        "Персональные и корректирующие консультации врача",
-        "Поддерживающие капельницы для метаболизма и энергии",
-        "Рекомендации по питанию и режиму для удержания веса",
+        "Регулярные консультации и контроль динамики, корректировка рекомендаций и поддержка на этапе закрепления",
+        "Поддерживающая пептидная терапия с уменьшением дозировки",
+        "Поддерживающие капельницы для метаболизма, поддержку обмена веществ, общее укрепление организма и восполнение энергии",
+        "Рекомендации по питанию и режиму для удержания веса - формирование устойчивых привычек, которые помогают сохранить результат после завершения программы",
+        "Посещение 1 раз в неделю (этап на 4 недели)",
       ],
-      duration: "Курс поддерживающих визитов",
-      price: "52 000 ₽",
+      results: ["Закрепление веса", "Удержание результата"],
+      duration: "4 недели. Количество циклов подбирается врачом.",
+      price: "от 52 000 ₽",
+      pricePerWeek: "",
     },
   ];
 
@@ -80,25 +91,31 @@ export default function Home() {
           name: "Метаболическая поддержка",
           price: "13 000 ₽",
           description:
-            "Запуск активного жиросжигания и ускорение метаболизма. Улучшает работу печени, усиливает расщепление жиров и повышает уровень энергии.",
+            "Запуск активного жиросжигания и ускорение метаболизма. Улучшает работу печени, усиливает расщепление жиров и повышает уровень энергии — логичное дополнение к любой программе снижения веса.",
         },
         {
-          name: "Экспресс‑похудение",
+          name: "Экспресс-похудение",
           price: "11 000 ₽",
           description:
-            "Интенсивная капельница для быстрого запуска снижения веса. Помогает активировать процессы жиросжигания, уменьшить объёмы.",
+            "Интенсивная капельница для быстрого запуска снижения веса. Помогает активировать процессы жиросжигания, уменьшить объёмы и чувствовать лёгкость в теле.",
         },
         {
           name: "Антиинсулинорезистентность",
           price: "11 000 ₽",
           description:
-            "Нормализация углеводного обмена и чувствительности к инсулину. Стабилизирует уровень глюкозы в крови.",
+            "Нормализация углеводного обмена и чувствительности к инсулину. Стабилизирует уровень глюкозы в крови и снижает тягу к сладкому — важный шаг при склонности к набору веса.",
         },
         {
           name: "Метаболическая активация",
           price: "11 000 ₽",
           description:
-            "Насыщает клетки энергией, повышает выносливость и увеличивает сжигание жиров организмом.",
+            "Насыщает клетки энергией, повышает выносливость и увеличивает сжигание жиров организмом. Подходит тем, кто хочет больше активности без чувства усталости.",
+        },
+        {
+          name: "Антиотечный баланс",
+          price: "11 000 ₽",
+          description:
+            "Мягкое выведение лишней жидкости и поддержка лимфодренажа. Снижает отёки, облегчает самочувствие и визуально уменьшает объёмы.",
         },
       ],
     },
@@ -109,25 +126,25 @@ export default function Home() {
           name: "Экспресс детокс",
           price: "12 000 ₽",
           description:
-            "Быстрое и качественное очищение организма от токсинов. Помогает снять чувство тяжести и вернуть комфорт в теле.",
+            "Быстрое и качественное очищение организма от токсинов и продуктов обмена. Помогает снять чувство тяжести и вернуть комфорт в теле.",
         },
         {
           name: "AfterParty",
           price: "15 000 ₽",
           description:
-            "Восстановительная капельница после интоксикаций. Улучшает работу печени, возвращает энергию и ясность ума.",
+            "Восстановительная капельница после интоксикаций и перегрузок. Улучшает работу печени, снижает симптомы интоксикации, возвращает энергию и ясность ума.",
         },
         {
           name: "Супер детокс",
           price: "17 000 ₽",
           description:
-            "Комплексное очищение организма на всех уровнях и восстановление клеток.",
+            "Комплексное очищение организма на всех уровнях и восстановление клеток. Подходит как усиление детокс-этапа в программах похудения.",
         },
         {
           name: "Витаминная",
           price: "15 000 ₽",
           description:
-            "Комплексная поддержка печени и детоксикации за счёт витаминов.",
+            "Комплексная поддержка печени и детоксикации за счёт витаминов. Помогает организму легче переносить изменения в питании и режимах.",
         },
       ],
     },
@@ -138,25 +155,25 @@ export default function Home() {
           name: "Восполнение железа",
           price: "9 000 ₽",
           description:
-            "Восстановление уровня железа и профилактика анемии. Снижает усталость, улучшает концентрацию.",
+            "Восстановление уровня железа и профилактика анемии. Снижает усталость, улучшает концентрацию и общий уровень энергии — важно при изменении рациона.",
         },
         {
           name: "Витаминная (B, C, D)",
           price: "12 000 ₽",
           description:
-            "Комплексное насыщение организма витаминами. Поддержка иммунитета и обмена веществ.",
+            "Комплексное насыщение организма витаминами группы B, витамином C и витамином D. Поддержка иммунитета, нервной системы и обмена веществ.",
         },
         {
           name: "Минеральная",
           price: "11 000 ₽",
           description:
-            "Восстановление минерального баланса и устранение обезвоживания.",
+            "Восстановление минерального баланса и устранение обезвоживания. Поддерживает нервную систему, мышцы и сердечно-сосудистую систему.",
         },
         {
           name: "Протеиновая",
           price: "13 000 ₽",
           description:
-            "Восполняет дефицит белка, делает кожу более упругой, ногти крепкими.",
+            "Восполняет дефицит белка, делает кожу более упругой, ногти крепкими, а волосы — сияющими. Особенно актуально при снижении калорийности рациона.",
         },
       ],
     },
@@ -167,25 +184,25 @@ export default function Home() {
           name: "Восстановление волос",
           price: "13 000 ₽",
           description:
-            "Поддержка роста и укрепление волос изнутри. Снижает ломкость и выпадение.",
+            "Поддержка роста и укрепление волос изнутри. Улучшает питание волосяных фолликулов, снижает ломкость и выпадение, увеличивает объём.",
         },
         {
           name: "Сияющая кожа",
           price: "16 000 ₽",
           description:
-            "Придаёт коже сияние, уменьшает пигментацию и повышает упругость.",
+            "Придаёт коже сияние, уменьшает пигментацию и повышает упругость. Способствует выравниванию тона и улучшению тургора.",
         },
         {
           name: "Поддержка сосудов",
           price: "13 000 ₽",
           description:
-            "Комплекс для микроциркуляции и сосудистого тонуса. Улучшает кровоснабжение тканей.",
+            "Комплекс для микроциркуляции и сосудистого тонуса. Улучшает кровоснабжение тканей, поддерживает работу мозга и сердечно-сосудистой системы.",
         },
         {
           name: "Золушка",
           price: "10 000 ₽",
           description:
-            "Комплекс антиоксидантов для молодости и красоты. Помогает коже выглядеть свежей.",
+            "Комплекс антиоксидантов для молодости и красоты. Помогает коже выглядеть более свежей и отдохнувшей.",
         },
       ],
     },
@@ -196,19 +213,19 @@ export default function Home() {
           name: "Заряд энергии",
           price: "13 000 ₽",
           description:
-            "Помогает эффективно восстановиться и вернуть силы для новых задач.",
+            "Помогает эффективно восстановиться за короткий промежуток времени после длительной работы и вернуть силы для новых задач.",
         },
         {
           name: "Энерго+",
           price: "11 000 ₽",
           description:
-            "Повышает уровень энергии, улучшает переносимость нагрузок.",
+            "Повышает уровень энергии, улучшает переносимость нагрузок и способствует восстановлению после стресса и переутомления.",
         },
         {
           name: "Миланский коктейль",
           price: "15 000 ₽",
           description:
-            "Повышает выносливость, силовые показатели и эффективность тренировок.",
+            "Повышает выносливость, силовые показатели и эффективность тренировок. Хорошо сочетается с программами похудения при активном спорте.",
         },
       ],
     },
@@ -219,25 +236,25 @@ export default function Home() {
           name: "Antiage",
           price: "21 000 ₽",
           description:
-            "Омоложение на клеточном уровне. Поддержка кожи, тканей и общего тонуса организма.",
+            "Омоложение на клеточном уровне. Поддержка кожи, тканей и общего тонуса организма в долгосрочной перспективе.",
         },
         {
           name: "NAD+ 2.0",
           price: "20 000 ₽",
           description:
-            "Усиленная капельница клеточного восстановления. Энергия, концентрация и мощная анти‑эйдж поддержка.",
+            "Усиленная капельница клеточного восстановления. Энергия, концентрация и мощная анти-эйдж поддержка.",
         },
         {
           name: "Антистресс",
           price: "16 000 ₽",
           description:
-            "Помогает восстановиться после длительного стресса и справиться с тревожностью.",
+            "Помогает восстановиться после длительного стресса, защитить нервную систему во время интенсивной работы и справиться с тревожностью.",
         },
         {
           name: "Здоровый сон",
           price: "11 500 ₽",
           description:
-            "Снимает нервное напряжение, помогает быстро заснуть и проснуться полным сил.",
+            "Снимает нервное напряжение и мышечные спазмы, помогает быстро заснуть, крепко спать всю ночь и проснуться полным сил.",
         },
       ],
     },
@@ -248,13 +265,13 @@ export default function Home() {
           name: "Ясный ум",
           price: "13 500 ₽",
           description:
-            "Улучшает когнитивные функции, помогает справиться с интенсивной умственной нагрузкой.",
+            "Улучшает когнитивные функции, помогает справиться с интенсивной умственной нагрузкой и повысить мозговую активность.",
         },
         {
           name: "Супер IQ",
           price: "12 500 ₽",
           description:
-            "Интеллектуальная капельница для ясности мышления и устойчивой концентрации.",
+            "Интеллектуальная капельница для ясности мышления, устойчивой концентрации и когнитивной поддержки.",
         },
       ],
     },
@@ -285,7 +302,7 @@ export default function Home() {
     {
       question: "Поможет ли, если я уже пробовал/пробовала диеты?",
       answer:
-        "Да, наш подход отличается от диет. Мы работаем с причинами, а не с симптомами. IV-терапия помогает нормализовать метаболизм и аппетит, что часто не удаётся диетами.",
+        "Да, наш подход отличается от диет. Мы работаем с причинами, а не с симптомами. Пептидная терапия и IV-терапия помогают нормализовать метаболизм и аппетит, что часто не удаётся диетами.",
     },
   ];
 
@@ -294,32 +311,29 @@ export default function Home() {
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-white border-b border-border shadow-sm">
         <div className="container flex items-center justify-between h-16">
-          <div className="text-xl font-bold text-primary">Понедельник</div>
-          <div className="hidden md:flex gap-8">
-            <a href="#programs" className="text-sm text-foreground hover:text-primary">
+          <div className="text-xl font-bold text-primary font-display">Понедельник</div>
+          <div className="hidden md:flex gap-6 text-sm">
+            <a href="#approach" className="text-foreground hover:text-primary transition-colors">
+              Наш подход
+            </a>
+            <a href="#suitable" className="text-foreground hover:text-primary transition-colors">
+              Кому подойдет
+            </a>
+            <a href="#programs" className="text-foreground hover:text-primary transition-colors">
               Программы
             </a>
-            <a href="#how-it-works" className="text-sm text-foreground hover:text-primary">
-              Как это работает
-            </a>
-            <a href="#doctors" className="text-sm text-foreground hover:text-primary">
-              Врачи
-            </a>
-            <a href="#results" className="text-sm text-foreground hover:text-primary">
+            <a href="#results" className="text-foreground hover:text-primary transition-colors">
               Результаты
             </a>
-            <a href="#faq" className="text-sm text-foreground hover:text-primary">
-              Вопросы
-            </a>
-            <a href="#contacts" className="text-sm text-foreground hover:text-primary">
+            <a href="#contacts" className="text-foreground hover:text-primary transition-colors">
               Контакты
             </a>
           </div>
-          <div className="flex gap-3">
-            <Button variant="outline" size="sm">
+          <div className="flex gap-2">
+            <Button variant="outline" size="sm" className="text-xs">
               Подобрать программу
             </Button>
-            <Button size="sm" className="bg-primary hover:bg-primary/90">
+            <Button size="sm" className="bg-primary hover:bg-primary/90 text-xs">
               Записаться
             </Button>
           </div>
@@ -338,12 +352,11 @@ export default function Home() {
           <div className="absolute inset-0 bg-black/40"></div>
         </div>
         <div className="container relative z-10 max-w-3xl">
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 font-display">
-            Похудение с врачами, а не диетами
+          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 font-display leading-tight">
+            Клиника снижения веса на новейших препаратах под контролем врачей
           </h1>
           <p className="text-xl text-white/90 mb-8 leading-relaxed">
-            Инфузионные капельницы, check‑up и питание по анализам — безопасный путь к минус
-            сантиметрам и килограммам
+            Диагностика, пептидная терапия и восполнение дефицитов с клинически протестированными протоколами IV-терапии и питания
           </p>
 
           {/* UTP Block */}
@@ -354,7 +367,7 @@ export default function Home() {
                   ✓
                 </div>
                 <p className="text-sm text-foreground">
-                  Медицинский подход к снижению веса, а не модные диеты
+                  Программы похудения и современные препараты под контролем врача-эндокринолога по вашим анализам
                 </p>
               </div>
             </div>
@@ -364,7 +377,7 @@ export default function Home() {
                   ✓
                 </div>
                 <p className="text-sm text-foreground">
-                  Капельницы, которые работают точечно по причинам набора веса
+                  Капельницы для снижения аппетита и ускорения метаболизма
                 </p>
               </div>
             </div>
@@ -374,7 +387,7 @@ export default function Home() {
                   ✓
                 </div>
                 <p className="text-sm text-foreground">
-                  Check-up, чтобы не навредить здоровью и усилить результат
+                  Восполнение дефицитов витаминов и микроэлементов
                 </p>
               </div>
             </div>
@@ -384,17 +397,21 @@ export default function Home() {
                   ✓
                 </div>
                 <p className="text-sm text-foreground">
-                  Процедуры без боли и стресса: просто прилечь и расслабиться
+                  Лечение причин набора веса, а не временные диеты
                 </p>
               </div>
             </div>
           </div>
 
+          {/* Additional info */}
+          <p className="text-white/80 text-sm mb-8 italic">
+            Часто пациенты приходят к нам после того, как слышали о препаратах: Озempик, Семаглютид
+          </p>
+
           {/* Hero Form */}
           <div className="bg-white rounded-lg p-8 shadow-lg">
             <p className="text-sm text-muted-foreground mb-4">
-              Оставьте контакты — подберём программу похудения за 5 минут. Первая консультация врача
-              — в подарок.
+              Оставьте контакты — подберём программу похудения за 5 минут. Первая консультация врача — в подарок.
             </p>
             <form onSubmit={handleFormSubmit} className="space-y-4">
               <div>
@@ -433,64 +450,203 @@ export default function Home() {
       </section>
 
       {/* Our Approach Section */}
-      <section className="py-16 bg-white">
+      <section id="approach" className="py-16 bg-white">
         <div className="container">
-          <h2 className="text-4xl font-bold text-center mb-4 font-display text-primary">
+          <h2 className="text-4xl font-bold text-center mb-8 font-display text-primary">
             Наш подход к похудению
           </h2>
-          <div className="max-w-3xl mx-auto bg-accent/30 p-8 rounded-lg">
-            <p className="text-lg text-foreground mb-4 leading-relaxed">
-              Мы работаем не с диетами, а с истинными причинами лишнего веса — через iv‑терапию,
-              интегративный и превентивный подход. Капельницы помогают мягко снижать вес, убирать
-              тягу к еде, очищать организм, выравнивать гормональный фон и возвращать энергию.
+          <div className="max-w-4xl mx-auto space-y-6">
+            <p className="text-lg text-foreground leading-relaxed">
+              В клинике «Понедельник» мы используем современные медицинские методы управления весом, которые применяются в мировой эндокринологической практике и используем поэтапный медицинский протокол снижения веса. Каждый этап протокола решает свою задачу.
             </p>
-            <p className="text-foreground leading-relaxed">
-              <strong>Фокус направлений:</strong> уменьшение жировой прослойки, управление
-              аппетитом, детокс и восстановление после срывов и хронического стресса, поддержка
-              работы щитовидной железы и гормонов, защита кожи во время похудения.
+
+            <div className="bg-accent/20 p-6 rounded-lg">
+              <h3 className="text-xl font-bold text-primary mb-4 font-display">Протокол может включать:</h3>
+              <ul className="space-y-2 text-foreground">
+                <li className="flex gap-2">
+                  <span className="text-primary font-bold">•</span>
+                  <span>Пептидную терапию</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-primary font-bold">•</span>
+                  <span>Препараты для контроля аппетита и метаболизма</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-primary font-bold">•</span>
+                  <span>Работу с инсулинорезистентностью</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-primary font-bold">•</span>
+                  <span>Регулирование уровня сахара в крови</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-primary font-bold">•</span>
+                  <span>Коррекцию питания</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-primary font-bold">•</span>
+                  <span>Восполнение дефицитов витаминов и микроэлементов</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-primary font-bold">•</span>
+                  <span>IV-терапию</span>
+                </li>
+              </ul>
+            </div>
+
+            <p className="text-foreground leading-relaxed italic">
+              Все назначения проводятся только после консультации врача и анализа состояния организма.
             </p>
+
+            <div className="border-l-4 border-primary pl-6 py-4">
+              <h3 className="text-2xl font-bold text-primary mb-4 font-display">Почему не работают диеты</h3>
+              <p className="text-foreground mb-4">Большинство диет не учитывают:</p>
+              <ul className="space-y-2 text-foreground mb-4">
+                <li className="flex gap-2">
+                  <span className="text-primary font-bold">•</span>
+                  <span>Гормональный фон</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-primary font-bold">•</span>
+                  <span>Инсулинорезистентность</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-primary font-bold">•</span>
+                  <span>Дефициты витаминов</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-primary font-bold">•</span>
+                  <span>Состояние метаболизма</span>
+                </li>
+              </ul>
+              <p className="text-foreground font-semibold mb-4">Поэтому вес часто возвращается.</p>
+              <p className="text-foreground">
+                <strong>В клинике «Понедельник» мы работаем с причинами набора веса, а не только с симптомом.</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Suitable For Section */}
+      <section id="suitable" className="py-16 bg-background">
+        <div className="container">
+          <h2 className="text-4xl font-bold text-center mb-12 font-display text-primary">
+            Кому подойдёт программа снижения веса
+          </h2>
+          <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+            <div>
+              <h3 className="text-xl font-bold text-primary mb-4 font-display">Наша программа подойдёт вам, если:</h3>
+              <ul className="space-y-3 text-foreground">
+                <li className="flex gap-3">
+                  <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span>Вы пробовали диеты, но вес возвращается</span>
+                </li>
+                <li className="flex gap-3">
+                  <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span>Чувствуете постоянный голод и сложно контролировать аппетит</span>
+                </li>
+                <li className="flex gap-3">
+                  <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span>Вес стоит на месте, несмотря на питание и спорт</span>
+                </li>
+                <li className="flex gap-3">
+                  <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span>Есть отеки, тяжесть и ощущение замедленного метаболизма</span>
+                </li>
+                <li className="flex gap-3">
+                  <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span>Хотите снизить вес без жёстких диет и стресса для организма</span>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-xl font-bold text-primary mb-4 font-display">Особенно программа может быть полезна, если у вас:</h3>
+              <ul className="space-y-3 text-foreground">
+                <li className="flex gap-3">
+                  <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span>Инсулинорезистентность</span>
+                </li>
+                <li className="flex gap-3">
+                  <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span>Преддиабет</span>
+                </li>
+                <li className="flex gap-3">
+                  <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span>Гормональные изменения</span>
+                </li>
+                <li className="flex gap-3">
+                  <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span>Хроническая усталость</span>
+                </li>
+                <li className="flex gap-3">
+                  <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span>Дефициты витаминов и микроэлементов</span>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Programs Section */}
-      <section id="programs" className="py-16 bg-background">
+      <section id="programs" className="py-16 bg-white">
         <div className="container">
           <h2 className="text-4xl font-bold text-center mb-12 font-display text-primary">
-            Программы похудения
+            Программа похудения
           </h2>
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             {programs.map((program) => (
-              <div key={program.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                <div className="p-6 border-b border-border">
+              <div key={program.id} className="bg-background rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-border">
+                <div className="p-6 border-b border-border bg-white">
                   <h3 className="text-2xl font-bold text-primary mb-2 font-display">{program.name}</h3>
                   {program.subtitle && (
                     <p className="text-sm text-muted-foreground">{program.subtitle}</p>
                   )}
                 </div>
                 <div className="p-6">
-                  <p className="text-sm text-foreground mb-4">{program.description}</p>
+                  <p className="text-sm text-foreground mb-6 leading-relaxed">{program.description}</p>
+
                   <div className="mb-6">
-                    <p className="text-xs font-semibold text-primary mb-3">Что внутри:</p>
+                    <p className="text-xs font-semibold text-primary mb-3 uppercase">Что внутри:</p>
                     <ul className="space-y-2">
                       {program.features.map((feature, idx) => (
-                        <li key={idx} className="flex gap-2 text-sm text-foreground">
+                        <li key={idx} className="flex gap-2 text-xs text-foreground leading-relaxed">
                           <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
                           <span>{feature}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
-                  <div className="border-t border-border pt-4 mb-4">
-                    <p className="text-xs text-muted-foreground mb-1">Длительность:</p>
-                    <p className="text-sm font-semibold text-foreground mb-3">{program.duration}</p>
-                    <p className="text-2xl font-bold text-primary">от {program.price}</p>
+
+                  <div className="mb-6 p-4 bg-accent/10 rounded-lg">
+                    <p className="text-xs font-semibold text-primary mb-2 uppercase">На этом этапе:</p>
+                    <ul className="space-y-1">
+                      {program.results.map((result, idx) => (
+                        <li key={idx} className="text-xs text-foreground flex gap-2">
+                          <span className="text-primary">✓</span>
+                          <span>{result}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
+
+                  <div className="border-t border-border pt-4 mb-4">
+                    <p className="text-xs text-muted-foreground mb-2">Длительность:</p>
+                    <p className="text-sm font-semibold text-foreground mb-3">{program.duration}</p>
+                    <div className="mb-3">
+                      <p className="text-2xl font-bold text-primary">{program.price}</p>
+                      {program.pricePerWeek && (
+                        <p className="text-xs text-muted-foreground">{program.pricePerWeek}</p>
+                      )}
+                    </div>
+                  </div>
+
                   <div className="flex gap-2">
-                    <Button variant="outline" className="flex-1">
+                    <Button variant="outline" className="flex-1 text-xs">
                       Подробнее
                     </Button>
-                    <Button className="flex-1 bg-primary hover:bg-primary/90">
+                    <Button className="flex-1 bg-primary hover:bg-primary/90 text-xs">
                       Записаться
                     </Button>
                   </div>
@@ -499,19 +655,17 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Additional Services Note */}
-          <div className="bg-accent/20 p-6 rounded-lg mb-12">
-            <p className="text-center text-foreground">
-              <strong>Разовая консультация врача</strong> — 5 000 ₽ | <strong>Набор анализов + iv‑терапия</strong> — 24 000 ₽
+          {/* Consultation Note */}
+          <div className="bg-accent/20 p-6 rounded-lg text-center mb-12">
+            <p className="text-foreground">
+              <strong>Разовая консультация врача — 5 000 ₽</strong>
             </p>
           </div>
 
-          {/* Additional Services */}
+          {/* Additional Services Section */}
           <div className="mb-12">
-            <p className="text-center text-foreground mb-8">
-              Капельницы можно подключать к основным программам похудения как усиление эффекта или
-              проходить отдельными курсами. Ниже — дополнительные направления: метаболизм, детокс,
-              иммунитет, красота, энергия, сон, стресс и когнитивная продуктивность.
+            <p className="text-center text-foreground mb-8 max-w-3xl mx-auto">
+              Капельницы можно подключать к основным программам похудения как усиление эффекта или проходить отдельными курсами. Ниже — дополнительные направления: метаболизм, детокс, иммунитет, красота, энергия, сон, стресс и когнитивная продуктивность.
             </p>
 
             {additionalServices.map((serviceGroup, groupIdx) => (
@@ -522,9 +676,9 @@ export default function Home() {
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
                   {serviceGroup.items.map((item, idx) => (
                     <div key={idx} className="bg-white p-4 rounded-lg border border-border hover:shadow-md transition-shadow">
-                      <h4 className="font-semibold text-foreground mb-1">{item.name}</h4>
+                      <h4 className="font-semibold text-foreground mb-2 text-sm">{item.name}</h4>
                       <p className="text-primary font-bold text-lg mb-3">{item.price}</p>
-                      <p className="text-xs text-muted-foreground">{item.description}</p>
+                      <p className="text-xs text-muted-foreground leading-relaxed">{item.description}</p>
                     </div>
                   ))}
                 </div>
@@ -535,103 +689,81 @@ export default function Home() {
       </section>
 
       {/* How It Works Section */}
-      <section id="how-it-works" className="py-16 bg-white">
-        <div className="container">
+      <section className="py-16 bg-background">
+        <div className="container max-w-4xl">
           <h2 className="text-4xl font-bold text-center mb-12 font-display text-primary">
             Как проходят процедуры
           </h2>
-          <div className="max-w-4xl mx-auto">
-            <div className="space-y-4 mb-12">
-              {[
-                "Онлайн-заявка или звонок",
-                "Консультация врача (оффлайн/онлайн), сбор анамнеза, назначение анализов",
-                "Check-up (анализы крови, оценка гормонального и метаболического статуса)",
-                "Подбор индивидуальной программы похудения (капельницы + питание + режим)",
-                "Прохождение процедур в клинике (мягкие кресла, чай, музыка, 30–90 минут)",
-                "Контрольные визиты, корректировка программы",
-              ].map((step, idx) => (
-                <div key={idx} className="flex gap-4">
-                  <div className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold flex-shrink-0">
-                    {idx + 1}
-                  </div>
-                  <div className="flex items-center">
-                    <p className="text-foreground">{step}</p>
-                  </div>
+          <div className="space-y-4 mb-12">
+            {[
+              "Онлайн-заявка или звонок",
+              "Консультация врача (оффлайн/онлайн), сбор анамнеза, назначение анализов",
+              "Check-up (анализы крови, оценка гормонального и метаболического статуса)",
+              "Подбор индивидуальной программы похудения (капельницы + питание + режим)",
+              "Прохождение процедур в клинике (мягкие кресла, чай, музыка, 30–90 минут)",
+              "Посещение 1 раз в неделю",
+              "Контрольные визиты, корректировка программы",
+            ].map((step, idx) => (
+              <div key={idx} className="flex gap-4">
+                <div className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold flex-shrink-0 text-sm">
+                  {idx + 1}
                 </div>
-              ))}
+                <div className="flex items-center">
+                  <p className="text-foreground">{step}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* IV Benefits */}
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
+            <div className="bg-white p-6 rounded-lg border border-border">
+              <h3 className="text-xl font-bold text-primary mb-4 font-display">Преимущества IV-введения</h3>
+              <ul className="space-y-3">
+                <li className="flex gap-2">
+                  <Check className="w-5 h-5 text-primary flex-shrink-0" />
+                  <span className="text-foreground">Полезные вещества попадают сразу в кровь, минуя ЖКТ, усвоение близко к 100%</span>
+                </li>
+                <li className="flex gap-2">
+                  <Check className="w-5 h-5 text-primary flex-shrink-0" />
+                  <span className="text-foreground">Эффект чувствуете уже в первые минуты/часы после процедуры</span>
+                </li>
+              </ul>
             </div>
 
-            {/* IV Benefits */}
-            <div className="grid md:grid-cols-2 gap-8 mb-12">
-              <div
-                className="rounded-lg p-8 text-white"
-                style={{
-                  backgroundImage:
-                    "url('https://d2xsxph8kpxj0f.cloudfront.net/310519663096993096/hdtQvaxiWb9W7weDTCV6tP/doctor-consultation-NkoBpyY75JQTKVbprpHfXZ.webp')",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              >
-                <div className="bg-black/50 p-6 rounded-lg">
-                  <h3 className="text-2xl font-bold mb-4 font-display">Преимущества IV-введения</h3>
-                  <ul className="space-y-3">
-                    <li className="flex gap-2">
-                      <Check className="w-5 h-5 flex-shrink-0" />
-                      <span>Полезные вещества попадают сразу в кровь, минуя ЖКТ, усвоение близко к 100%</span>
-                    </li>
-                    <li className="flex gap-2">
-                      <Check className="w-5 h-5 flex-shrink-0" />
-                      <span>Эффект чувствуете уже в первые минуты/часы после процедуры</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div
-                className="rounded-lg p-8 text-white"
-                style={{
-                  backgroundImage:
-                    "url('https://d2xsxph8kpxj0f.cloudfront.net/310519663096993096/hdtQvaxiWb9W7weDTCV6tP/clinic-reception-jmJdCtFncFimLXSjfDkaXj.webp')",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              >
-                <div className="bg-black/50 p-6 rounded-lg">
-                  <h3 className="text-2xl font-bold mb-4 font-display">Комфорт и безопасность</h3>
-                  <ul className="space-y-3">
-                    <li className="flex gap-2">
-                      <Check className="w-5 h-5 flex-shrink-0" />
-                      <span>Мягкие кресла с реклайнером</span>
-                    </li>
-                    <li className="flex gap-2">
-                      <Check className="w-5 h-5 flex-shrink-0" />
-                      <span>Чай/кофе, спокойная музыка, возможность работать с ноутбуком</span>
-                    </li>
-                    <li className="flex gap-2">
-                      <Check className="w-5 h-5 flex-shrink-0" />
-                      <span>Процедуры под постоянным наблюдением медперсонала</span>
-                    </li>
-                    <li className="flex gap-2">
-                      <Check className="w-5 h-5 flex-shrink-0" />
-                      <span>Состав и дозировки подбирает врач по анализам и анамнезу</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+            <div className="bg-white p-6 rounded-lg border border-border">
+              <h3 className="text-xl font-bold text-primary mb-4 font-display">Комфорт и безопасность</h3>
+              <ul className="space-y-3">
+                <li className="flex gap-2">
+                  <Check className="w-5 h-5 text-primary flex-shrink-0" />
+                  <span className="text-foreground">Мягкие кресла с реклайнером</span>
+                </li>
+                <li className="flex gap-2">
+                  <Check className="w-5 h-5 text-primary flex-shrink-0" />
+                  <span className="text-foreground">Чай/кофе, спокойная музыка</span>
+                </li>
+                <li className="flex gap-2">
+                  <Check className="w-5 h-5 text-primary flex-shrink-0" />
+                  <span className="text-foreground">Процедуры под постоянным наблюдением медперсонала</span>
+                </li>
+                <li className="flex gap-2">
+                  <Check className="w-5 h-5 text-primary flex-shrink-0" />
+                  <span className="text-foreground">Состав и дозировки подбирает врач по анализам и анамнезу</span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </section>
 
       {/* Results Section */}
-      <section id="results" className="py-16 bg-background">
+      <section id="results" className="py-16 bg-white">
         <div className="container">
           <h2 className="text-4xl font-bold text-center mb-4 font-display text-primary">
             Результаты до/после
           </h2>
           <p className="text-center text-foreground mb-12 max-w-2xl mx-auto">
-            За время работы нашу методику похудения опробовали люди разных возрастов и запросов —
-            вот их результаты
+            Реальные кейсы: фото «до/после», указание кг и сроков (с согласия клиентов)
           </p>
           <div
             className="rounded-lg overflow-hidden h-96 bg-cover bg-center"
@@ -643,33 +775,71 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section id="faq" className="py-16 bg-white">
+      {/* Patient Testimonials Section */}
+      <section className="py-16 bg-background">
         <div className="container max-w-3xl">
-          <h2 className="text-4xl font-bold text-center mb-12 font-display text-primary">
-            Частые вопросы
+          <h2 className="text-4xl font-bold text-center mb-4 font-display text-primary">
+            Поговорите с человеком, который уже похудел именно на вашей программе
           </h2>
-          <div className="space-y-3">
-            {faqItems.map((item, idx) => (
-              <div key={idx} className="border border-border rounded-lg overflow-hidden">
-                <button
-                  onClick={() => setExpandedFaq(expandedFaq === idx ? null : idx)}
-                  className="w-full p-4 flex items-center justify-between hover:bg-accent/10 transition-colors text-left"
-                >
-                  <span className="font-semibold text-foreground">{item.question}</span>
-                  <ChevronDown
-                    className={`w-5 h-5 text-primary transition-transform ${
-                      expandedFaq === idx ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
-                {expandedFaq === idx && (
-                  <div className="p-4 bg-accent/5 border-t border-border">
-                    <p className="text-foreground text-sm leading-relaxed">{item.answer}</p>
-                  </div>
-                )}
+          <p className="text-center text-foreground mb-12">
+            Оставьте контакты — мы назначим вам разговор с нашим пациентом, который прошел тот же курс, что вы рассматриваете. Бесплатно и без обязательств.
+          </p>
+
+          <div className="bg-white rounded-lg p-8 shadow-md">
+            <form onSubmit={handleFormSubmit} className="space-y-4">
+              <div>
+                <label className="block text-sm font-semibold text-foreground mb-2">Ваше имя *</label>
+                <input
+                  type="text"
+                  placeholder="Имя"
+                  className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                  required
+                />
               </div>
-            ))}
+              <div>
+                <label className="block text-sm font-semibold text-foreground mb-2">Телефон *</label>
+                <input
+                  type="tel"
+                  placeholder="+7 (999) 999-99-99"
+                  className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-foreground mb-2">Какая программа вас интересует? *</label>
+                <select
+                  value={selectedProgram}
+                  onChange={(e) => setSelectedProgram(e.target.value)}
+                  className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                >
+                  <option>Старт</option>
+                  <option>Интенсив</option>
+                  <option>Стабилизация результата</option>
+                </select>
+              </div>
+              <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-white">
+                Отправить заявку на связь
+              </Button>
+            </form>
+
+            <p className="text-center text-sm text-muted-foreground mt-6 mb-6">
+              Мы назначим вам разговор с нашим пациентом в течение 24 часов. Бесплатно. Никаких обязательств.
+            </p>
+
+            <div className="space-y-2 text-sm text-foreground">
+              <div className="flex gap-2">
+                <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                <span>Позвоним уточнить детали</span>
+              </div>
+              <div className="flex gap-2">
+                <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                <span>Передадим контакты пациента</span>
+              </div>
+              <div className="flex gap-2">
+                <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                <span>Организуем встречу или звонок</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -681,10 +851,9 @@ export default function Home() {
             Остались вопросы по программам похудения?
           </h2>
           <p className="text-lg mb-8 opacity-90">
-            Получите консультацию специалиста. Первая консультация врача — бесплатно. Подберём
-            программу под ваши анализы и образ жизни.
+            Получите консультацию специалиста. Подберём программу под ваши анализы и образ жизни.
           </p>
-          <form onSubmit={handleFormSubmit} className="space-y-4">
+          <form onSubmit={handleFormSubmit} className="space-y-4 mb-6">
             <input
               type="text"
               placeholder="Ваше имя"
@@ -701,6 +870,9 @@ export default function Home() {
               Получить консультацию
             </Button>
           </form>
+          <p className="text-sm opacity-75">
+            Не знаете, какую программу выбрать? Оставьте заявку — подберём по вашим задачам.
+          </p>
         </div>
       </section>
 
@@ -725,7 +897,7 @@ export default function Home() {
                   <Clock className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
                   <div>
                     <p className="font-semibold text-foreground">График работы</p>
-                    <p className="text-foreground">Ежедневно с 8:00 до 21:00</p>
+                    <p className="text-foreground">Ежедневно с 9:00 до 21:00</p>
                   </div>
                 </div>
                 <div className="flex gap-3">

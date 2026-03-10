@@ -311,7 +311,10 @@ export default function Home() {
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-white border-b border-border shadow-sm">
         <div className="container flex items-center justify-between h-16">
-          <div className="text-lg sm:text-xl font-bold text-primary font-display">Понедельник</div>
+          <div className="flex items-center gap-2 sm:gap-3">
+            <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/YmfaYcSJobutlROw.jpg" alt="Понедельник клиника" className="h-10 w-10 object-contain" />
+            <span className="text-lg sm:text-xl font-bold text-primary font-display hidden sm:inline">Понедельник</span>
+          </div>
           <div className="hidden md:flex gap-4 lg:gap-6 text-xs lg:text-sm">
             <a href="#approach" className="text-foreground hover:text-primary transition-colors">
               Наш подход
@@ -939,11 +942,26 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="bg-primary text-white py-8">
-        <div className="container text-center">
-          <p className="mb-2">© 2024 Клиника медицинского снижения веса «Понедельник»</p>
-          <p className="text-sm opacity-75">
-            Все права защищены. Информация на сайте не является публичной офертой.
-          </p>
+        <div className="container">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6 pb-6 border-b border-white border-opacity-20">
+            <div className="flex items-center gap-3">
+              <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/YmfaYcSJobutlROw.jpg" alt="Понедельник клиника" className="h-12 w-12 object-contain rounded" />
+              <div>
+                <p className="font-bold text-lg">Понедельник</p>
+                <p className="text-sm opacity-75">Клиника медицинского снижения веса</p>
+              </div>
+            </div>
+            <div className="text-center sm:text-right">
+              <p className="font-semibold">+7 (999) 999-99-99</p>
+              <p className="text-sm opacity-75">info@ponedelnik.clinic</p>
+            </div>
+          </div>
+          <div className="text-center">
+            <p className="mb-2">© 2024 Клиника медицинского снижения веса «Понедельник»</p>
+            <p className="text-sm opacity-75">
+              Все права защищены. Информация на сайте не является публичной офертой.
+            </p>
+          </div>
         </div>
       </footer>
     </div>

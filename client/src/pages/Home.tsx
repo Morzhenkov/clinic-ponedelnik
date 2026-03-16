@@ -365,64 +365,125 @@ export default function Home() {
         )}
       </nav>
 
-      {/* Hero Section */}
-      <section className="relative py-16 sm:py-20 md:py-24 overflow-hidden">
+      {/* Hero Section - Desktop: overlay on photo, Mobile: photo on top + content below */}
+      {/* Desktop hero */}
+      <section className="relative hidden sm:block py-20 md:py-24 overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url('${photos.receptionDesk}')` }}
+          style={{ backgroundImage: `url('${photos.receptionLogo}')` }}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-black/40"></div>
         </div>
         <div className="container relative z-10 max-w-3xl">
-          <div className="mb-6 sm:mb-8">
-            <p className="text-base sm:text-lg md:text-xl text-white font-semibold mb-1 sm:mb-2">
+          <div className="mb-8">
+            <p className="text-lg md:text-xl text-white font-semibold mb-1">
               Ваш новый понедельник начинается здесь
             </p>
-            <p className="text-sm sm:text-base md:text-lg text-white/90">
+            <p className="text-base md:text-lg text-white/90">
               Начните свой новый понедельник — без лишнего веса
             </p>
           </div>
-          <p className="text-xs sm:text-sm text-white/70 uppercase tracking-widest mb-3 sm:mb-4">
+          <p className="text-sm text-white/70 uppercase tracking-widest mb-4">
             Медицинская программа снижения веса под контролем врача
           </p>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 font-display leading-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 font-display leading-tight">
             Клиника снижения веса на новейших препаратах под контролем врачей без жёстких диет и откатов
           </h1>
-          <p className="text-base sm:text-lg md:text-xl text-white/90 mb-6 sm:mb-8 leading-relaxed">
+          <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed">
             Диагностика, пептидная терапия и восполнение дефицитов с клинически протестированными протоколами инфузионной терапии и питания
           </p>
 
-          {/* UTP Block */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mb-8 sm:mb-10">
+          <div className="grid grid-cols-2 gap-3 mb-10">
             {[
               "Программы похудения и современные препараты под контролем врача-эндокринолога по вашим анализам",
               "Пептидная терапия и современные препараты для контроля аппетита",
               "Восполнение дефицитов витаминов и микроэлементов",
               "Лечение причин набора веса, а не временные диеты",
             ].map((text, idx) => (
-              <div key={idx} className="bg-white/95 p-3 sm:p-4 rounded-lg">
-                <div className="flex gap-2 sm:gap-3">
-                  <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-white text-xs font-bold mt-0.5">
+              <div key={idx} className="bg-white/95 backdrop-blur-sm p-4 rounded-lg">
+                <div className="flex gap-3">
+                  <div className="w-6 h-6 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-white text-xs font-bold mt-0.5">
                     ✓
                   </div>
-                  <p className="text-xs sm:text-sm text-foreground leading-snug">{text}</p>
+                  <p className="text-sm text-foreground leading-snug">{text}</p>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Additional info */}
-          <p className="text-white/80 text-xs sm:text-sm mb-6 sm:mb-8 italic leading-relaxed">
+          <p className="text-white/80 text-sm mb-8 italic leading-relaxed">
             Многие пациенты приходят к нам после того, как слышали о препаратах семаглутида и тирзепатида (Оземпик, Мунжаро и аналоги).
-            <br className="hidden sm:block" />
+            <br />
             Мы подбираем терапию индивидуально — с учётом анализов, состояния организма и целей пациента.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-3">
-            <a href="#programs" className="px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold transition-colors text-center text-sm sm:text-base">
+          <div className="flex flex-row gap-3">
+            <a href="#programs" className="px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold transition-colors text-center text-base">
               Подобрать программу
             </a>
-            <a href="#consultation" className="px-6 py-3 border-2 border-white text-white hover:bg-white/10 rounded-lg font-semibold transition-colors text-center text-sm sm:text-base">
+            <a href="#consultation" className="px-6 py-3 border-2 border-white text-white hover:bg-white/10 rounded-lg font-semibold transition-colors text-center text-base">
+              Записаться
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Mobile hero - photo visible on top, content below */}
+      <section className="sm:hidden">
+        {/* Reception wall photo - prominently visible */}
+        <div className="relative h-56 overflow-hidden">
+          <img
+            src={photos.receptionLogo}
+            alt="Стена ресепшена клиники Понедельник"
+            className="w-full h-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/50"></div>
+          <div className="absolute bottom-3 left-4 right-4">
+            <p className="text-white text-sm font-semibold">
+              Ваш новый понедельник начинается здесь
+            </p>
+          </div>
+        </div>
+
+        {/* Content area on clean background */}
+        <div className="px-4 py-6 bg-background">
+          <p className="text-[10px] text-primary/70 uppercase tracking-widest mb-2">
+            Медицинская программа снижения веса под контролем врача
+          </p>
+          <h1 className="text-[22px] leading-[1.2] font-bold text-foreground mb-3 font-display">
+            Клиника снижения веса на новейших препаратах под контролем врачей без жёстких диет и откатов
+          </h1>
+          <p className="text-sm text-foreground/80 mb-4 leading-relaxed">
+            Диагностика, пептидная терапия и восполнение дефицитов с клинически протестированными протоколами инфузионной терапии и питания
+          </p>
+
+          {/* UTP Block - compact cards */}
+          <div className="space-y-2 mb-4">
+            {[
+              "Программы похудения и современные препараты под контролем врача-эндокринолога по вашим анализам",
+              "Пептидная терапия и современные препараты для контроля аппетита",
+              "Восполнение дефицитов витаминов и микроэлементов",
+              "Лечение причин набора веса, а не временные диеты",
+            ].map((text, idx) => (
+              <div key={idx} className="flex gap-2.5 items-start">
+                <div className="w-5 h-5 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-white text-[10px] font-bold mt-0.5">
+                  ✓
+                </div>
+                <p className="text-[13px] text-foreground leading-snug">{text}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-foreground/60 text-xs mb-5 italic leading-relaxed">
+            Многие пациенты приходят к нам после того, как слышали о препаратах семаглутида и тирзепатида (Оземпик, Мунжаро и аналоги).
+            Мы подбираем терапию индивидуально — с учётом анализов, состояния организма и целей пациента.
+          </p>
+
+          <div className="flex gap-2.5">
+            <a href="#programs" className="flex-1 px-4 py-2.5 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold transition-colors text-center text-sm">
+              Подобрать программу
+            </a>
+            <a href="#consultation" className="flex-1 px-4 py-2.5 border-2 border-primary text-primary hover:bg-primary/5 rounded-lg font-semibold transition-colors text-center text-sm">
               Записаться
             </a>
           </div>
@@ -430,9 +491,9 @@ export default function Home() {
       </section>
 
       {/* Clinic Gallery Strip */}
-      <section className="py-8 sm:py-10 bg-white">
+      <section className="py-6 sm:py-10 bg-white">
         <div className="container">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4">
             <div className="aspect-[4/3] rounded-lg overflow-hidden">
               <img src={photos.receptionDesk} alt="Ресепшн клиники" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
             </div>
@@ -450,12 +511,12 @@ export default function Home() {
       </section>
 
       {/* Approach Section */}
-      <section id="approach" className="py-12 sm:py-16 bg-background">
+      <section id="approach" className="py-10 sm:py-16 bg-background">
         <div className="container max-w-4xl">
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 sm:mb-4 font-display text-primary">
+          <h2 className="text-2xl sm:text-4xl font-bold text-center mb-2 sm:mb-4 font-display text-primary">
             Наш подход к похудению
           </h2>
-          <p className="text-center text-foreground mb-8 sm:mb-12 text-sm sm:text-base leading-relaxed max-w-3xl mx-auto">
+          <p className="text-center text-foreground mb-6 sm:mb-12 text-xs sm:text-base leading-relaxed max-w-3xl mx-auto">
             В клинике «Понедельник» мы используем современные медицинские методы управления весом, которые применяются в мировой эндокринологической практике и используем поэтапный медицинский протокол снижения веса. Каждый этап протокола решает свою задачу.
           </p>
 
@@ -533,9 +594,9 @@ export default function Home() {
       </section>
 
       {/* Suitable Section */}
-      <section id="suitable" className="py-12 sm:py-16 bg-background">
+      <section id="suitable" className="py-10 sm:py-16 bg-background">
         <div className="container max-w-4xl">
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 sm:mb-4 font-display text-primary">
+          <h2 className="text-2xl sm:text-4xl font-bold text-center mb-2 sm:mb-4 font-display text-primary">
             Кому подойдёт программа снижения веса
           </h2>
 
@@ -584,16 +645,16 @@ export default function Home() {
       </section>
 
       {/* Programs Section */}
-      <section id="programs" className="py-12 sm:py-16 bg-white">
+      <section id="programs" className="py-10 sm:py-16 bg-white">
         <div className="container">
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 sm:mb-4 font-display text-primary">
+          <h2 className="text-2xl sm:text-4xl font-bold text-center mb-2 sm:mb-4 font-display text-primary">
             Программа похудения
           </h2>
-          <p className="text-center text-foreground mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base">
+          <p className="text-center text-foreground mb-6 sm:mb-12 max-w-2xl mx-auto text-xs sm:text-base">
             Выберите программу, которая соответствует вашим целям и возможностям
           </p>
 
-          <div className="grid md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12">
+          <div className="grid md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-6 sm:mb-12">
             {programs.map((program) => (
               <div key={program.id} className="bg-background rounded-xl p-4 sm:p-6 border border-border hover:shadow-lg transition-shadow flex flex-col">
                 <h3 className="text-xl sm:text-2xl font-bold mb-1 sm:mb-2 font-display text-primary">{program.name}</h3>
@@ -650,20 +711,20 @@ export default function Home() {
       </section>
 
       {/* Additional Services Section */}
-      <section className="py-12 sm:py-16 bg-background">
+      <section className="py-10 sm:py-16 bg-background">
         <div className="container">
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 sm:mb-4 font-display text-primary">
+          <h2 className="text-2xl sm:text-4xl font-bold text-center mb-2 sm:mb-4 font-display text-primary">
             Дополнительные услуги
           </h2>
-          <p className="text-center text-foreground mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base">
+          <p className="text-center text-foreground mb-6 sm:mb-12 max-w-2xl mx-auto text-xs sm:text-base">
             Дополните вашу программу специализированными капельницами для достижения лучших результатов
           </p>
 
-          <div className="space-y-8 sm:space-y-12">
+          <div className="space-y-6 sm:space-y-12">
             {additionalServices.map((service, idx) => (
               <div key={idx}>
-                <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 font-display text-primary">{service.category}</h3>
-                <div className="grid sm:grid-cols-2 gap-3 sm:gap-6">
+                <h3 className="text-lg sm:text-2xl font-bold mb-3 sm:mb-6 font-display text-primary">{service.category}</h3>
+                <div className="grid sm:grid-cols-2 gap-2.5 sm:gap-6">
                   {service.items.map((item, itemIdx) => (
                     <div key={itemIdx} className="bg-white p-4 sm:p-6 rounded-xl border border-border hover:shadow-md transition-shadow">
                       <h4 className="text-base sm:text-lg font-bold text-foreground mb-1 sm:mb-2">{item.name}</h4>
@@ -679,12 +740,12 @@ export default function Home() {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-12 sm:py-16 bg-white">
+      <section className="py-10 sm:py-16 bg-white">
         <div className="container">
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 sm:mb-4 font-display text-primary">
+          <h2 className="text-2xl sm:text-4xl font-bold text-center mb-2 sm:mb-4 font-display text-primary">
             Как это работает
           </h2>
-          <p className="text-center text-foreground mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base">
+          <p className="text-center text-foreground mb-6 sm:mb-12 max-w-2xl mx-auto text-xs sm:text-base">
             Простой и понятный процесс, который помогает вам достичь результатов
           </p>
 
@@ -780,12 +841,12 @@ export default function Home() {
       </section>
 
       {/* Results Section */}
-      <section id="results" className="py-12 sm:py-16 bg-background">
+      <section id="results" className="py-10 sm:py-16 bg-background">
         <div className="container">
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 sm:mb-4 font-display text-primary">
+          <h2 className="text-2xl sm:text-4xl font-bold text-center mb-2 sm:mb-4 font-display text-primary">
             Результаты пациентов
           </h2>
-          <p className="text-center text-foreground mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base">
+          <p className="text-center text-foreground mb-6 sm:mb-12 max-w-2xl mx-auto text-xs sm:text-base">
             За курс программы пациенты обычно достигают:
           </p>
           
@@ -817,9 +878,9 @@ export default function Home() {
       </section>
 
       {/* Patient Testimonials Section */}
-      <section className="py-12 sm:py-16 bg-white">
+      <section className="py-10 sm:py-16 bg-white">
         <div className="container max-w-3xl">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-3 sm:mb-4 font-display text-primary leading-tight">
+          <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-center mb-2 sm:mb-4 font-display text-primary leading-tight">
             Поговорите с человеком, который уже похудел именно на нашей программе
           </h2>
           <p className="text-center text-foreground mb-8 sm:mb-12 text-sm sm:text-base leading-relaxed">
@@ -861,12 +922,12 @@ export default function Home() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-12 sm:py-16 bg-background">
+      <section className="py-10 sm:py-16 bg-background">
         <div className="container max-w-3xl">
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 sm:mb-4 font-display text-primary">
+          <h2 className="text-2xl sm:text-4xl font-bold text-center mb-2 sm:mb-4 font-display text-primary">
             Ответы на вопросы
           </h2>
-          <p className="text-center text-foreground mb-8 sm:mb-12 text-sm sm:text-base">
+          <p className="text-center text-foreground mb-6 sm:mb-12 text-xs sm:text-base">
             Всё, что вам нужно знать о программах похудения
           </p>
 
@@ -896,12 +957,12 @@ export default function Home() {
       </section>
 
       {/* Consultation Form Section */}
-      <section id="consultation" className="py-12 sm:py-16 bg-white">
+      <section id="consultation" className="py-10 sm:py-16 bg-white">
         <div className="container max-w-3xl">
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 sm:mb-4 font-display text-primary">
+          <h2 className="text-2xl sm:text-4xl font-bold text-center mb-2 sm:mb-4 font-display text-primary">
             Получить консультацию врача
           </h2>
-          <p className="text-center text-foreground mb-8 sm:mb-12 text-sm sm:text-base">
+          <p className="text-center text-foreground mb-6 sm:mb-12 text-xs sm:text-base">
             Оставьте контакты и выберите интересующую вас программу — врач свяжется с вами в течение часа
           </p>
 
@@ -959,9 +1020,9 @@ export default function Home() {
       </section>
 
       {/* Contacts Section */}
-      <section id="contacts" className="py-12 sm:py-16 bg-background">
+      <section id="contacts" className="py-10 sm:py-16 bg-background">
         <div className="container">
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 font-display text-primary">Контакты</h2>
+          <h2 className="text-2xl sm:text-4xl font-bold text-center mb-6 sm:mb-12 font-display text-primary">Контакты</h2>
 
           <div className="grid md:grid-cols-2 gap-8 sm:gap-12 max-w-4xl mx-auto">
             <div>

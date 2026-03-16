@@ -1,5 +1,6 @@
-import { ChevronDown, Check, MapPin, Phone, Mail, Clock } from "lucide-react";
+
 import { useState } from "react";
+import { Check, ChevronDown, MapPin, Clock, Phone, Mail, Menu, X } from "lucide-react";
 
 /**
  * Design Philosophy: Medical Minimalism with Warm Humanity
@@ -7,6 +8,7 @@ import { useState } from "react";
  * - Color palette: Dark green (#1B5E3F), warm beige (#F5F1ED), soft gold (#D4A574)
  * - Typography: Playfair Display (headers), Inter (body)
  * - Emphasis on medical credibility, safety, and personalized approach
+ * - Real clinic photos integrated for authenticity
  */
 
 export default function Home() {
@@ -14,6 +16,7 @@ export default function Home() {
   const [formData, setFormData] = useState({ name: "", phone: "" });
   const [selectedProgram, setSelectedProgram] = useState("Новый понедельник");
   const [submitted, setSubmitted] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -23,6 +26,22 @@ export default function Home() {
     e.preventDefault();
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 3000);
+  };
+
+  const closeMobileMenu = () => setMobileMenuOpen(false);
+
+  // CDN URLs for clinic photos
+  const photos = {
+    ivPatient: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/lpIjVeIoDTAQVIOG.webp",
+    doctorOffice: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/TKhJXPaJQWNGgEiB.jpg",
+    ivDrip: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/DvYEDyiDcefFfwuZ.jpg",
+    recliners: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/ZIcdmlMlVmVhLyZD.jpg",
+    receptionLogo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/xMgEidrUcTgfXKfc.jpg",
+    receptionDesk: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/iNJVkdeepDsPpcDN.jpg",
+    waitingArea: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/xBiIIyOqnOdmPTVU.jpg",
+    logo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/YmfaYcSJobutlROw.jpg",
+    heroGenerated: "https://d2xsxph8kpxj0f.cloudfront.net/310519663096993096/hdtQvaxiWb9W7weDTCV6tP/iv-therapy-procedure-HrfhGSzZrzp7Ymjgf9SXUg.webp",
+    wellnessResults: "https://d2xsxph8kpxj0f.cloudfront.net/310519663096993096/hdtQvaxiWb9W7weDTCV6tP/wellness-results-CCDrWAnx4WMRuRR4bDSn54.webp",
   };
 
   // Main programs
@@ -239,20 +258,34 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background overflow-x-hidden">
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-white border-b border-border shadow-sm">
-        <div className="container flex items-center justify-between h-16">
-          <div className="flex items-center gap-2 sm:gap-3">
-            <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/YmfaYcSJobutlROw.jpg" alt="Понедельник клиника" className="h-10 w-10 object-contain" />
-            <span className="text-lg sm:text-xl font-bold text-primary font-display hidden sm:inline">Понедельник</span>
-          </div>
-          <div className="hidden md:flex gap-4 lg:gap-6 text-xs lg:text-sm">
+        <div className="container flex items-center justify-between h-16 sm:h-18">
+          {/* Logo area - wider and more prominent */}
+          <a href="#" className="flex items-center gap-3 flex-shrink-0">
+            <img
+              src={photos.logo}
+              alt="Понедельник клиника"
+              className="h-11 w-11 sm:h-12 sm:w-12 object-contain rounded"
+            />
+            <div className="flex flex-col leading-tight">
+              <span className="text-base sm:text-lg font-bold text-primary font-display tracking-wide">
+                Понедельник
+              </span>
+              <span className="text-[10px] sm:text-xs text-foreground/60 font-medium uppercase tracking-wider">
+                клиника
+              </span>
+            </div>
+          </a>
+
+          {/* Desktop nav */}
+          <div className="hidden lg:flex gap-5 xl:gap-6 text-sm">
             <a href="#approach" className="text-foreground hover:text-primary transition-colors">
               Наш подход
             </a>
             <a href="#suitable" className="text-foreground hover:text-primary transition-colors">
-              Кому подойдет
+              Кому подойдёт
             </a>
             <a href="#programs" className="text-foreground hover:text-primary transition-colors">
               Программы
@@ -264,116 +297,170 @@ export default function Home() {
               Контакты
             </a>
           </div>
-          <div className="flex gap-1 sm:gap-2">
-            <button className="hidden sm:block px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary/5 text-xs font-semibold transition-colors">
-              Подобрать программу
-            </button>
-            <button className="px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg text-xs font-semibold transition-colors">
+
+          {/* Desktop buttons */}
+          <div className="hidden lg:flex gap-2">
+            <a
+              href="tel:+79150660553"
+              className="px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary/5 text-xs font-semibold transition-colors"
+            >
+              +7 (915) 066-05-53
+            </a>
+            <a
+              href="#consultation"
+              className="px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg text-xs font-semibold transition-colors"
+            >
               Записаться
-            </button>
+            </a>
           </div>
+
+          {/* Mobile menu button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="lg:hidden p-2 text-foreground"
+            aria-label="Меню"
+          >
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
+
+        {/* Mobile menu dropdown */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden bg-white border-t border-border shadow-lg">
+            <div className="container py-4 space-y-1">
+              <a href="#approach" onClick={closeMobileMenu} className="block py-3 px-4 text-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-colors">
+                Наш подход
+              </a>
+              <a href="#suitable" onClick={closeMobileMenu} className="block py-3 px-4 text-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-colors">
+                Кому подойдёт
+              </a>
+              <a href="#programs" onClick={closeMobileMenu} className="block py-3 px-4 text-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-colors">
+                Программы
+              </a>
+              <a href="#results" onClick={closeMobileMenu} className="block py-3 px-4 text-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-colors">
+                Результаты
+              </a>
+              <a href="#contacts" onClick={closeMobileMenu} className="block py-3 px-4 text-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-colors">
+                Контакты
+              </a>
+              <div className="pt-3 border-t border-border space-y-2">
+                <a
+                  href="tel:+79150660553"
+                  className="block text-center py-3 px-4 border border-primary text-primary rounded-lg font-semibold"
+                >
+                  +7 (915) 066-05-53
+                </a>
+                <a
+                  href="#consultation"
+                  onClick={closeMobileMenu}
+                  className="block text-center py-3 px-4 bg-primary text-white rounded-lg font-semibold"
+                >
+                  Записаться
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}
-      <section className="relative py-20 overflow-hidden">
+      <section className="relative py-16 sm:py-20 md:py-24 overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage:
-              "url('https://d2xsxph8kpxj0f.cloudfront.net/310519663096993096/hdtQvaxiWb9W7weDTCV6tP/iv-therapy-procedure-HrfhGSzZrzp7Ymjgf9SXUg.webp')",
-          }}
+          style={{ backgroundImage: `url('${photos.receptionDesk}')` }}
         >
-          <div className="absolute inset-0 bg-black/40"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30"></div>
         </div>
         <div className="container relative z-10 max-w-3xl">
-          <div className="mb-8">
-            <p className="text-lg sm:text-xl text-white font-semibold mb-2">Ваш новый понедельник начинается здесь</p>
-            <p className="text-base sm:text-lg text-white/90">Начните свой новый понедельник — без лишнего веса</p>
+          <div className="mb-6 sm:mb-8">
+            <p className="text-base sm:text-lg md:text-xl text-white font-semibold mb-1 sm:mb-2">
+              Ваш новый понедельник начинается здесь
+            </p>
+            <p className="text-sm sm:text-base md:text-lg text-white/90">
+              Начните свой новый понедельник — без лишнего веса
+            </p>
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 font-display leading-tight">
+          <p className="text-xs sm:text-sm text-white/70 uppercase tracking-widest mb-3 sm:mb-4">
+            Медицинская программа снижения веса под контролем врача
+          </p>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 font-display leading-tight">
             Клиника снижения веса на новейших препаратах под контролем врачей без жёстких диет и откатов
           </h1>
-          <p className="text-xl text-white/90 mb-8 leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-white/90 mb-6 sm:mb-8 leading-relaxed">
             Диагностика, пептидная терапия и восполнение дефицитов с клинически протестированными протоколами инфузионной терапии и питания
           </p>
 
           {/* UTP Block */}
-          <div className="grid sm:grid-cols-2 gap-3 sm:gap-4 mb-12">
-            <div className="bg-white/95 p-3 sm:p-4 rounded-lg">
-              <div className="flex gap-2 sm:gap-3">
-                <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-white text-xs sm:text-sm font-bold">
-                  ✓
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mb-8 sm:mb-10">
+            {[
+              "Программы похудения и современные препараты под контролем врача-эндокринолога по вашим анализам",
+              "Пептидная терапия и современные препараты для контроля аппетита",
+              "Восполнение дефицитов витаминов и микроэлементов",
+              "Лечение причин набора веса, а не временные диеты",
+            ].map((text, idx) => (
+              <div key={idx} className="bg-white/95 p-3 sm:p-4 rounded-lg">
+                <div className="flex gap-2 sm:gap-3">
+                  <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-white text-xs font-bold mt-0.5">
+                    ✓
+                  </div>
+                  <p className="text-xs sm:text-sm text-foreground leading-snug">{text}</p>
                 </div>
-                <p className="text-xs sm:text-sm text-foreground">
-                  Программы похудения и современные препараты под контролем врача-эндокринолога по вашим анализам
-                </p>
               </div>
-            </div>
-            <div className="bg-white/95 p-3 sm:p-4 rounded-lg">
-              <div className="flex gap-2 sm:gap-3">
-                <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-white text-xs sm:text-sm font-bold">
-                  ✓
-                </div>
-                <p className="text-xs sm:text-sm text-foreground">
-                  Пептидная терапия и современные препараты для контроля аппетита
-                </p>
-              </div>
-            </div>
-            <div className="bg-white/95 p-3 sm:p-4 rounded-lg">
-              <div className="flex gap-2 sm:gap-3">
-                <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-white text-xs sm:text-sm font-bold">
-                  ✓
-                </div>
-                <p className="text-xs sm:text-sm text-foreground">
-                  Восполнение дефицитов витаминов и микроэлементов
-                </p>
-              </div>
-            </div>
-            <div className="bg-white/95 p-3 sm:p-4 rounded-lg">
-              <div className="flex gap-2 sm:gap-3">
-                <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-white text-xs sm:text-sm font-bold">
-                  ✓
-                </div>
-                <p className="text-xs sm:text-sm text-foreground">
-                  Лечение причин набора веса, а не временные диеты
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
 
           {/* Additional info */}
-          <p className="text-white/80 text-xs sm:text-sm mb-6 sm:mb-8 italic">
+          <p className="text-white/80 text-xs sm:text-sm mb-6 sm:mb-8 italic leading-relaxed">
             Многие пациенты приходят к нам после того, как слышали о препаратах семаглутида и тирзепатида (Оземпик, Мунжаро и аналоги).
             <br className="hidden sm:block" />
             Мы подбираем терапию индивидуально — с учётом анализов, состояния организма и целей пациента.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-            <button className="px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold transition-colors">
+          <div className="flex flex-col sm:flex-row gap-3">
+            <a href="#programs" className="px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold transition-colors text-center text-sm sm:text-base">
               Подобрать программу
-            </button>
-            <button className="px-6 py-3 border-2 border-white text-white hover:bg-white/10 rounded-lg font-semibold transition-colors">
+            </a>
+            <a href="#consultation" className="px-6 py-3 border-2 border-white text-white hover:bg-white/10 rounded-lg font-semibold transition-colors text-center text-sm sm:text-base">
               Записаться
-            </button>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Clinic Gallery Strip */}
+      <section className="py-8 sm:py-10 bg-white">
+        <div className="container">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+            <div className="aspect-[4/3] rounded-lg overflow-hidden">
+              <img src={photos.receptionDesk} alt="Ресепшн клиники" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+            </div>
+            <div className="aspect-[4/3] rounded-lg overflow-hidden">
+              <img src={photos.doctorOffice} alt="Кабинет врача" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+            </div>
+            <div className="aspect-[4/3] rounded-lg overflow-hidden">
+              <img src={photos.recliners} alt="Кресла для процедур" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+            </div>
+            <div className="aspect-[4/3] rounded-lg overflow-hidden">
+              <img src={photos.waitingArea} alt="Зона ожидания" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+            </div>
           </div>
         </div>
       </section>
 
       {/* Approach Section */}
-      <section id="approach" className="py-16 bg-white">
-        <div className="container max-w-3xl">
-          <h2 className="text-4xl font-bold text-center mb-4 font-display text-primary">
+      <section id="approach" className="py-12 sm:py-16 bg-background">
+        <div className="container max-w-4xl">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 sm:mb-4 font-display text-primary">
             Наш подход к похудению
           </h2>
-          <p className="text-center text-foreground mb-12">
+          <p className="text-center text-foreground mb-8 sm:mb-12 text-sm sm:text-base leading-relaxed max-w-3xl mx-auto">
             В клинике «Понедельник» мы используем современные медицинские методы управления весом, которые применяются в мировой эндокринологической практике и используем поэтапный медицинский протокол снижения веса. Каждый этап протокола решает свою задачу.
           </p>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            <div>
-              <h3 className="text-2xl font-bold mb-6 font-display text-primary">Протокол может включать:</h3>
-              <ul className="space-y-3">
+          <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
+            <div className="bg-white p-5 sm:p-8 rounded-xl border border-border">
+              <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 font-display text-primary">Протокол может включать:</h3>
+              <ul className="space-y-2 sm:space-y-3">
                 {[
                   "Пептидную терапию",
                   "Препараты для контроля аппетита и метаболизма",
@@ -383,37 +470,37 @@ export default function Home() {
                   "Восполнение дефицитов витаминов и микроэлементов",
                   "Инфузионную терапию",
                 ].map((item, idx) => (
-                  <li key={idx} className="flex gap-3">
-                    <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span className="text-foreground">{item}</span>
+                  <li key={idx} className="flex gap-2 sm:gap-3">
+                    <Check className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-foreground text-sm sm:text-base">{item}</span>
                   </li>
                 ))}
               </ul>
-              <p className="text-sm text-foreground mt-6 italic">
+              <p className="text-xs sm:text-sm text-foreground mt-4 sm:mt-6 italic">
                 Все назначения проводятся только после консультации врача и анализа состояния организма.
               </p>
             </div>
 
-            <div>
-              <h3 className="text-2xl font-bold mb-6 font-display text-primary">Почему не работают диеты</h3>
-              <p className="text-foreground mb-4">
+            <div className="bg-white p-5 sm:p-8 rounded-xl border border-border">
+              <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 font-display text-primary">Почему не работают диеты</h3>
+              <p className="text-foreground mb-3 sm:mb-4 text-sm sm:text-base">
                 Большинство диет не учитывают:
               </p>
-              <ul className="space-y-3 mb-6">
+              <ul className="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
                 {[
                   "Гормональный фон",
                   "Инсулинорезистентность",
                   "Дефициты витаминов",
                   "Состояние метаболизма",
                 ].map((item, idx) => (
-                  <li key={idx} className="flex gap-3">
-                    <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span className="text-foreground">{item}</span>
+                  <li key={idx} className="flex gap-2 sm:gap-3">
+                    <Check className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-foreground text-sm sm:text-base">{item}</span>
                   </li>
                 ))}
               </ul>
-              <p className="text-foreground mb-4">Поэтому вес часто возвращается.</p>
-              <p className="text-foreground font-semibold">
+              <p className="text-foreground mb-3 sm:mb-4 text-sm sm:text-base">Поэтому вес часто возвращается.</p>
+              <p className="text-foreground font-semibold text-sm sm:text-base">
                 В клинике «Понедельник» мы работаем с причинами набора веса, а не только с симптомом.
               </p>
             </div>
@@ -421,19 +508,41 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Doctor's Office Photo + Approach visual */}
+      <section className="py-0 bg-white">
+        <div className="container max-w-5xl">
+          <div className="grid md:grid-cols-2 gap-0 md:gap-6 items-center py-8 sm:py-12">
+            <div className="rounded-xl overflow-hidden mb-6 md:mb-0">
+              <img
+                src={photos.doctorOffice}
+                alt="Кабинет врача клиники Понедельник"
+                className="w-full h-64 sm:h-80 object-cover rounded-xl"
+              />
+            </div>
+            <div className="rounded-xl overflow-hidden">
+              <img
+                src={photos.receptionLogo}
+                alt="Логотип клиники Понедельник на стене"
+                className="w-full h-64 sm:h-80 object-cover rounded-xl"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Suitable Section */}
-      <section id="suitable" className="py-16 bg-background">
-        <div className="container max-w-3xl">
-          <h2 className="text-4xl font-bold text-center mb-4 font-display text-primary">
+      <section id="suitable" className="py-12 sm:py-16 bg-background">
+        <div className="container max-w-4xl">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 sm:mb-4 font-display text-primary">
             Кому подойдёт программа снижения веса
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            <div>
-              <h3 className="text-xl font-bold mb-4 font-display text-primary">
+          <div className="grid md:grid-cols-2 gap-6 sm:gap-8 mt-8 sm:mt-10">
+            <div className="bg-white p-5 sm:p-8 rounded-xl border border-border">
+              <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 font-display text-primary">
                 Наша программа подойдёт вам, если:
               </h3>
-              <ul className="space-y-3">
+              <ul className="space-y-2 sm:space-y-3">
                 {[
                   "Вы пробовали диеты, но вес возвращается",
                   "Чувствуете постоянный голод и сложно контролировать аппетит",
@@ -441,19 +550,19 @@ export default function Home() {
                   "Есть отеки, тяжесть и ощущение замедленного метаболизма",
                   "Хотите снизить вес без жёстких диет и стресса для организма",
                 ].map((item, idx) => (
-                  <li key={idx} className="flex gap-3">
-                    <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span className="text-foreground">{item}</span>
+                  <li key={idx} className="flex gap-2 sm:gap-3">
+                    <Check className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-foreground text-sm sm:text-base">{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div>
-              <h3 className="text-xl font-bold mb-4 font-display text-primary">
+            <div className="bg-white p-5 sm:p-8 rounded-xl border border-border">
+              <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 font-display text-primary">
                 Особенно программа может быть полезна, если у вас:
               </h3>
-              <ul className="space-y-3">
+              <ul className="space-y-2 sm:space-y-3">
                 {[
                   "Инсулинорезистентность",
                   "Преддиабет",
@@ -461,9 +570,9 @@ export default function Home() {
                   "Хроническая усталость",
                   "Дефициты витаминов и микроэлементов",
                 ].map((item, idx) => (
-                  <li key={idx} className="flex gap-3">
-                    <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span className="text-foreground">{item}</span>
+                  <li key={idx} className="flex gap-2 sm:gap-3">
+                    <Check className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-foreground text-sm sm:text-base">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -473,65 +582,64 @@ export default function Home() {
       </section>
 
       {/* Programs Section */}
-      <section id="programs" className="py-16 bg-white">
+      <section id="programs" className="py-12 sm:py-16 bg-white">
         <div className="container">
-          <h2 className="text-4xl font-bold text-center mb-4 font-display text-primary">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 sm:mb-4 font-display text-primary">
             Программа похудения
           </h2>
-          <p className="text-center text-foreground mb-12 max-w-2xl mx-auto">
+          <p className="text-center text-foreground mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base">
             Выберите программу, которая соответствует вашим целям и возможностям
           </p>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
+          <div className="grid md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12">
             {programs.map((program) => (
-              <div key={program.id} className="bg-background rounded-lg p-6 border border-border hover:shadow-lg transition-shadow">
-                <h3 className="text-2xl font-bold mb-2 font-display text-primary">{program.name}</h3>
+              <div key={program.id} className="bg-background rounded-xl p-4 sm:p-6 border border-border hover:shadow-lg transition-shadow flex flex-col">
+                <h3 className="text-xl sm:text-2xl font-bold mb-1 sm:mb-2 font-display text-primary">{program.name}</h3>
                 {program.subtitle && (
-                  <p className="text-sm text-foreground/70 mb-4 italic">{program.subtitle}</p>
+                  <p className="text-xs sm:text-sm text-foreground/70 mb-3 sm:mb-4 italic">{program.subtitle}</p>
                 )}
-                <p className="text-foreground mb-6 text-sm">{program.description}</p>
+                <p className="text-foreground mb-4 sm:mb-6 text-xs sm:text-sm leading-relaxed">{program.description}</p>
 
-                <div className="mb-6">
-                  <h4 className="font-semibold text-foreground mb-3">Что внутри:</h4>
-                  <ul className="space-y-2">
+                <div className="mb-4 sm:mb-6">
+                  <h4 className="font-semibold text-foreground mb-2 sm:mb-3 text-sm sm:text-base">Что внутри:</h4>
+                  <ul className="space-y-1.5 sm:space-y-2">
                     {program.features.map((feature, idx) => (
-                      <li key={idx} className="text-sm text-foreground flex gap-2">
-                        <span className="text-primary font-bold">•</span>
+                      <li key={idx} className="text-xs sm:text-sm text-foreground flex gap-2">
+                        <span className="text-primary font-bold flex-shrink-0">•</span>
                         <span>{feature}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="mb-6 p-4 bg-primary/5 rounded-lg">
-                  <h4 className="font-semibold text-foreground mb-3">На этом этапе:</h4>
-                  <ul className="space-y-2">
+                <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-primary/5 rounded-lg">
+                  <h4 className="font-semibold text-foreground mb-2 sm:mb-3 text-sm sm:text-base">На этом этапе:</h4>
+                  <ul className="space-y-1.5 sm:space-y-2">
                     {program.results.map((result, idx) => (
-                      <li key={idx} className="text-sm text-foreground flex gap-2">
-                        <Check className="w-4 h-4 text-primary flex-shrink-0" />
+                      <li key={idx} className="text-xs sm:text-sm text-foreground flex gap-2">
+                        <Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary flex-shrink-0 mt-0.5" />
                         <span>{result}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="mb-6 pb-6 border-b border-border">
-                  <p className="text-sm text-foreground/70 mb-2">
-                    <span className="font-semibold">Длительность:</span> {program.duration}
-                  </p>
-                  <p className="text-2xl font-bold text-primary">{program.price}</p>
-                  {program.pricePerWeek && (
-                    <p className="text-sm text-foreground/70">{program.pricePerWeek}</p>
-                  )}
-                </div>
+                <div className="mt-auto">
+                  <div className="mb-4 sm:mb-6 pb-4 sm:pb-6 border-b border-border">
+                    <p className="text-xs sm:text-sm text-foreground/70 mb-1 sm:mb-2 leading-relaxed">
+                      <span className="font-semibold">Длительность:</span> {program.duration}
+                    </p>
+                    <p className="text-xl sm:text-2xl font-bold text-primary">{program.price}</p>
+                    {program.pricePerWeek && (
+                      <p className="text-xs sm:text-sm text-foreground/70">{program.pricePerWeek}</p>
+                    )}
+                  </div>
 
-                <div className="flex flex-col gap-2">
-                  <button className="w-full px-4 py-2 text-sm text-foreground border border-border rounded-lg hover:bg-background transition-colors">
-                    Подробнее
-                  </button>
-                  <button className="w-full px-4 py-2 text-sm bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
-                    Записаться
-                  </button>
+                  <div className="flex flex-col gap-2">
+                    <a href="#consultation" className="w-full px-4 py-2.5 text-xs sm:text-sm bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-center font-semibold">
+                      Записаться
+                    </a>
+                  </div>
                 </div>
               </div>
             ))}
@@ -540,25 +648,25 @@ export default function Home() {
       </section>
 
       {/* Additional Services Section */}
-      <section className="py-16 bg-background">
+      <section className="py-12 sm:py-16 bg-background">
         <div className="container">
-          <h2 className="text-4xl font-bold text-center mb-4 font-display text-primary">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 sm:mb-4 font-display text-primary">
             Дополнительные услуги
           </h2>
-          <p className="text-center text-foreground mb-12 max-w-2xl mx-auto">
+          <p className="text-center text-foreground mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base">
             Дополните вашу программу специализированными капельницами для достижения лучших результатов
           </p>
 
-          <div className="space-y-12">
+          <div className="space-y-8 sm:space-y-12">
             {additionalServices.map((service, idx) => (
               <div key={idx}>
-                <h3 className="text-2xl font-bold mb-6 font-display text-primary">{service.category}</h3>
-                <div className="grid md:grid-cols-2 gap-6">
+                <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 font-display text-primary">{service.category}</h3>
+                <div className="grid sm:grid-cols-2 gap-3 sm:gap-6">
                   {service.items.map((item, itemIdx) => (
-                    <div key={itemIdx} className="bg-white p-6 rounded-lg border border-border">
-                      <h4 className="text-lg font-bold text-foreground mb-2">{item.name}</h4>
-                      <p className="text-primary font-bold text-lg mb-3">{item.price}</p>
-                      <p className="text-sm text-foreground">{item.description}</p>
+                    <div key={itemIdx} className="bg-white p-4 sm:p-6 rounded-xl border border-border hover:shadow-md transition-shadow">
+                      <h4 className="text-base sm:text-lg font-bold text-foreground mb-1 sm:mb-2">{item.name}</h4>
+                      <p className="text-primary font-bold text-base sm:text-lg mb-2 sm:mb-3">{item.price}</p>
+                      <p className="text-xs sm:text-sm text-foreground leading-relaxed">{item.description}</p>
                     </div>
                   ))}
                 </div>
@@ -569,165 +677,181 @@ export default function Home() {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-16 bg-white">
+      <section className="py-12 sm:py-16 bg-white">
         <div className="container">
-          <h2 className="text-4xl font-bold text-center mb-4 font-display text-primary">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 sm:mb-4 font-display text-primary">
             Как это работает
           </h2>
-          <p className="text-center text-foreground mb-12 max-w-2xl mx-auto">
+          <p className="text-center text-foreground mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base">
             Простой и понятный процесс, который помогает вам достичь результатов
           </p>
 
-          <div className="space-y-6 max-w-3xl mx-auto">
-            {[
-              "Первичная консультация и диагностика (сдача анализов, оценка состояния)",
-              "Check-up (анализы крови, оценка гормонального и метаболического статуса)",
-              "Подбор индивидуальной программы похудения (капельницы + питание + режим)",
-              "Прохождение процедур в клинике (мягкие кресла, чай, музыка, 30–90 минут)",
-              "Посещение 1 раз в неделю",
-              "Контрольные визиты, корректировка программы",
-            ].map((step, idx) => (
-              <div key={idx} className="flex gap-4">
-                <div className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold flex-shrink-0 text-sm">
-                  {idx + 1}
+          <div className="grid md:grid-cols-2 gap-8 sm:gap-12 items-start max-w-5xl mx-auto">
+            {/* Steps */}
+            <div className="space-y-4 sm:space-y-6">
+              {[
+                "Первичная консультация и диагностика (сдача анализов, оценка состояния)",
+                "Check-up (анализы крови, оценка гормонального и метаболического статуса)",
+                "Подбор индивидуальной программы похудения (капельницы + питание + режим)",
+                "Прохождение процедур в клинике (мягкие кресла, чай, музыка, 30–90 минут)",
+                "Посещение 1 раз в неделю",
+                "Контрольные визиты, корректировка программы",
+              ].map((step, idx) => (
+                <div key={idx} className="flex gap-3 sm:gap-4">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold flex-shrink-0 text-xs sm:text-sm">
+                    {idx + 1}
+                  </div>
+                  <div className="flex items-center">
+                    <p className="text-foreground text-sm sm:text-base">{step}</p>
+                  </div>
                 </div>
-                <div className="flex items-center">
-                  <p className="text-foreground">{step}</p>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
+
+            {/* Clinic procedure photo */}
+            <div className="rounded-xl overflow-hidden">
+              <img
+                src={photos.ivPatient}
+                alt="Процедура в клинике Понедельник"
+                className="w-full h-64 sm:h-80 md:h-96 object-cover rounded-xl"
+              />
+            </div>
           </div>
 
           {/* IV Benefits */}
-          <div className="grid md:grid-cols-2 gap-8 mb-12 mt-12">
-            <div className="bg-background p-6 rounded-lg border border-border">
-              <h3 className="text-xl font-bold text-primary mb-4 font-display">Преимущества инфузионного введения</h3>
-              <ul className="space-y-3">
+          <div className="grid md:grid-cols-2 gap-4 sm:gap-8 mt-8 sm:mt-12 max-w-5xl mx-auto">
+            <div className="bg-background p-4 sm:p-6 rounded-xl border border-border">
+              <h3 className="text-lg sm:text-xl font-bold text-primary mb-3 sm:mb-4 font-display">Преимущества инфузионного введения</h3>
+              <ul className="space-y-2 sm:space-y-3">
                 <li className="flex gap-2">
-                  <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                  <span className="text-foreground">Полезные вещества попадают сразу в кровь, минуя ЖКТ, усвоение близко к 100%</span>
+                  <Check className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-foreground text-sm sm:text-base">Полезные вещества попадают сразу в кровь, минуя ЖКТ, усвоение близко к 100%</span>
                 </li>
                 <li className="flex gap-2">
-                  <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                  <span className="text-foreground">Эффект чувствуете уже в первые минуты/часы после процедуры</span>
+                  <Check className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-foreground text-sm sm:text-base">Эффект чувствуете уже в первые минуты/часы после процедуры</span>
                 </li>
               </ul>
             </div>
 
-            <div className="bg-background p-6 rounded-lg border border-border">
-              <h3 className="text-xl font-bold text-primary mb-4 font-display">Комфорт и безопасность</h3>
-              <ul className="space-y-3">
+            <div className="bg-background p-4 sm:p-6 rounded-xl border border-border">
+              <h3 className="text-lg sm:text-xl font-bold text-primary mb-3 sm:mb-4 font-display">Комфорт и безопасность</h3>
+              <ul className="space-y-2 sm:space-y-3">
                 <li className="flex gap-2">
-                  <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                  <span className="text-foreground">Мягкие кресла с реклайнером</span>
+                  <Check className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-foreground text-sm sm:text-base">Мягкие кресла с реклайнером</span>
                 </li>
                 <li className="flex gap-2">
-                  <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                  <span className="text-foreground">Чай/кофе, спокойная музыка</span>
+                  <Check className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-foreground text-sm sm:text-base">Чай/кофе, спокойная музыка</span>
                 </li>
                 <li className="flex gap-2">
-                  <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                  <span className="text-foreground">Процедуры под постоянным наблюдением медперсонала</span>
+                  <Check className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-foreground text-sm sm:text-base">Процедуры под постоянным наблюдением медперсонала</span>
                 </li>
                 <li className="flex gap-2">
-                  <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                  <span className="text-foreground">Состав и дозировки подбирает врач по анализам и анамнезу</span>
+                  <Check className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-foreground text-sm sm:text-base">Состав и дозировки подбирает врач по анализам и анамнезу</span>
                 </li>
               </ul>
+            </div>
+          </div>
+
+          {/* Comfort photos */}
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 mt-8 sm:mt-10 max-w-5xl mx-auto">
+            <div className="rounded-xl overflow-hidden">
+              <img
+                src={photos.recliners}
+                alt="Мягкие кресла-реклайнеры для процедур"
+                className="w-full h-40 sm:h-52 md:h-64 object-cover"
+              />
+            </div>
+            <div className="rounded-xl overflow-hidden">
+              <img
+                src={photos.ivDrip}
+                alt="Инфузионная терапия в клинике"
+                className="w-full h-40 sm:h-52 md:h-64 object-cover"
+              />
             </div>
           </div>
         </div>
       </section>
 
       {/* Results Section */}
-      <section id="results" className="py-16 bg-background">
+      <section id="results" className="py-12 sm:py-16 bg-background">
         <div className="container">
-          <h2 className="text-4xl font-bold text-center mb-4 font-display text-primary">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 sm:mb-4 font-display text-primary">
             Результаты пациентов
           </h2>
-          <p className="text-center text-foreground mb-12 max-w-2xl mx-auto">
+          <p className="text-center text-foreground mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base">
             За курс программы пациенты обычно достигают:
           </p>
           
-          <div className="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto mb-8">
-            <div className="bg-white p-6 rounded-lg border border-border">
-              <ul className="space-y-3">
-                <li className="flex gap-2">
-                  <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                  <span className="text-foreground">Снижение веса на 6–30 кг</span>
-                </li>
-                <li className="flex gap-2">
-                  <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                  <span className="text-foreground">Уменьшение объёмов</span>
-                </li>
-              </ul>
-            </div>
-            <div className="bg-white p-6 rounded-lg border border-border">
-              <ul className="space-y-3">
-                <li className="flex gap-2">
-                  <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                  <span className="text-foreground">Снижение аппетита</span>
-                </li>
-                <li className="flex gap-2">
-                  <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                  <span className="text-foreground">Улучшение самочувствия</span>
-                </li>
-              </ul>
-            </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 max-w-3xl mx-auto mb-6 sm:mb-8">
+            {[
+              "Снижение веса на 6–30 кг",
+              "Уменьшение объёмов",
+              "Снижение аппетита",
+              "Улучшение самочувствия",
+            ].map((result, idx) => (
+              <div key={idx} className="bg-white p-3 sm:p-5 rounded-xl border border-border text-center">
+                <Check className="w-5 h-5 sm:w-6 sm:h-6 text-primary mx-auto mb-2" />
+                <span className="text-foreground text-xs sm:text-sm font-medium">{result}</span>
+              </div>
+            ))}
           </div>
 
           <div
-            className="rounded-lg overflow-hidden h-96 bg-cover bg-center"
+            className="rounded-xl overflow-hidden h-48 sm:h-64 md:h-80 lg:h-96 bg-cover bg-center max-w-4xl mx-auto"
             style={{
-              backgroundImage:
-                "url('https://d2xsxph8kpxj0f.cloudfront.net/310519663096993096/hdtQvaxiWb9W7weDTCV6tP/wellness-results-CCDrWAnx4WMRuRR4bDSn54.webp')",
+              backgroundImage: `url('${photos.wellnessResults}')`,
             }}
           ></div>
 
-          <p className="text-center text-sm text-foreground/70 mt-6 italic">
+          <p className="text-center text-xs sm:text-sm text-foreground/70 mt-4 sm:mt-6 italic">
             *результаты индивидуальны
           </p>
         </div>
       </section>
 
       {/* Patient Testimonials Section */}
-      <section className="py-16 bg-white">
+      <section className="py-12 sm:py-16 bg-white">
         <div className="container max-w-3xl">
-          <h2 className="text-4xl font-bold text-center mb-4 font-display text-primary">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-3 sm:mb-4 font-display text-primary leading-tight">
             Поговорите с человеком, который уже похудел именно на нашей программе
           </h2>
-          <p className="text-center text-foreground mb-12">
+          <p className="text-center text-foreground mb-8 sm:mb-12 text-sm sm:text-base leading-relaxed">
             Оставьте контакты — мы назначим вам разговор с нашим пациентом, который прошел тот же курс, что вы рассматриваете. Бесплатно и без обязательств.
           </p>
 
-          <div className="bg-background rounded-lg p-8 shadow-md">
-            <form onSubmit={handleFormSubmit} className="space-y-4">
+          <div className="bg-background rounded-xl p-5 sm:p-8 shadow-md">
+            <form onSubmit={handleFormSubmit} className="space-y-3 sm:space-y-4">
               <div>
-                <label className="block text-sm font-semibold text-foreground mb-2">Ваше имя *</label>
+                <label className="block text-xs sm:text-sm font-semibold text-foreground mb-1.5 sm:mb-2">Ваше имя *</label>
                 <input
                   type="text"
                   placeholder="Имя"
-                  className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-sm sm:text-base"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-foreground mb-2">Телефон *</label>
+                <label className="block text-xs sm:text-sm font-semibold text-foreground mb-1.5 sm:mb-2">Телефон *</label>
                 <input
                   type="tel"
                   placeholder="+7 (999) 999-99-99"
-                  className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-sm sm:text-base"
                   required
                 />
               </div>
               <button
                 type="submit"
-                className="w-full px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold transition-colors"
+                className="w-full px-6 py-2.5 sm:py-3 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold transition-colors text-sm sm:text-base"
               >
                 Отправить заявку на связь
               </button>
               {submitted && (
-                <p className="text-center text-primary text-sm">Спасибо! Мы свяжемся с вами в ближайшее время.</p>
+                <p className="text-center text-primary text-xs sm:text-sm">Спасибо! Мы свяжемся с вами в ближайшее время.</p>
               )}
             </form>
           </div>
@@ -735,32 +859,32 @@ export default function Home() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-16 bg-background">
+      <section className="py-12 sm:py-16 bg-background">
         <div className="container max-w-3xl">
-          <h2 className="text-4xl font-bold text-center mb-4 font-display text-primary">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 sm:mb-4 font-display text-primary">
             Ответы на вопросы
           </h2>
-          <p className="text-center text-foreground mb-12">
+          <p className="text-center text-foreground mb-8 sm:mb-12 text-sm sm:text-base">
             Всё, что вам нужно знать о программах похудения
           </p>
 
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {faqItems.map((item, idx) => (
-              <div key={idx} className="bg-white rounded-lg border border-border overflow-hidden">
+              <div key={idx} className="bg-white rounded-xl border border-border overflow-hidden">
                 <button
                   onClick={() => setExpandedFaq(expandedFaq === idx ? null : idx)}
-                  className="w-full px-6 py-4 flex items-center justify-between hover:bg-background transition-colors"
+                  className="w-full px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between hover:bg-background transition-colors"
                 >
-                  <h3 className="font-semibold text-foreground text-left">{item.question}</h3>
+                  <h3 className="font-semibold text-foreground text-left text-sm sm:text-base pr-2">{item.question}</h3>
                   <ChevronDown
-                    className={`w-5 h-5 text-primary flex-shrink-0 transition-transform ${
+                    className={`w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0 transition-transform ${
                       expandedFaq === idx ? "rotate-180" : ""
                     }`}
                   />
                 </button>
                 {expandedFaq === idx && (
-                  <div className="px-6 py-4 bg-background border-t border-border">
-                    <p className="text-foreground">{item.answer}</p>
+                  <div className="px-4 sm:px-6 py-3 sm:py-4 bg-background border-t border-border">
+                    <p className="text-foreground text-sm sm:text-base">{item.answer}</p>
                   </div>
                 )}
               </div>
@@ -770,48 +894,48 @@ export default function Home() {
       </section>
 
       {/* Consultation Form Section */}
-      <section className="py-16 bg-white">
+      <section id="consultation" className="py-12 sm:py-16 bg-white">
         <div className="container max-w-3xl">
-          <h2 className="text-4xl font-bold text-center mb-4 font-display text-primary">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 sm:mb-4 font-display text-primary">
             Получить консультацию врача
           </h2>
-          <p className="text-center text-foreground mb-12">
+          <p className="text-center text-foreground mb-8 sm:mb-12 text-sm sm:text-base">
             Оставьте контакты и выберите интересующую вас программу — врач свяжется с вами в течение часа
           </p>
 
-          <div className="bg-background rounded-lg p-8 shadow-md">
-            <form onSubmit={handleFormSubmit} className="space-y-4">
+          <div className="bg-background rounded-xl p-5 sm:p-8 shadow-md">
+            <form onSubmit={handleFormSubmit} className="space-y-3 sm:space-y-4">
               <div>
-                <label className="block text-sm font-semibold text-foreground mb-2">Ваше имя *</label>
+                <label className="block text-xs sm:text-sm font-semibold text-foreground mb-1.5 sm:mb-2">Ваше имя *</label>
                 <input
                   type="text"
                   name="name"
                   placeholder="Ваше имя"
                   value={formData.name}
                   onChange={handleFormChange}
-                  className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-sm sm:text-base"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-foreground mb-2">Телефон *</label>
+                <label className="block text-xs sm:text-sm font-semibold text-foreground mb-1.5 sm:mb-2">Телефон *</label>
                 <input
                   type="tel"
                   name="phone"
                   placeholder="+7 (999) 999-99-99"
                   value={formData.phone}
                   onChange={handleFormChange}
-                  className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-sm sm:text-base"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-foreground mb-2">Интересующая программа</label>
+                <label className="block text-xs sm:text-sm font-semibold text-foreground mb-1.5 sm:mb-2">Интересующая программа</label>
                 <select
                   name="program"
                   value={selectedProgram}
                   onChange={(e) => setSelectedProgram(e.target.value)}
-                  className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-sm sm:text-base bg-white"
                 >
                   <option>Новый понедельник</option>
                   <option>Интенсив</option>
@@ -820,12 +944,12 @@ export default function Home() {
               </div>
               <button
                 type="submit"
-                className="w-full px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold transition-colors"
+                className="w-full px-6 py-2.5 sm:py-3 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold transition-colors text-sm sm:text-base"
               >
                 Получить консультацию
               </button>
               {submitted && (
-                <p className="text-center text-primary text-sm">Спасибо! Врач свяжется с вами в ближайшее время.</p>
+                <p className="text-center text-primary text-xs sm:text-sm">Спасибо! Врач свяжется с вами в ближайшее время.</p>
               )}
             </form>
           </div>
@@ -833,56 +957,58 @@ export default function Home() {
       </section>
 
       {/* Contacts Section */}
-      <section id="contacts" className="py-16 bg-background">
+      <section id="contacts" className="py-12 sm:py-16 bg-background">
         <div className="container">
-          <h2 className="text-4xl font-bold text-center mb-12 font-display text-primary">Контакты</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 font-display text-primary">Контакты</h2>
 
-          <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 sm:gap-12 max-w-4xl mx-auto">
             <div>
-              <h3 className="text-2xl font-bold mb-6 font-display text-primary">Адрес клиники</h3>
-              <div className="space-y-4">
+              <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 font-display text-primary">Адрес клиники</h3>
+              <div className="space-y-3 sm:space-y-4">
                 <div className="flex gap-3">
-                  <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
+                  <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-semibold text-foreground">Адрес</p>
-                    <p className="text-foreground">г. Москва, ул. Адмирала Макарова 6А</p>
+                    <p className="font-semibold text-foreground text-sm sm:text-base">Адрес</p>
+                    <p className="text-foreground text-sm sm:text-base">г. Москва, ул. Адмирала Макарова, 6А</p>
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <Clock className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
+                  <Clock className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-semibold text-foreground">График работы</p>
-                    <p className="text-foreground">Ежедневно с 9:00 до 21:00</p>
+                    <p className="font-semibold text-foreground text-sm sm:text-base">График работы</p>
+                    <p className="text-foreground text-sm sm:text-base">Ежедневно с 9:00 до 21:00</p>
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <Phone className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
+                  <Phone className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-semibold text-foreground">Телефон</p>
-                    <p className="text-foreground">+7 (999) 999-99-99</p>
+                    <p className="font-semibold text-foreground text-sm sm:text-base">Телефон</p>
+                    <a href="tel:+79150660553" className="text-foreground hover:text-primary transition-colors text-sm sm:text-base">
+                      +7 (915) 066-05-53
+                    </a>
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <Mail className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
+                  <Mail className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-semibold text-foreground">Email</p>
-                    <p className="text-foreground">info@ponedelnik.clinic</p>
+                    <p className="font-semibold text-foreground text-sm sm:text-base">Email</p>
+                    <p className="text-foreground text-sm sm:text-base">info@ponedelnik.clinic</p>
                   </div>
                 </div>
               </div>
             </div>
             <div>
-              <h3 className="text-2xl font-bold mb-6 font-display text-primary">Как добраться</h3>
-              <div className="space-y-4">
+              <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 font-display text-primary">Как добраться</h3>
+              <div className="space-y-3 sm:space-y-4">
                 <div>
-                  <p className="font-semibold text-foreground mb-2">Метро</p>
-                  <p className="text-foreground">
+                  <p className="font-semibold text-foreground mb-1 sm:mb-2 text-sm sm:text-base">Метро</p>
+                  <p className="text-foreground text-sm sm:text-base">
                     Ближайшие станции: Парк культуры, Смоленская (5–10 минут пешком)
                   </p>
                 </div>
                 <div>
-                  <p className="font-semibold text-foreground mb-2">Парковка</p>
-                  <p className="text-foreground">
+                  <p className="font-semibold text-foreground mb-1 sm:mb-2 text-sm sm:text-base">Парковка</p>
+                  <p className="text-foreground text-sm sm:text-base">
                     Бесплатная парковка на территории клиники для пациентов
                   </p>
                 </div>
@@ -893,29 +1019,52 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-primary text-white py-8">
+      <footer className="bg-primary text-white py-6 sm:py-8">
         <div className="container">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6 pb-6 border-b border-white border-opacity-20">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4 sm:mb-6 pb-4 sm:pb-6 border-b border-white/20">
             <div className="flex items-center gap-3">
-              <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/YmfaYcSJobutlROw.jpg" alt="Понедельник клиника" className="h-12 w-12 object-contain rounded" />
+              <img src={photos.logo} alt="Понедельник клиника" className="h-10 w-10 sm:h-12 sm:w-12 object-contain rounded" />
               <div>
-                <p className="font-bold text-lg">Понедельник</p>
-                <p className="text-sm opacity-75">Клиника медицинского снижения веса</p>
+                <p className="font-bold text-base sm:text-lg">Понедельник</p>
+                <p className="text-xs sm:text-sm opacity-75">Клиника медицинского снижения веса</p>
               </div>
             </div>
             <div className="text-center sm:text-right">
-              <p className="font-semibold">+7 (999) 999-99-99</p>
-              <p className="text-sm opacity-75">info@ponedelnik.clinic</p>
+              <a href="tel:+79150660553" className="font-semibold hover:opacity-80 transition-opacity text-sm sm:text-base">
+                +7 (915) 066-05-53
+              </a>
+              <p className="text-xs sm:text-sm opacity-75">г. Москва, ул. Адмирала Макарова, 6А</p>
             </div>
           </div>
           <div className="text-center">
-            <p className="mb-2">© 2024 Клиника медицинского снижения веса «Понедельник»</p>
-            <p className="text-sm opacity-75">
+            <p className="mb-1 sm:mb-2 text-xs sm:text-sm">© 2025 Клиника медицинского снижения веса «Понедельник»</p>
+            <p className="text-xs opacity-75">
               Все права защищены. Информация на сайте не является публичной офертой.
             </p>
           </div>
         </div>
       </footer>
+
+      {/* Fixed mobile CTA */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-border p-3 sm:hidden">
+        <div className="flex gap-2">
+          <a
+            href="tel:+79150660553"
+            className="flex-1 py-2.5 text-center border border-primary text-primary rounded-lg font-semibold text-sm"
+          >
+            Позвонить
+          </a>
+          <a
+            href="#consultation"
+            className="flex-1 py-2.5 text-center bg-primary text-white rounded-lg font-semibold text-sm"
+          >
+            Записаться
+          </a>
+        </div>
+      </div>
+
+      {/* Spacer for fixed mobile CTA */}
+      <div className="h-16 sm:hidden"></div>
     </div>
   );
 }

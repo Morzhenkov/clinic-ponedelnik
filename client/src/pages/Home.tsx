@@ -40,6 +40,8 @@ export default function Home() {
     receptionDesk: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/iNJVkdeepDsPpcDN.jpg",
     waitingArea: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/xBiIIyOqnOdmPTVU.jpg",
     logo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/YmfaYcSJobutlROw.jpg",
+    logoCircle: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/ewXRlFUwzVxJipWN.png",
+    logoCircleLight: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/gAryqnxSGiVncDrQ.png",
     heroGenerated: "https://d2xsxph8kpxj0f.cloudfront.net/310519663096993096/hdtQvaxiWb9W7weDTCV6tP/iv-therapy-procedure-HrfhGSzZrzp7Ymjgf9SXUg.webp",
     wellnessResults: "https://d2xsxph8kpxj0f.cloudfront.net/310519663096993096/hdtQvaxiWb9W7weDTCV6tP/wellness-results-CCDrWAnx4WMRuRR4bDSn54.webp",
   };
@@ -262,12 +264,13 @@ export default function Home() {
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-white border-b border-border shadow-sm">
         <div className="container flex items-center justify-between h-16 sm:h-18">
-          {/* Logo area - circle Пн icon only, clean and prominent */}
-          <a href="#" className="flex items-center gap-3 flex-shrink-0">
-            <svg viewBox="0 0 80 80" className="h-11 w-11 sm:h-12 sm:w-12 flex-shrink-0" aria-label="Понедельник клиника">
-              <circle cx="40" cy="40" r="36" fill="none" stroke="#1B5E3F" strokeWidth="3" />
-              <text x="40" y="44" textAnchor="middle" dominantBaseline="middle" fill="#1B5E3F" fontSize="24" fontWeight="700" fontFamily="'Playfair Display', serif" letterSpacing="1">Пн</text>
-            </svg>
+          {/* Logo area - original circle icon from brand logo */}
+          <a href="#" className="flex items-center gap-2.5 flex-shrink-0">
+            <img
+              src={photos.logoCircle}
+              alt="Понедельник"
+              className="h-10 w-10 sm:h-11 sm:w-11 object-contain"
+            />
             <div className="flex flex-col leading-tight">
               <span className="text-base sm:text-lg font-bold text-primary font-display tracking-wide">
                 Понедельник
@@ -1022,10 +1025,11 @@ export default function Home() {
         <div className="container">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4 sm:mb-6 pb-4 sm:pb-6 border-b border-white/20">
             <div className="flex items-center gap-3">
-              <svg viewBox="0 0 80 80" className="h-11 w-11 sm:h-12 sm:w-12 flex-shrink-0" aria-label="Понедельник клиника">
-                <circle cx="40" cy="40" r="36" fill="none" stroke="white" strokeWidth="3" />
-                <text x="40" y="44" textAnchor="middle" dominantBaseline="middle" fill="white" fontSize="24" fontWeight="700" fontFamily="'Playfair Display', serif" letterSpacing="1">Пн</text>
-              </svg>
+              <img
+                src={photos.logoCircleLight}
+                alt="Понедельник"
+                className="h-10 w-10 sm:h-12 sm:w-12 object-contain"
+              />
               <div>
                 <p className="font-bold text-base sm:text-lg">Понедельник</p>
                 <p className="text-xs sm:text-sm opacity-75">Клиника медицинского снижения веса</p>

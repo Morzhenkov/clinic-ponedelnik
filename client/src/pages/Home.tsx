@@ -40,8 +40,8 @@ export default function Home() {
     receptionDesk: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/iNJVkdeepDsPpcDN.jpg",
     waitingArea: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/xBiIIyOqnOdmPTVU.jpg",
     logo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/YmfaYcSJobutlROw.jpg",
-    logoCircle: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/ewXRlFUwzVxJipWN.png",
-    logoCircleLight: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/gAryqnxSGiVncDrQ.png",
+    logoCircle: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/LmXzAEntIIRgShGK.png",
+    logoCircleLight: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/LmXzAEntIIRgShGK.png",
     heroGenerated: "https://d2xsxph8kpxj0f.cloudfront.net/310519663096993096/hdtQvaxiWb9W7weDTCV6tP/iv-therapy-procedure-HrfhGSzZrzp7Ymjgf9SXUg.webp",
     wellnessResults: "https://d2xsxph8kpxj0f.cloudfront.net/310519663096993096/hdtQvaxiWb9W7weDTCV6tP/wellness-results-CCDrWAnx4WMRuRR4bDSn54.webp",
   };

@@ -428,62 +428,65 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Mobile hero - photo visible on top, content below */}
-      <section className="sm:hidden">
-        {/* Reception wall photo - prominently visible */}
-        <div className="relative h-56 overflow-hidden">
-          <img
-            src={photos.receptionLogo}
-            alt="Стена ресепшена клиники Понедельник"
-            className="w-full h-full object-cover object-center"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/50"></div>
-          <div className="absolute bottom-3 left-4 right-4">
-            <p className="text-white text-sm font-semibold">
+      {/* Mobile hero - text overlay on photo like desktop */}
+      <section className="sm:hidden relative py-16 overflow-hidden">
+        {/* Reception wall photo background */}
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url('${photos.receptionLogo}')` }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-black/40"></div>
+        </div>
+        
+        {/* Content overlay on photo */}
+        <div className="container relative z-10 px-4">
+          <div className="mb-6">
+            <p className="text-base text-white font-semibold mb-1">
               Ваш новый понедельник начинается здесь
             </p>
+            <p className="text-sm text-white/90">
+              Начните свой новый понедельник — без лишнего веса
+            </p>
           </div>
-        </div>
-
-        {/* Content area on clean background */}
-        <div className="px-4 py-6 bg-background">
-          <p className="text-[10px] text-primary/70 uppercase tracking-widest mb-2">
+          <p className="text-xs text-white/70 uppercase tracking-widest mb-3">
             Медицинская программа снижения веса под контролем врача
           </p>
-          <h1 className="text-[22px] leading-[1.2] font-bold text-foreground mb-3 font-display">
+          <h1 className="text-xl leading-[1.2] font-bold text-white mb-3 font-display">
             Клиника снижения веса на новейших препаратах под контролем врачей без жёстких диет и откатов
           </h1>
-          <p className="text-sm text-foreground/80 mb-4 leading-relaxed">
+          <p className="text-sm text-white/90 mb-4 leading-relaxed">
             Диагностика, пептидная терапия и восполнение дефицитов с клинически протестированными протоколами инфузионной терапии и питания
           </p>
 
           {/* UTP Block - compact cards */}
-          <div className="space-y-2 mb-4">
+          <div className="grid grid-cols-2 gap-2 mb-4">
             {[
               "Программы похудения и современные препараты под контролем врача-эндокринолога по вашим анализам",
               "Пептидная терапия и современные препараты для контроля аппетита",
               "Восполнение дефицитов витаминов и микроэлементов",
               "Лечение причин набора веса, а не временные диеты",
             ].map((text, idx) => (
-              <div key={idx} className="flex gap-2.5 items-start">
-                <div className="w-5 h-5 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-white text-[10px] font-bold mt-0.5">
-                  ✓
+              <div key={idx} className="bg-white/95 backdrop-blur-sm p-2.5 rounded-lg">
+                <div className="flex gap-2 items-start">
+                  <div className="w-5 h-5 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-white text-[10px] font-bold mt-0.5">
+                    ✓
+                  </div>
+                  <p className="text-[11px] text-foreground leading-snug">{text}</p>
                 </div>
-                <p className="text-[13px] text-foreground leading-snug">{text}</p>
               </div>
             ))}
           </div>
 
-          <p className="text-foreground/60 text-xs mb-5 italic leading-relaxed">
+          <p className="text-white/80 text-xs mb-4 italic leading-relaxed">
             Многие пациенты приходят к нам после того, как слышали о препаратах семаглутида и тирзепатида (Оземпик, Мунжаро и аналоги).
-            Мы подбираем терапию индивидуально — с учётом анализов, состояния организма и целей пациента.
+            Мы подбираем терапию индивидуально.
           </p>
 
-          <div className="flex gap-2.5">
-            <a href="#programs" className="flex-1 px-4 py-2.5 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold transition-colors text-center text-sm">
+          <div className="flex gap-2">
+            <a href="#programs" className="flex-1 px-3 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold transition-colors text-center text-xs">
               Подобрать программу
             </a>
-            <a href="#consultation" className="flex-1 px-4 py-2.5 border-2 border-primary text-primary hover:bg-primary/5 rounded-lg font-semibold transition-colors text-center text-sm">
+            <a href="#consultation" className="flex-1 px-3 py-2 border-2 border-white text-white hover:bg-white/10 rounded-lg font-semibold transition-colors text-center text-xs">
               Записаться
             </a>
           </div>
@@ -1066,7 +1069,7 @@ export default function Home() {
                 <div>
                   <p className="font-semibold text-foreground mb-1 sm:mb-2 text-sm sm:text-base">Метро</p>
                   <p className="text-foreground text-sm sm:text-base">
-                    Ближайшие станции: Парк культуры, Смоленская (5–10 минут пешком)
+                    Ближайшая станция: Водный стадион (7 минут пешком)
                   </p>
                 </div>
                 <div>

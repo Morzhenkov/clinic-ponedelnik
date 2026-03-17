@@ -1117,10 +1117,16 @@ export default function Home() {
 
       {/* Fixed mobile CTA */}
       <div className="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-border p-3 sm:hidden">
-        <div className="flex items-center justify-center">
+        <div className="flex gap-2">
+          <a
+            href="tel:+79150660553"
+            className="flex-1 py-2.5 text-center border border-primary text-primary rounded-lg font-semibold text-sm"
+          >
+            Позвонить
+          </a>
           <a
             href="#consultation"
-            className="py-2.5 px-8 bg-primary text-white rounded-lg font-semibold text-sm hover:bg-primary/90 transition-colors"
+            className="flex-1 py-2.5 text-center bg-primary text-white rounded-lg font-semibold text-sm"
           >
             Записаться
           </a>

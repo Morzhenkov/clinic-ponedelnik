@@ -1,0 +1,9 @@
+{
+  "query": "CREATE TABLE `consultations` (\n\t`id` int AUTO_INCREMENT NOT NULL,\n\t`name` varchar(255) NOT NULL,\n\t`phone` varchar(20) NOT NULL,\n\t`program` varchar(255) NOT NULL,\n\t`fileUrl` text,\n\t`fileKey` text,\n\t`fileName` varchar(255),\n\t`fileMimeType` varchar(100),\n\t`createdAt` timestamp NOT NULL DEFAULT (now()),\n\t`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,\n\tCONSTRAINT `consultations_id` PRIMARY KEY(`id`)\n);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway04.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2nqhTzbt36HtBzs.157d5c7d3453 --database hdtQvaxiWb9W7weDTCV6tP --execute CREATE TABLE `consultations` (\n\t`id` int AUTO_INCREMENT NOT NULL,\n\t`name` varchar(255) NOT NULL,\n\t`phone` varchar(20) NOT NULL,\n\t`program` varchar(255) NOT NULL,\n\t`fileUrl` text,\n\t`fileKey` text,\n\t`fileName` varchar(255),\n\t`fileMimeType` varchar(100),\n\t`createdAt` timestamp NOT NULL DEFAULT (now()),\n\t`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,\n\tCONSTRAINT `consultations_id` PRIMARY KEY(`id`)\n);",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 976
+}

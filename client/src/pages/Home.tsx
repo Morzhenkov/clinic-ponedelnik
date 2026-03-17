@@ -1,6 +1,8 @@
 
 import { useState } from "react";
-import { Check, ChevronDown, MapPin, Clock, Phone, Mail, Menu, X } from "lucide-react";
+import { Check, ChevronDown, MapPin, Clock, Phone, Mail, Menu, X, Upload } from "lucide-react";
+import { trpc } from "@/lib/trpc";
+import { toast } from "sonner";
 
 /**
  * Design Philosophy: Medical Minimalism with Warm Humanity
@@ -17,15 +19,71 @@ export default function Home() {
   const [selectedProgram, setSelectedProgram] = useState("Новый понедельник");
   const [submitted, setSubmitted] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
+
+  const consultationMutation = trpc.consultations.submit.useMutation({
+    onSuccess: () => {
+      setSubmitted(true);
+      setFormData({ name: "", phone: "" });
+      setUploadedFile(null);
+      toast.success("Заявка отправлена! Врач свяжется с вами в течение часа.");
+      setTimeout(() => setSubmitted(false), 3000);
+    },
+    onError: (error) => {
+      toast.error("Ошибка при отправке заявки. Пожалуйста, попробуйте снова.");
+      console.error(error);
+    },
+  });
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.size > 10 * 1024 * 1024) {
+        toast.error("Файл слишком большой. Максимальный размер: 10 МБ");
+        return;
+      }
+      setUploadedFile(file);
+    }
+  };
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
+    setIsUploading(true);
+
+    try {
+      let fileData: { base64: string; fileName: string; mimeType: string } | undefined;
+
+      if (uploadedFile) {
+        const reader = new FileReader();
+        await new Promise((resolve, reject) => {
+          reader.onload = () => {
+            const base64String = (reader.result as string).split(",")[1];
+            fileData = {
+              base64: base64String,
+              fileName: uploadedFile.name,
+              mimeType: uploadedFile.type,
+            };
+            resolve(null);
+          };
+          reader.onerror = reject;
+          reader.readAsDataURL(uploadedFile);
+        });
+      }
+
+      await consultationMutation.mutateAsync({
+        name: formData.name,
+        phone: formData.phone,
+        program: selectedProgram,
+        fileData,
+      });
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   const closeMobileMenu = () => setMobileMenuOpen(false);
@@ -1008,11 +1066,35 @@ export default function Home() {
                   <option>Стабилизация результата</option>
                 </select>
               </div>
+              <div>
+                <label className="block text-xs sm:text-sm font-semibold text-foreground mb-1.5 sm:mb-2">Загрузить файл (анализы, документы)</label>
+                <div className="relative">
+                  <input
+                    type="file"
+                    onChange={handleFileChange}
+                    className="hidden"
+                    id="file-input"
+                    accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.txt"
+                  />
+                  <label
+                    htmlFor="file-input"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border-2 border-dashed border-primary rounded-lg cursor-pointer hover:bg-primary/5 transition-colors flex items-center gap-2 justify-center text-sm sm:text-base"
+                  >
+                    <Upload className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
+                    {uploadedFile ? (
+                      <span className="text-foreground font-medium">{uploadedFile.name}</span>
+                    ) : (
+                      <span className="text-foreground/70">Выберите файл или перетащите сюда</span>
+                    )}
+                  </label>
+                </div>
+              </div>
               <button
                 type="submit"
-                className="w-full px-6 py-2.5 sm:py-3 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold transition-colors text-sm sm:text-base"
+                disabled={isUploading || consultationMutation.isPending}
+                className="w-full px-6 py-2.5 sm:py-3 bg-primary hover:bg-primary/90 disabled:bg-primary/50 text-white rounded-lg font-semibold transition-colors text-sm sm:text-base"
               >
-                Получить консультацию
+                {isUploading || consultationMutation.isPending ? "Отправка..." : "Получить консультацию"}
               </button>
               {submitted && (
                 <p className="text-center text-primary text-xs sm:text-sm">Спасибо! Врач свяжется с вами в ближайшее время.</p>

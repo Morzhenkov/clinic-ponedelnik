@@ -1195,7 +1195,7 @@ export default function Home() {
               <img
                 src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/lZBYIAbLnvciebLy.png"
                 alt="Понедельник"
-                className="h-10 w-10 sm:h-12 sm:w-12 object-contain"
+                className="h-16 w-16 sm:h-20 sm:w-20 object-contain"
               />
               <div>
                 <p className="font-bold text-base sm:text-lg">Понедельник</p>

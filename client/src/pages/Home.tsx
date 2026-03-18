@@ -325,7 +325,7 @@ export default function Home() {
           {/* Logo area - original circle icon from brand logo */}
           <a href="#" className="flex items-center gap-2.5 flex-shrink-0">
             <img
-              src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/UCizlwkkTsmCuWGk.svg"
+              src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/OVPfLwgZQKNXDIup.svg"
               alt="Понедельник"
               className="h-28 w-28 sm:h-32 sm:w-32 object-contain"
             />

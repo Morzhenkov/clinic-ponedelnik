@@ -327,7 +327,7 @@ export default function Home() {
             <img
               src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/rMRZYvVsSjevBtrR.png"
               alt="Понедельник"
-              className="h-10 w-10 sm:h-11 sm:w-11 object-contain"
+              className="h-14 w-14 sm:h-16 sm:w-16 object-contain"
             />
             <div className="flex flex-col leading-tight">
               <span className="text-base sm:text-lg font-bold text-primary font-display tracking-wide">

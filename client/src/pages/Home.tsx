@@ -325,7 +325,7 @@ export default function Home() {
           {/* Logo area - original circle icon from brand logo */}
           <a href="#" className="flex items-center gap-2.5 flex-shrink-0">
             <img
-              src={photos.logoCircle}
+              src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/rMRZYvVsSjevBtrR.png"
               alt="Понедельник"
               className="h-10 w-10 sm:h-11 sm:w-11 object-contain"
             />
@@ -1193,7 +1193,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4 sm:mb-6 pb-4 sm:pb-6 border-b border-white/20">
             <div className="flex items-center gap-3">
               <img
-                src={photos.logoCircleLight}
+                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/lZBYIAbLnvciebLy.png"
                 alt="Понедельник"
                 className="h-10 w-10 sm:h-12 sm:w-12 object-contain"
               />

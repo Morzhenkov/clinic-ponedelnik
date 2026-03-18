@@ -324,14 +324,11 @@ export default function Home() {
         <div className="container flex items-center justify-between h-16 sm:h-18">
           {/* Logo area - original circle icon from brand logo */}
           <a href="#" className="flex items-center gap-2.5 flex-shrink-0">
-            <picture>
-              <source media="(min-width: 640px)" srcSet="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/fLVjPDDcsPACsEHM.png" />
-              <img
-                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/WPbuvgWDjMkRImgI.png"
-                alt="Понедельник"
-                className="h-28 w-28 sm:h-32 sm:w-32 object-contain"
-              />
-            </picture>
+            <img
+              src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/VHVqMlZhcoYUCECf.svg"
+              alt="Понедельник"
+              className="h-28 w-28 sm:h-32 sm:w-32 object-contain"
+            />
             <div className="flex flex-col leading-tight">
               <span className="text-base sm:text-lg font-bold text-primary font-display tracking-wide">
                 Понедельник

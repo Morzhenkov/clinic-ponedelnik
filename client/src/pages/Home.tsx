@@ -329,7 +329,7 @@ export default function Home() {
               <img
                 src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/WPbuvgWDjMkRImgI.png"
                 alt="Понедельник"
-                className="h-14 w-14 sm:h-16 sm:w-16 object-contain"
+                className="h-28 w-28 sm:h-32 sm:w-32 object-contain"
               />
             </picture>
             <div className="flex flex-col leading-tight">

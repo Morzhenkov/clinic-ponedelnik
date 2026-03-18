@@ -953,7 +953,14 @@ export default function Home() {
             Оставьте контакты — мы назначим вам разговор с нашим пациентом, который прошел тот же курс, что вы рассматриваете. Бесплатно и без обязательств.
           </p>
 
-          <div className="bg-background rounded-xl p-5 sm:p-8 shadow-md">
+          <div className="bg-background rounded-xl p-5 sm:p-8 shadow-md relative overflow-hidden" style={{
+            backgroundImage: 'url(https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/fEvVmzzKUNjGHVAp.png)',
+            backgroundPosition: 'right bottom',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'clamp(150px, 30vw, 300px)',
+            backgroundAttachment: 'local',
+          }}>
+            <div className="relative z-10">
             <form onSubmit={handleFormSubmit} className="space-y-3 sm:space-y-4">
               <div>
                 <label className="block text-xs sm:text-sm font-semibold text-foreground mb-1.5 sm:mb-2">Ваше имя *</label>
@@ -983,6 +990,7 @@ export default function Home() {
                 <p className="text-center text-primary text-xs sm:text-sm">Спасибо! Мы свяжемся с вами в ближайшее время.</p>
               )}
             </form>
+            </div>
           </div>
         </div>
       </section>
@@ -1032,7 +1040,14 @@ export default function Home() {
             Оставьте контакты и выберите интересующую вас программу — врач свяжется с вами в течение часа
           </p>
 
-          <div className="bg-background rounded-xl p-5 sm:p-8 shadow-md">
+          <div className="bg-background rounded-xl p-5 sm:p-8 shadow-md relative overflow-hidden" style={{
+            backgroundImage: 'url(https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/fEvVmzzKUNjGHVAp.png)',
+            backgroundPosition: 'right bottom',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'clamp(150px, 30vw, 300px)',
+            backgroundAttachment: 'local',
+          }}>
+            <div className="relative z-10">
             <form onSubmit={handleFormSubmit} className="space-y-3 sm:space-y-4">
               <div>
                 <label className="block text-xs sm:text-sm font-semibold text-foreground mb-1.5 sm:mb-2">Ваше имя *</label>
@@ -1071,7 +1086,7 @@ export default function Home() {
                   <option>Стабилизация результата</option>
                 </select>
               </div>
-              <div>
+              <div className="hidden sm:block">
                 <label className="block text-xs sm:text-sm font-semibold text-foreground mb-1.5 sm:mb-2">Загрузить файл (анализы, документы)</label>
                 <div className="relative">
                   <input
@@ -1105,6 +1120,7 @@ export default function Home() {
                 <p className="text-center text-primary text-xs sm:text-sm">Спасибо! Врач свяжется с вами в ближайшее время.</p>
               )}
             </form>
+            </div>
           </div>
         </div>
       </section>
@@ -1129,7 +1145,7 @@ export default function Home() {
                   <Clock className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                   <div>
                     <p className="font-semibold text-foreground text-sm sm:text-base">График работы</p>
-                    <p className="text-foreground text-sm sm:text-base">Ежедневно с 9:00 до 21:00</p>
+                    <p className="text-foreground text-sm sm:text-base">Ежедневно с 10:00 до 20:00</p>
                   </div>
                 </div>
                 <div className="flex gap-3">

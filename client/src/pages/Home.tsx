@@ -925,12 +925,17 @@ export default function Home() {
             ))}
           </div>
 
-          <div
-            className="rounded-xl overflow-hidden h-48 sm:h-64 md:h-80 lg:h-96 bg-cover bg-center max-w-4xl mx-auto"
-            style={{
-              backgroundImage: `url('${photos.wellnessResults}')`,
-            }}
-          ></div>
+          <div className="rounded-xl overflow-hidden max-w-4xl mx-auto">
+            <picture>
+              <source media="(max-width: 640px)" srcSet="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/OHnvPnoIYBJmJXMe.jpg" />
+              <source media="(max-width: 1024px)" srcSet="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/kQpyXMIxjfLZgBvh.jpg" />
+              <img
+                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/KbHisKnQTYQZdiJJ.jpg"
+                alt="Результаты пациентов - до и после"
+                className="w-full h-auto rounded-xl object-cover"
+              />
+            </picture>
+          </div>
 
           <p className="text-center text-xs sm:text-sm text-foreground/70 mt-4 sm:mt-6 italic">
             *результаты индивидуальны

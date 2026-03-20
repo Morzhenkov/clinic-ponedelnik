@@ -927,10 +927,22 @@ export default function Home() {
 
           <div className="rounded-xl overflow-hidden max-w-4xl mx-auto">
             <picture>
-              <source media="(max-width: 640px)" srcSet="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/OHnvPnoIYBJmJXMe.jpg" />
-              <source media="(max-width: 1024px)" srcSet="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/kQpyXMIxjfLZgBvh.jpg" />
+              <source media="(max-width: 640px)" srcSet="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/onfaxAicWJWqkGsg.jpg" />
+              <source media="(max-width: 1024px)" srcSet="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/QnzGtLmrDqkLIppq.jpg" />
               <img
-                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/KbHisKnQTYQZdiJJ.jpg"
+                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/SohOikkoRfqNVvXJ.jpg"
+                alt="Результаты пациентов - до и после"
+                className="w-full h-auto rounded-xl object-cover"
+              />
+            </picture>
+          </div>
+          
+          <div className="rounded-xl overflow-hidden max-w-4xl mx-auto mt-6 sm:mt-8">
+            <picture>
+              <source media="(max-width: 640px)" srcSet="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/ZsZiAXgFQxEWPXNa.jpg" />
+              <source media="(max-width: 1024px)" srcSet="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/uJabHgjSMXfzuZWP.jpg" />
+              <img
+                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/rscHNCjsmILdRngU.jpg"
                 alt="Результаты пациентов - до и после"
                 className="w-full h-auto rounded-xl object-cover"
               />

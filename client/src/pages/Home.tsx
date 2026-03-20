@@ -1226,6 +1226,9 @@ export default function Home() {
             <p className="text-xs opacity-75">
               Все права защищены. Информация на сайте не является публичной офертой.
             </p>
+            <p className="text-xs opacity-75 mt-2 sm:mt-3">
+              Лицензия на осуществление медицинской деятельности: Л041-01137-77/04609253
+            </p>
           </div>
         </div>
       </footer>

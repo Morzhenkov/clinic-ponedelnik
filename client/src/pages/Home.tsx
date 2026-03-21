@@ -94,7 +94,7 @@ export default function Home() {
     doctorOffice: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/TKhJXPaJQWNGgEiB.jpg",
     ivDrip: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/DvYEDyiDcefFfwuZ.jpg",
     recliners: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/ZIcdmlMlVmVhLyZD.jpg",
-    receptionLogo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/xMgEidrUcTgfXKfc.jpg",
+    receptionLogo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/AgaouaSNjfmrDGbN.jpg",
     receptionDesk: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/iNJVkdeepDsPpcDN.jpg",
     waitingArea: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/xBiIIyOqnOdmPTVU.jpg",
     logo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/YmfaYcSJobutlROw.jpg",

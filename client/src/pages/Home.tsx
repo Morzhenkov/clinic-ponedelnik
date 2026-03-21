@@ -102,6 +102,7 @@ export default function Home() {
     logoCircleLight: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/LmXzAEntIIRgShGK.png",
     heroGenerated: "https://d2xsxph8kpxj0f.cloudfront.net/310519663096993096/hdtQvaxiWb9W7weDTCV6tP/iv-therapy-procedure-HrfhGSzZrzp7Ymjgf9SXUg.webp",
     wellnessResults: "https://d2xsxph8kpxj0f.cloudfront.net/310519663096993096/hdtQvaxiWb9W7weDTCV6tP/wellness-results-CCDrWAnx4WMRuRR4bDSn54.webp",
+    transformationSequence: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/RefjzjSMLELhxutl.PNG",
   };
 
   // Main programs
@@ -423,130 +424,106 @@ export default function Home() {
         )}
       </nav>
 
-      {/* Hero Section - Desktop: overlay on photo, Mobile: photo on top + content below */}
-      {/* Desktop hero */}
-      <section className="relative hidden sm:block py-20 md:py-24 overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url('${photos.receptionLogo}')` }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-black/40"></div>
-        </div>
-        <div className="container relative z-10 max-w-3xl">
-          <div className="mb-8">
-            <p className="text-lg md:text-xl text-white font-semibold mb-1">
-              Ваш новый понедельник начинается здесь
-            </p>
-            <p className="text-base md:text-lg text-white/90">
-              Начните свой новый понедельник — без лишнего веса
-            </p>
-          </div>
-          <p className="text-sm text-white/70 uppercase tracking-widest mb-4">
-            Медицинская программа снижения веса под контролем врача
-          </p>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 font-display leading-tight">
-            Клиника снижения веса на новейших препаратах под контролем врачей без жёстких диет и откатов
-          </h1>
-          <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed">
-            Диагностика, пептидная терапия и восполнение дефицитов с клинически протестированными протоколами инфузионной терапии и питания
-          </p>
-
-          <div className="grid grid-cols-2 gap-3 mb-10">
-            {[
-              "Программы похудения и современные препараты под контролем врача-эндокринолога по вашим анализам",
-              "Пептидная терапия и современные препараты для контроля аппетита",
-              "Восполнение дефицитов витаминов и микроэлементов",
-              "Лечение причин набора веса, а не временные диеты",
-            ].map((text, idx) => (
-              <div key={idx} className="bg-white/95 backdrop-blur-sm p-4 rounded-lg">
-                <div className="flex gap-3">
-                  <div className="w-6 h-6 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-white text-xs font-bold mt-0.5">
-                    ✓
-                  </div>
-                  <p className="text-sm text-foreground leading-snug">{text}</p>
-                </div>
+      {/* Hero Section - Desktop: split text on left, image on right */}
+      <section className="relative hidden sm:block py-16 md:py-20 overflow-hidden bg-white">
+        <div className="container">
+          <div className="grid grid-cols-2 gap-8 lg:gap-12 items-center">
+            {/* Left column - text content */}
+            <div className="max-w-2xl">
+              <div className="mb-6">
+                <p className="text-lg md:text-xl text-primary font-semibold mb-1">
+                  Ваш новый понедельник начинается здесь
+                </p>
+                <p className="text-base md:text-lg text-foreground/80">
+                  Начните свой новый понедельник — без лишнего веса
+                </p>
               </div>
-            ))}
-          </div>
+              <p className="text-sm text-foreground/60 uppercase tracking-widest mb-4">
+                Медицинская программа снижения веса под контролем врача
+              </p>
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6 font-display leading-tight">
+                Клиника снижения веса на новейших препаратах под контролем врачей без жёстких диет и откатов
+              </h1>
+              <p className="text-base md:text-lg text-foreground/80 mb-6 leading-relaxed">
+                Диагностика, пептидная терапия и восполнение дефицитов с клинически протестированными протоколами инфузионной терапии и питания
+              </p>
+              
+              {/* Patient results statistic */}
+              <div className="mb-8 p-4 bg-primary/5 border-l-4 border-primary rounded">
+                <p className="text-sm md:text-base text-foreground font-semibold">
+                  Пациенты клиники в среднем теряют 6–15 кг за курс программы
+                </p>
+              </div>
 
-          <p className="text-white/80 text-sm mb-8 italic leading-relaxed">
-            Многие пациенты приходят к нам после того, как слышали о препаратах семаглутида и тирзепатида (Оземпик, Мунжаро и аналоги).
-            <br />
-            Мы подбираем терапию индивидуально — с учётом анализов, состояния организма и целей пациента.
-          </p>
-
-          <div className="flex flex-row gap-3">
-            <a href="#programs" className="px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold transition-colors text-center text-base">
-              Подобрать программу
-            </a>
-            <a href="#consultation" className="px-6 py-3 border-2 border-white text-white hover:bg-white/10 rounded-lg font-semibold transition-colors text-center text-base">
-              Записаться
-            </a>
+              <div className="flex flex-row gap-3">
+                <a href="#programs" className="px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold transition-colors text-center text-base">
+                  Подобрать программу
+                </a>
+                <a href="#consultation" className="px-6 py-3 border-2 border-primary text-primary hover:bg-primary/5 rounded-lg font-semibold transition-colors text-center text-base">
+                  Записаться
+                </a>
+              </div>
+            </div>
+            
+            {/* Right column - transformation image */}
+            <div className="relative">
+              <img
+                src={photos.transformationSequence}
+                alt="Результаты трансформации пациентов"
+                className="w-full h-auto object-cover rounded-lg shadow-lg"
+              />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Mobile hero - text overlay on photo like desktop */}
-      <section className="sm:hidden relative py-16 overflow-hidden">
-        {/* Reception wall photo background */}
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url('${photos.receptionLogo}')` }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/60 to-black/40"></div>
-        </div>
-        
-        {/* Content overlay on photo */}
-        <div className="container relative z-10 px-4">
+      {/* Mobile hero - stacked layout with image on top */}
+      <section className="sm:hidden relative py-8 overflow-hidden bg-white">
+        <div className="container px-4">
+          {/* Image on top */}
           <div className="mb-6">
-            <p className="text-base text-white font-semibold mb-1">
-              Ваш новый понедельник начинается здесь
-            </p>
-            <p className="text-sm text-white/90">
-              Начните свой новый понедельник — без лишнего веса
-            </p>
+            <img
+              src={photos.transformationSequence}
+              alt="Результаты трансформации пациентов"
+              className="w-full h-auto object-cover rounded-lg shadow-md"
+            />
           </div>
-          <p className="text-xs text-white/70 uppercase tracking-widest mb-3">
-            Медицинская программа снижения веса под контролем врача
-          </p>
-          <h1 className="text-xl leading-[1.2] font-bold text-white mb-3 font-display">
-            Клиника снижения веса на новейших препаратах под контролем врачей без жёстких диет и откатов
-          </h1>
-          <p className="text-sm text-white/90 mb-4 leading-relaxed">
-            Диагностика, пептидная терапия и восполнение дефицитов с клинически протестированными протоколами инфузионной терапии и питания
-          </p>
+          
+          {/* Text content below */}
+          <div>
+            <div className="mb-4">
+              <p className="text-sm text-primary font-semibold mb-1">
+                Ваш новый понедельник начинается здесь
+              </p>
+              <p className="text-xs text-foreground/80">
+                Начните свой новый понедельник — без лишнего веса
+              </p>
+            </div>
+            <p className="text-xs text-foreground/60 uppercase tracking-widest mb-3">
+              Медицинская программа снижения веса под контролем врача
+            </p>
+            <h1 className="text-lg leading-[1.3] font-bold text-foreground mb-3 font-display">
+              Клиника снижения веса на новейших препаратах под контролем врачей без жёстких диет и откатов
+            </h1>
+            <p className="text-xs text-foreground/80 mb-4 leading-relaxed">
+              Диагностика, пептидная терапия и восполнение дефицитов с клинически протестированными протоколами инфузионной терапии и питания
+            </p>
 
-          {/* UTP Block - compact cards */}
-          <div className="grid grid-cols-2 gap-2 mb-4">
-            {[
-              "Программы похудения и современные препараты под контролем врача-эндокринолога по вашим анализам",
-              "Пептидная терапия и современные препараты для контроля аппетита",
-              "Восполнение дефицитов витаминов и микроэлементов",
-              "Лечение причин набора веса, а не временные диеты",
-            ].map((text, idx) => (
-              <div key={idx} className="bg-white/95 backdrop-blur-sm p-2.5 rounded-lg">
-                <div className="flex gap-2 items-start">
-                  <div className="w-5 h-5 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-white text-[10px] font-bold mt-0.5">
-                    ✓
-                  </div>
-                  <p className="text-[11px] text-foreground leading-snug">{text}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+            {/* Patient results statistic */}
+            <div className="mb-4 p-3 bg-primary/5 border-l-4 border-primary rounded">
+              <p className="text-xs text-foreground font-semibold">
+                Пациенты клиники в среднем теряют 6–15 кг за курс программы
+              </p>
+            </div>
 
-          <p className="text-white/80 text-xs mb-4 italic leading-relaxed">
-            Многие пациенты приходят к нам после того, как слышали о препаратах семаглутида и тирзепатида (Оземпик, Мунжаро и аналоги).
-            Мы подбираем терапию индивидуально.
-          </p>
-
-          <div className="flex gap-2">
-            <a href="#programs" className="flex-1 px-3 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold transition-colors text-center text-xs">
-              Подобрать программу
-            </a>
-            <a href="#consultation" className="flex-1 px-3 py-2 border-2 border-white text-white hover:bg-white/10 rounded-lg font-semibold transition-colors text-center text-xs">
-              Записаться
-            </a>
+            <div className="flex gap-2">
+              <a href="#programs" className="flex-1 px-3 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold transition-colors text-center text-xs">
+                Подобрать программу
+              </a>
+              <a href="#consultation" className="flex-1 px-3 py-2 border-2 border-primary text-primary hover:bg-primary/5 rounded-lg font-semibold transition-colors text-center text-xs">
+                Записаться
+              </a>
+            </div>
           </div>
         </div>
       </section>

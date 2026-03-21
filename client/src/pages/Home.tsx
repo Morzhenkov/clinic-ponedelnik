@@ -424,7 +424,7 @@ export default function Home() {
         )}
       </nav>
 
-      {/* Hero Section - Desktop: split text on left, image on right */}
+      {/* Hero Section Screen 1 - Desktop: split text on left, image on right */}
       <section className="relative hidden sm:block py-16 md:py-20 overflow-hidden bg-white">
         <div className="container">
           <div className="grid grid-cols-2 gap-8 lg:gap-12 items-center">
@@ -454,15 +454,6 @@ export default function Home() {
                   Пациенты клиники в среднем теряют 6–15 кг за курс программы
                 </p>
               </div>
-
-              <div className="flex flex-row gap-3">
-                <a href="#programs" className="px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold transition-colors text-center text-base">
-                  Подобрать программу
-                </a>
-                <a href="#consultation" className="px-6 py-3 border-2 border-primary text-primary hover:bg-primary/5 rounded-lg font-semibold transition-colors text-center text-base">
-                  Записаться
-                </a>
-              </div>
             </div>
             
             {/* Right column - transformation image */}
@@ -477,7 +468,54 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Mobile hero - stacked layout with image on top */}
+      {/* Hero Section Screen 2 - Desktop: UTP blocks and details */}
+      <section className="relative hidden sm:block py-16 md:py-20 overflow-hidden bg-background">
+        <div className="container">
+          <div className="grid grid-cols-2 gap-8 lg:gap-12 items-start">
+            {/* Left column - UTP blocks */}
+            <div>
+              <div className="grid grid-cols-1 gap-4 mb-8">
+                {[
+                  "Программы похудения и современные препараты под контролем врача-эндокринолога по вашим анализам",
+                  "Пептидная терапия и современные препараты для контроля аппетита",
+                  "Восполнение дефицитов витаминов и микроэлементов",
+                  "Лечение причин набора веса, а не временные диеты",
+                ].map((text, idx) => (
+                  <div key={idx} className="bg-white p-4 rounded-lg shadow-sm border border-border">
+                    <div className="flex gap-3">
+                      <div className="w-6 h-6 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-white text-xs font-bold mt-0.5">
+                        ✓
+                      </div>
+                      <p className="text-sm text-foreground leading-snug">{text}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            {/* Right column - additional info */}
+            <div>
+              <p className="text-foreground/80 text-base mb-6 leading-relaxed italic">
+                Многие пациенты приходят к нам после того, как слышали о препаратах семаглутида и тирзепатида (Оземпик, Мунжаро и аналоги).
+                <br />
+                <br />
+                Мы подбираем терапию индивидуально — с учётом анализов, состояния организма и целей пациента.
+              </p>
+              
+              <div className="flex flex-row gap-3">
+                <a href="#programs" className="px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold transition-colors text-center text-base">
+                  Подобрать программу
+                </a>
+                <a href="#consultation" className="px-6 py-3 border-2 border-primary text-primary hover:bg-primary/5 rounded-lg font-semibold transition-colors text-center text-base">
+                  Записаться
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Mobile hero - Screen 1: stacked layout with image on top */}
       <section className="sm:hidden relative py-8 overflow-hidden bg-white">
         <div className="container px-4">
           {/* Image on top */}
@@ -515,15 +553,47 @@ export default function Home() {
                 Пациенты клиники в среднем теряют 6–15 кг за курс программы
               </p>
             </div>
+          </div>
+        </div>
+      </section>
 
-            <div className="flex gap-2">
-              <a href="#programs" className="flex-1 px-3 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold transition-colors text-center text-xs">
-                Подобрать программу
-              </a>
-              <a href="#consultation" className="flex-1 px-3 py-2 border-2 border-primary text-primary hover:bg-primary/5 rounded-lg font-semibold transition-colors text-center text-xs">
-                Записаться
-              </a>
-            </div>
+      {/* Mobile hero - Screen 2: UTP blocks and details */}
+      <section className="sm:hidden relative py-8 overflow-hidden bg-background">
+        <div className="container px-4">
+          {/* UTP blocks */}
+          <div className="space-y-3 mb-6">
+            {[
+              "Программы похудения и современные препараты под контролем врача-эндокринолога по вашим анализам",
+              "Пептидная терапия и современные препараты для контроля аппетита",
+              "Восполнение дефицитов витаминов и микроэлементов",
+              "Лечение причин набора веса, а не временные диеты",
+            ].map((text, idx) => (
+              <div key={idx} className="bg-white p-3 rounded-lg shadow-sm border border-border">
+                <div className="flex gap-2 items-start">
+                  <div className="w-5 h-5 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-white text-[10px] font-bold mt-0.5">
+                    ✓
+                  </div>
+                  <p className="text-[11px] text-foreground leading-snug">{text}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Additional info */}
+          <p className="text-foreground/80 text-xs mb-4 leading-relaxed italic">
+            Многие пациенты приходят к нам после того, как слышали о препаратах семаглутида и тирзепатида (Оземпик, Мунжаро и аналоги).
+            <br />
+            <br />
+            Мы подбираем терапию индивидуально — с учётом анализов, состояния организма и целей пациента.
+          </p>
+
+          <div className="flex gap-2">
+            <a href="#programs" className="flex-1 px-3 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold transition-colors text-center text-xs">
+              Подобрать программу
+            </a>
+            <a href="#consultation" className="flex-1 px-3 py-2 border-2 border-primary text-primary hover:bg-primary/5 rounded-lg font-semibold transition-colors text-center text-xs">
+              Записаться
+            </a>
           </div>
         </div>
       </section>

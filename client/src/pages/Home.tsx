@@ -92,7 +92,7 @@ export default function Home() {
   const photos = {
     ivPatient: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/lpIjVeIoDTAQVIOG.webp",
     doctorOffice: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/TKhJXPaJQWNGgEiB.jpg",
-    ivDrip: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/DvYEDyiDcefFfwuZ.jpg",
+    ivDrip: "https://d2xsxph8kpxj0f.cloudfront.net/310519663096993096/hdtQvaxiWb9W7weDTCV6tP/iv-therapy-clinic-FuooDkTv8sXbkkS2yQBZp8.webp",
     recliners: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/ZIcdmlMlVmVhLyZD.jpg",
     receptionLogo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/AgaouaSNjfmrDGbN.jpg",
     receptionDesk: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/iNJVkdeepDsPpcDN.jpg",

@@ -456,13 +456,28 @@ export default function Home() {
               </div>
             </div>
             
-            {/* Right column - transformation image */}
-            <div className="relative">
-              <img
-                src={photos.transformationSequence}
-                alt="Результаты трансформации пациентов"
-                className="w-full h-auto object-cover rounded-lg shadow-lg"
-              />
+            {/* Right column - who benefits text */}
+            <div className="relative bg-white p-8 rounded-lg shadow-lg border border-border">
+              <h3 className="text-2xl md:text-3xl font-bold mb-6 font-display text-primary">
+                Кому подойдёт программа снижения веса
+              </h3>
+              <ul className="space-y-4">
+                {[
+                  "Людям с избыточным весом и ожирением",
+                  "Тем, кто не может похудеть традиционными методами",
+                  "Людям с нарушениями метаболизма и инсулинорезистентностью",
+                  "Тем, кто хочет избежать жёстких диет и голодания",
+                  "Людям с дефицитами витаминов и микроэлементов",
+                  "Тем, кто ищет медицинский подход к снижению веса",
+                ].map((item, idx) => (
+                  <li key={idx} className="flex gap-3">
+                    <div className="w-6 h-6 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-white text-sm font-bold mt-0.5">
+                      ✓
+                    </div>
+                    <span className="text-base text-foreground leading-relaxed">{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
@@ -515,16 +530,31 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Mobile hero - Screen 1: stacked layout with image on top */}
+      {/* Mobile hero - Screen 1: stacked layout with who benefits text */}
       <section className="sm:hidden relative py-8 overflow-hidden bg-white">
         <div className="container px-4">
-          {/* Image on top */}
-          <div className="mb-6">
-            <img
-              src={photos.transformationSequence}
-              alt="Результаты трансформации пациентов"
-              className="w-full h-auto object-cover rounded-lg shadow-md"
-            />
+          {/* Who benefits section */}
+          <div className="mb-6 bg-white p-4 rounded-lg shadow-md border border-border">
+            <h3 className="text-lg font-bold mb-4 font-display text-primary">
+              Кому подойдёт программа снижения веса
+            </h3>
+            <ul className="space-y-3">
+              {[
+                "Людям с избыточным весом и ожирением",
+                "Тем, кто не может похудеть традиционными методами",
+                "Людям с нарушениями метаболизма и инсулинорезистентностью",
+                "Тем, кто хочет избежать жёстких диет и голодания",
+                "Людям с дефицитами витаминов и микроэлементов",
+                "Тем, кто ищет медицинский подход к снижению веса",
+              ].map((item, idx) => (
+                <li key={idx} className="flex gap-2 items-start">
+                  <div className="w-5 h-5 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-white text-[10px] font-bold mt-0.5">
+                    ✓
+                  </div>
+                  <span className="text-xs text-foreground leading-snug">{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
           
           {/* Text content below */}

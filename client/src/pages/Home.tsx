@@ -103,8 +103,6 @@ export default function Home() {
     heroGenerated: "https://d2xsxph8kpxj0f.cloudfront.net/310519663096993096/hdtQvaxiWb9W7weDTCV6tP/iv-therapy-procedure-HrfhGSzZrzp7Ymjgf9SXUg.webp",
     wellnessResults: "https://d2xsxph8kpxj0f.cloudfront.net/310519663096993096/hdtQvaxiWb9W7weDTCV6tP/wellness-results-CCDrWAnx4WMRuRR4bDSn54.webp",
     transformationSequence: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/RefjzjSMLELhxutl.PNG",
-    clinicSignage: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/PqhsyfkhJOsdrZBr.png",
-    clinicInterior: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/aJuviohMXPRhyatQ.jpg",
   };
 
   // Main programs
@@ -603,12 +601,18 @@ export default function Home() {
       {/* Clinic Gallery Strip */}
       <section className="py-6 sm:py-10 bg-white">
         <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-            <div className="aspect-[16/9] rounded-lg overflow-hidden">
-              <img src={photos.clinicSignage} alt="Логотип и вывеска клиники" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4">
+            <div className="aspect-[4/3] rounded-lg overflow-hidden">
+              <img src={photos.receptionDesk} alt="Ресепшн клиники" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
             </div>
-            <div className="aspect-[16/9] rounded-lg overflow-hidden">
-              <img src={photos.clinicInterior} alt="Интерьер кабинета клиники" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+            <div className="aspect-[4/3] rounded-lg overflow-hidden">
+              <img src={photos.doctorOffice} alt="Кабинет врача" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+            </div>
+            <div className="aspect-[4/3] rounded-lg overflow-hidden">
+              <img src={photos.recliners} alt="Кресла для процедур" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+            </div>
+            <div className="aspect-[4/3] rounded-lg overflow-hidden">
+              <img src={photos.waitingArea} alt="Зона ожидания" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
             </div>
           </div>
         </div>

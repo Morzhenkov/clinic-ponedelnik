@@ -91,7 +91,8 @@ export default function Home() {
   // CDN URLs for clinic photos
   const photos = {
     ivPatient: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/lpIjVeIoDTAQVIOG.webp",
-    doctorOffice: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/bWASYmIdwgwIxoIl.png",
+    doctorOffice: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/TKhJXPaJQWNGgEiB.jpg",
+    doctorConsultation: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/bWASYmIdwgwIxoIl.png",
     ivDrip: "https://d2xsxph8kpxj0f.cloudfront.net/310519663096993096/hdtQvaxiWb9W7weDTCV6tP/iv-therapy-clinic-FuooDkTv8sXbkkS2yQBZp8.webp",
     recliners: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/ZIcdmlMlVmVhLyZD.jpg",
     receptionLogo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/AgaouaSNjfmrDGbN.jpg",
@@ -679,8 +680,8 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-0 md:gap-6 items-center py-8 sm:py-12">
             <div className="rounded-xl overflow-hidden mb-6 md:mb-0">
               <img
-                src={photos.doctorOffice}
-                alt="Кабинет врача клиники Понедельник"
+                src={photos.doctorConsultation}
+                alt="Консультация врача клиники Понедельник"
                 className="w-full h-64 sm:h-80 object-cover rounded-xl"
               />
             </div>

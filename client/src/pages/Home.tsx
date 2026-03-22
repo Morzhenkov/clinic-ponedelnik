@@ -436,13 +436,13 @@ export default function Home() {
         
         <div className="container relative z-10 flex items-center justify-center min-h-[600px]">
           <div className="text-center max-w-3xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 font-display leading-tight" style={{textShadow: '2px 2px 8px rgba(0,0,0,0.6), 0 0 20px rgba(0,0,0,0.4)'}}>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-6 font-display leading-tight" style={{textShadow: '0 2px 4px rgba(255,255,255,0.3)'}}>
               Ваш новый понедельник начинается здесь
             </h1>
-            <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed" style={{textShadow: '1px 1px 4px rgba(0,0,0,0.5)'}}>
+            <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed" style={{textShadow: '0 1px 2px rgba(255,255,255,0.3)'}}>
               Начните свой новый понедельник — без лишнего веса
             </p>
-            <p className="text-base md:text-lg text-white/70 uppercase tracking-widest font-semibold" style={{textShadow: '1px 1px 4px rgba(0,0,0,0.5)'}}>
+            <p className="text-base md:text-lg text-gray-600 uppercase tracking-widest font-semibold" style={{textShadow: '0 1px 2px rgba(255,255,255,0.3)'}}>
               Медицинская программа снижения веса под контролем врача
             </p>
           </div>
@@ -511,22 +511,23 @@ export default function Home() {
       </section>
 
       {/* Mobile hero - Screen 1: minimalist center layout */}
-      <section className="sm:hidden relative py-20 overflow-hidden" style={{
+      <section className="sm:hidden relative overflow-hidden" style={{
         backgroundImage: `url(${photos.heroBackground})`,
         backgroundSize: 'contain',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
+        backgroundAttachment: 'scroll'
       }}>
         
         <div className="container px-4 relative z-10 flex items-center justify-center min-h-[600px]">
           <div className="text-center">
-            <h1 className="text-2xl font-bold text-white mb-4 font-display leading-tight" style={{textShadow: '2px 2px 8px rgba(0,0,0,0.6), 0 0 20px rgba(0,0,0,0.4)'}}>
+            <h1 className="text-2xl font-bold text-gray-800 mb-4 font-display leading-tight" style={{textShadow: '0 2px 4px rgba(255,255,255,0.3)'}}>
               Ваш новый понедельник начинается здесь
             </h1>
-            <p className="text-sm text-white/90 mb-4 leading-relaxed" style={{textShadow: '1px 1px 4px rgba(0,0,0,0.5)'}}>
+            <p className="text-sm text-gray-700 mb-4 leading-relaxed" style={{textShadow: '0 1px 2px rgba(255,255,255,0.3)'}}>
               Начните свой новый понедельник — без лишнего веса
             </p>
-            <p className="text-xs text-white/70 uppercase tracking-widest font-semibold" style={{textShadow: '1px 1px 4px rgba(0,0,0,0.5)'}}>
+            <p className="text-xs text-gray-600 uppercase tracking-widest font-semibold" style={{textShadow: '0 1px 2px rgba(255,255,255,0.3)'}}>
               Медицинская программа снижения веса под контролем врача
             </p>
           </div>

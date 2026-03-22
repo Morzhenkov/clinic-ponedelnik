@@ -104,7 +104,7 @@ export default function Home() {
     heroGenerated: "https://d2xsxph8kpxj0f.cloudfront.net/310519663096993096/hdtQvaxiWb9W7weDTCV6tP/iv-therapy-procedure-HrfhGSzZrzp7Ymjgf9SXUg.webp",
     wellnessResults: "https://d2xsxph8kpxj0f.cloudfront.net/310519663096993096/hdtQvaxiWb9W7weDTCV6tP/wellness-results-CCDrWAnx4WMRuRR4bDSn54.webp",
     transformationSequence: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/RefjzjSMLELhxutl.PNG",
-    heroBackground: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/YzisKuWqvfgnqSRv.PNG",
+    heroBackground: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/UlMMUYuPeugTFMXq.PNG",
   };
 
   // Main programs
@@ -427,7 +427,7 @@ export default function Home() {
       </nav>
 
       {/* Hero Section Screen 1 - Desktop: background image with text overlay */}
-      <section className="relative hidden sm:block py-20 md:py-28 overflow-hidden" style={{
+      <section className="relative hidden sm:block py-20 md:py-32 overflow-hidden" style={{
         backgroundImage: `url(${photos.heroBackground})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center right',
@@ -436,32 +436,17 @@ export default function Home() {
         {/* Dark overlay for text readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"></div>
         
-        <div className="container relative z-10">
+        <div className="container relative z-10 flex items-center min-h-[500px]">
           <div className="max-w-2xl">
-            <div className="mb-6">
-              <p className="text-lg md:text-xl text-white font-semibold mb-1">
-                Ваш новый понедельник начинается здесь
-              </p>
-              <p className="text-base md:text-lg text-white/90">
-                Начните свой новый понедельник — без лишнего веса
-              </p>
-            </div>
-            <p className="text-sm text-white/70 uppercase tracking-widest mb-4">
+            <p className="text-lg md:text-xl text-white font-semibold mb-2">
+              Ваш новый понедельник начинается здесь
+            </p>
+            <p className="text-base md:text-lg text-white/90 mb-4">
+              Начните свой новый понедельник — без лишнего веса
+            </p>
+            <p className="text-sm text-white/70 uppercase tracking-widest">
               Медицинская программа снижения веса под контролем врача
             </p>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 font-display leading-tight">
-              Клиника снижения веса на новейших препаратах под контролем врачей без жёстких диет и откатов
-            </h1>
-            <p className="text-base md:text-lg text-white/90 mb-6 leading-relaxed">
-              Диагностика, пептидная терапия и восполнение дефицитов с клинически протестированными протоколами инфузионной терапии и питания
-            </p>
-            
-            {/* Patient results statistic */}
-            <div className="mb-8 p-4 bg-white/10 border-l-4 border-white rounded backdrop-blur-sm">
-              <p className="text-sm md:text-base text-white font-semibold">
-                Пациенты клиники в среднем теряют 6–15 кг за курс программы
-              </p>
-            </div>
           </div>
         </div>
       </section>
@@ -469,6 +454,20 @@ export default function Home() {
       {/* Hero Section Screen 2 - Desktop: UTP blocks and details */}
       <section className="relative hidden sm:block py-16 md:py-20 overflow-hidden bg-background">
         <div className="container">
+          <div className="mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-8 font-display">Клиника снижения веса на новейших препаратах под контролем врачей без жёстких диет и откатов</h2>
+            <p className="text-base md:text-lg text-foreground/80 mb-8 leading-relaxed">
+              Диагностика, пептидная терапия и восполнение дефицитов с клинически протестированными протоколами инфузионной терапии и питания
+            </p>
+            
+            {/* Patient results statistic */}
+            <div className="mb-8 p-4 bg-primary/10 border-l-4 border-primary rounded">
+              <p className="text-base text-foreground font-semibold">
+                Пациенты клиники в среднем теряют 6–15 кг за курс программы
+              </p>
+            </div>
+          </div>
+          
           <div className="grid grid-cols-2 gap-8 lg:gap-12 items-start">
             {/* Left column - UTP blocks */}
             <div>
@@ -514,7 +513,7 @@ export default function Home() {
       </section>
 
       {/* Mobile hero - Screen 1: background image with text overlay */}
-      <section className="sm:hidden relative py-12 overflow-hidden" style={{
+      <section className="sm:hidden relative py-16 overflow-hidden" style={{
         backgroundImage: `url(${photos.heroBackground})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center right',
@@ -522,32 +521,17 @@ export default function Home() {
         {/* Dark overlay for text readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/50"></div>
         
-        <div className="container px-4 relative z-10">
+        <div className="container px-4 relative z-10 flex items-center min-h-[400px]">
           <div>
-            <div className="mb-4">
-              <p className="text-sm text-white font-semibold mb-1">
-                Ваш новый понедельник начинается здесь
-              </p>
-              <p className="text-xs text-white/90">
-                Начните свой новый понедельник — без лишнего веса
-              </p>
-            </div>
-            <p className="text-xs text-white/70 uppercase tracking-widest mb-3">
+            <p className="text-sm text-white font-semibold mb-2">
+              Ваш новый понедельник начинается здесь
+            </p>
+            <p className="text-xs text-white/90 mb-3">
+              Начните свой новый понедельник — без лишнего веса
+            </p>
+            <p className="text-xs text-white/70 uppercase tracking-widest">
               Медицинская программа снижения веса под контролем врача
             </p>
-            <h1 className="text-lg leading-[1.3] font-bold text-white mb-3 font-display">
-              Клиника снижения веса на новейших препаратах под контролем врачей без жёстких диет и откатов
-            </h1>
-            <p className="text-xs text-white/90 mb-4 leading-relaxed">
-              Диагностика, пептидная терапия и восполнение дефицитов с клинически протестированными протоколами инфузионной терапии и питания
-            </p>
-
-            {/* Patient results statistic */}
-            <div className="mb-4 p-3 bg-primary/5 border-l-4 border-primary rounded">
-              <p className="text-xs text-foreground font-semibold">
-                Пациенты клиники в среднем теряют 6–15 кг за курс программы
-              </p>
-            </div>
           </div>
         </div>
       </section>
@@ -555,6 +539,18 @@ export default function Home() {
       {/* Mobile hero - Screen 2: UTP blocks and details */}
       <section className="sm:hidden relative py-8 overflow-hidden bg-background">
         <div className="container px-4">
+          <h2 className="text-lg font-bold text-foreground mb-4 font-display">Клиника снижения веса на новейших препаратах под контролем врачей без жёстких диет и откатов</h2>
+          <p className="text-xs text-foreground/80 mb-4 leading-relaxed">
+            Диагностика, пептидная терапия и восполнение дефицитов с клинически протестированными протоколами инфузионной терапии и питания
+          </p>
+          
+          {/* Patient results statistic */}
+          <div className="mb-4 p-3 bg-primary/10 border-l-4 border-primary rounded">
+            <p className="text-xs text-foreground font-semibold">
+              Пациенты клиники в среднем теряют 6–15 кг за курс программы
+            </p>
+          </div>
+          
           {/* UTP blocks */}
           <div className="space-y-3 mb-6">
             {[

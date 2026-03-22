@@ -426,25 +426,25 @@ export default function Home() {
         )}
       </nav>
 
-      {/* Hero Section Screen 1 - Desktop: background image with text overlay */}
-      <section className="relative hidden sm:block py-20 md:py-32 overflow-hidden" style={{
+      {/* Hero Section Screen 1 - Desktop: minimalist center layout */}
+      <section className="relative hidden sm:block py-32 md:py-40 overflow-hidden" style={{
         backgroundImage: `url(${photos.heroBackground})`,
         backgroundSize: 'cover',
-        backgroundPosition: 'center right',
+        backgroundPosition: 'center',
         backgroundAttachment: 'fixed'
       }}>
-        {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"></div>
+        {/* Strong dark overlay for maximum readability */}
+        <div className="absolute inset-0 bg-black/75"></div>
         
-        <div className="container relative z-10 flex items-center min-h-[500px]">
-          <div className="max-w-2xl">
-            <p className="text-lg md:text-xl text-white font-semibold mb-2">
+        <div className="container relative z-10 flex items-center justify-center min-h-[600px]">
+          <div className="text-center max-w-3xl">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 font-display leading-tight">
               Ваш новый понедельник начинается здесь
-            </p>
-            <p className="text-base md:text-lg text-white/90 mb-4">
+            </h1>
+            <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed">
               Начните свой новый понедельник — без лишнего веса
             </p>
-            <p className="text-sm text-white/70 uppercase tracking-widest">
+            <p className="text-base md:text-lg text-white/70 uppercase tracking-widest font-semibold">
               Медицинская программа снижения веса под контролем врача
             </p>
           </div>
@@ -512,24 +512,24 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Mobile hero - Screen 1: background image with text overlay */}
-      <section className="sm:hidden relative py-16 overflow-hidden" style={{
+      {/* Mobile hero - Screen 1: minimalist center layout */}
+      <section className="sm:hidden relative py-20 overflow-hidden" style={{
         backgroundImage: `url(${photos.heroBackground})`,
         backgroundSize: 'cover',
-        backgroundPosition: 'center right',
+        backgroundPosition: 'center',
       }}>
-        {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/50"></div>
+        {/* Strong dark overlay for maximum readability */}
+        <div className="absolute inset-0 bg-black/75"></div>
         
-        <div className="container px-4 relative z-10 flex items-center min-h-[400px]">
-          <div>
-            <p className="text-sm text-white font-semibold mb-2">
+        <div className="container px-4 relative z-10 flex items-center justify-center min-h-[500px]">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold text-white mb-4 font-display leading-tight">
               Ваш новый понедельник начинается здесь
-            </p>
-            <p className="text-xs text-white/90 mb-3">
+            </h1>
+            <p className="text-sm text-white/90 mb-4 leading-relaxed">
               Начните свой новый понедельник — без лишнего веса
             </p>
-            <p className="text-xs text-white/70 uppercase tracking-widest">
+            <p className="text-xs text-white/70 uppercase tracking-widest font-semibold">
               Медицинская программа снижения веса под контролем врача
             </p>
           </div>

@@ -519,8 +519,8 @@ export default function Home() {
         backgroundAttachment: 'scroll'
       }}>
         
-        <div className="container px-4 relative z-10 flex items-center justify-center min-h-[600px]">
-          <div className="text-center">
+        <div className="relative z-10 flex items-center justify-center" style={{height: 'auto'}}>
+          <div className="text-center py-8">
             <h1 className="text-2xl font-bold text-gray-800 mb-4 font-display leading-tight" style={{textShadow: '0 2px 4px rgba(255,255,255,0.3)'}}>
               Ваш новый понедельник начинается здесь
             </h1>

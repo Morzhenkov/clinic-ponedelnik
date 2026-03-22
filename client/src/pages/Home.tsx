@@ -433,8 +433,6 @@ export default function Home() {
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed'
       }}>
-        {/* Strong dark overlay for maximum readability */}
-        <div className="absolute inset-0 bg-black/75"></div>
         
         <div className="container relative z-10 flex items-center justify-center min-h-[600px]">
           <div className="text-center max-w-3xl">
@@ -518,8 +516,6 @@ export default function Home() {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}>
-        {/* Strong dark overlay for maximum readability */}
-        <div className="absolute inset-0 bg-black/75"></div>
         
         <div className="container px-4 relative z-10 flex items-center justify-center min-h-[500px]">
           <div className="text-center">

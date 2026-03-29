@@ -511,37 +511,34 @@ export default function Home() {
       </section>
 
       {/* Mobile hero - Screen 1: Title top, image center, subtitle bottom */}
-      <section className="sm:hidden relative flex flex-col" style={{
-        backgroundColor: 'white'
-      }}>
-        {/* Full image section with title and subtitle overlays */}
+      <section className="sm:hidden relative flex flex-col">
+        {/* Top section: Title on white background */}
+        <div className="px-4 py-8 text-center" style={{
+          backgroundColor: 'white'
+        }}>
+          <h1 className="text-3xl font-bold text-gray-800 font-display leading-tight tracking-tight">
+            ВАШЕ НОВЫЙ ПОНЕДЕЛЬНИК<br/>НАЧИНАЕТСЯ ЗДЕСЬ
+          </h1>
+        </div>
+
+        {/* Middle section: Image */}
         <div style={{
           backgroundImage: `url(${photos.heroBackground})`,
           backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
-          minHeight: '600px',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          paddingTop: '2rem',
-          paddingBottom: '2rem'
+          minHeight: '380px',
+          width: '100%'
         }}>
-          {/* Title text at top of image */}
-          <div className="px-4 text-center">
-            <h1 className="text-3xl font-bold text-gray-800 font-display leading-tight tracking-tight">
-              ВАШЕ НОВЫЙ ПОНЕДЕЛЬНИК<br/>НАЧИНАЕТСЯ ЗДЕСЬ
-            </h1>
-          </div>
+        </div>
 
-          {/* Subtitle text at bottom of image */}
-          <div className="px-4 py-4 text-center" style={{
-            backgroundColor: 'rgba(255, 255, 255, 0.9)'
-          }}>
-            <p className="text-base text-gray-700 leading-relaxed italic font-display">
-              Начните свой новый понедельник — без лишнего веса
-            </p>
-          </div>
+        {/* Subtitle section: Below image on white background */}
+        <div className="px-4 py-6 text-center" style={{
+          backgroundColor: 'white'
+        }}>
+          <p className="text-base text-gray-700 leading-relaxed italic font-display">
+            Начните свой новый понедельник — без лишнего веса
+          </p>
         </div>
 
         {/* Bottom section: Medical program description */}

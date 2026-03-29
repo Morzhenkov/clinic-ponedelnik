@@ -510,41 +510,54 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Mobile hero - Screen 1: Full photo with text overlay */}
+      {/* Mobile hero - Screen 1: Full photo with text overlay and seamless program section */}
       <section className="sm:hidden relative w-full" style={{
         backgroundImage: `url(${photos.heroBackground})`,
         backgroundSize: 'contain',
         backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
+        backgroundPosition: 'top center',
         backgroundAttachment: 'scroll',
-        aspectRatio: '9 / 16',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: '2rem 1rem',
-        minHeight: 'auto'
+        margin: 0,
+        padding: 0
       }}>
         {/* Title overlay */}
-        <h1 className="text-2xl font-bold text-gray-800 font-display leading-tight text-center" style={{
-          textShadow: '1px 1px 2px rgba(255,255,255,0.5)'
+        <div style={{
+          paddingTop: '2rem',
+          paddingBottom: '1rem',
+          margin: 0
         }}>
-          ВАШЕ НОВЫЙ ПОНЕДЕЛЬНИК НАЧИНАЕТСЯ ЗДЕСЬ
-        </h1>
+          <h1 className="text-2xl font-bold text-gray-800 font-display leading-tight text-center" style={{
+            textShadow: '1px 1px 2px rgba(255,255,255,0.5)',
+            margin: 0
+          }}>
+            ВАШЕ НОВЫЙ ПОНЕДЕЛЬНИК НАЧИНАЕТСЯ ЗДЕСЬ
+          </h1>
+        </div>
 
-        {/* Subtitle overlay */}
-        <p className="text-sm text-gray-700 leading-relaxed italic text-center" style={{
-          textShadow: '1px 1px 2px rgba(255,255,255,0.5)'
+        {/* Subtitle overlay - positioned at bottom of photo */}
+        <div style={{
+          paddingTop: '1rem',
+          paddingBottom: '2rem',
+          margin: 0
         }}>
-          Начните свой новый понедельник — без лишнего веса
-        </p>
+          <p className="text-sm text-gray-700 leading-relaxed italic text-center" style={{
+            textShadow: '1px 1px 2px rgba(255,255,255,0.5)',
+            margin: 0
+          }}>
+            Начните свой новый понедельник — без лишнего веса
+          </p>
+        </div>
       </section>
 
-      {/* Program offer section */}
-      <section className="sm:hidden relative text-center py-8" style={{
-        backgroundColor: '#D9CBB1'
+      {/* Program offer section - seamless transition */}
+      <section className="sm:hidden relative text-center" style={{
+        backgroundColor: '#D9CBB1',
+        margin: 0,
+        padding: '2rem 1rem'
       }}>
-        <p className="text-sm text-gray-800 uppercase tracking-widest font-semibold leading-relaxed px-4">
+        <p className="text-sm text-gray-800 uppercase tracking-widest font-semibold leading-relaxed px-4" style={{
+          margin: 0
+        }}>
           МЕДИЦИНСКАЯ ПРОГРАММА<br/>СНИЖЕНИЯ ВЕСА ПОД<br/>КОНТРОЛЕМ ВРАЧА
         </p>
       </section>

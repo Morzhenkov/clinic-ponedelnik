@@ -510,30 +510,43 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Mobile hero - Screen 1: Same as desktop */}
-      <section className="sm:hidden relative overflow-hidden" style={{
+      {/* Mobile hero - Screen 1: Full photo with text overlay */}
+      <section className="sm:hidden relative w-full" style={{
         backgroundImage: `url(${photos.heroBackground})`,
         backgroundSize: 'contain',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
-        backgroundAttachment: 'fixed',
-        minHeight: '100vh'
+        backgroundAttachment: 'scroll',
+        aspectRatio: '9 / 16',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '2rem 1rem',
+        minHeight: 'auto'
       }}>
-        <div className="container relative z-10 flex items-center justify-center" style={{
-          minHeight: '100vh'
+        {/* Title overlay */}
+        <h1 className="text-2xl font-bold text-gray-800 font-display leading-tight text-center" style={{
+          textShadow: '1px 1px 2px rgba(255,255,255,0.5)'
         }}>
-          <div className="text-center max-w-2xl px-4">
-            <h1 className="text-3xl font-bold text-gray-800 mb-6 font-display leading-tight" style={{textShadow: '0 2px 4px rgba(255,255,255,0.3)'}}>
-              Ваш новый понедельник начинается здесь
-            </h1>
-            <p className="text-base text-gray-700 mb-6 leading-relaxed" style={{textShadow: '0 1px 2px rgba(255,255,255,0.3)'}}>
-              Начните свой новый понедельник — без лишнего веса
-            </p>
-            <p className="text-sm text-gray-600 uppercase tracking-widest font-semibold" style={{textShadow: '0 1px 2px rgba(255,255,255,0.3)'}}>
-              Медицинская программа снижения веса под контролем врача
-            </p>
-          </div>
-        </div>
+          ВАШЕ НОВЫЙ ПОНЕДЕЛЬНИК НАЧИНАЕТСЯ ЗДЕСЬ
+        </h1>
+
+        {/* Subtitle overlay */}
+        <p className="text-sm text-gray-700 leading-relaxed italic text-center" style={{
+          textShadow: '1px 1px 2px rgba(255,255,255,0.5)'
+        }}>
+          Начните свой новый понедельник — без лишнего веса
+        </p>
+      </section>
+
+      {/* Program offer section */}
+      <section className="sm:hidden relative text-center py-8" style={{
+        backgroundColor: '#D9CBB1'
+      }}>
+        <p className="text-sm text-gray-800 uppercase tracking-widest font-semibold leading-relaxed px-4">
+          МЕДИЦИНСКАЯ ПРОГРАММА<br/>СНИЖЕНИЯ ВЕСА ПОД<br/>КОНТРОЛЕМ ВРАЧА
+        </p>
       </section>
 
       {/* Mobile hero - Screen 2: UTP blocks and details */}

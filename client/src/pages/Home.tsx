@@ -511,31 +511,41 @@ export default function Home() {
       </section>
 
       {/* Mobile hero - Screen 1: Title top, image center, subtitle bottom */}
-      {/* Mobile hero - Screen 1: Photo background for entire section */}
+      {/* Mobile hero - Screen 1: Photo background, no white gaps */}
       <section className="sm:hidden relative flex flex-col" style={{
         backgroundImage: `url(${photos.heroBackground})`,
         backgroundSize: 'contain',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
+        backgroundAttachment: 'scroll',
         minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        padding: '2rem 1rem'
+        padding: 0,
+        margin: 0
       }}>
-        {/* Top section: Main title */}
-        <div className="text-center">
+        {/* Top section: Main title - no padding */}
+        <div className="text-center" style={{
+          padding: '2rem 1rem 0',
+          margin: 0
+        }}>
           <h1 className="text-3xl font-bold text-gray-800 font-display leading-tight tracking-tight" style={{
-            textShadow: '2px 2px 4px rgba(255, 255, 255, 0.8)'
+            textShadow: '2px 2px 4px rgba(255, 255, 255, 0.8)',
+            margin: 0
           }}>
             ВАШЕ НОВОЕ ПОНЕДЕЛЬНИК НАЧИНАЕТСЯ ЗДЕСЬ
           </h1>
         </div>
 
-        {/* Bottom section: Subtitle */}
-        <div className="text-center">
-          <p className="text-base text-gray-700 mb-6 leading-relaxed italic" style={{
-            textShadow: '2px 2px 4px rgba(255, 255, 255, 0.8)'
+        {/* Bottom section: Subtitle - no padding */}
+        <div className="text-center" style={{
+          padding: '0 1rem 2rem',
+          margin: 0
+        }}>
+          <p className="text-base text-gray-700 leading-relaxed italic" style={{
+            textShadow: '2px 2px 4px rgba(255, 255, 255, 0.8)',
+            margin: 0
           }}>
             Начните свой новый понедельник — без лишнего веса
           </p>

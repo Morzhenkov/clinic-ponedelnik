@@ -510,37 +510,35 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Mobile hero - Screen 1: Title top, image center, subtitle bottom */}
+      {/* Mobile hero - Screen 1: Title, full photo, subtitle */}
       <section className="sm:hidden relative flex flex-col">
-        {/* Mobile hero: Title, image, and subtitle all on same photo background */}
+        {/* Title section */}
+        <div className="px-4 py-6 text-center" style={{
+          backgroundColor: '#F5F1ED'
+        }}>
+          <h1 className="text-2xl font-bold text-gray-800 font-display leading-tight tracking-tight">
+            ВАШЕ НОВЫЙ ПОНЕДЕЛЬНИК<br/>НАЧИНАЕТСЯ ЗДЕСЬ
+          </h1>
+        </div>
+
+        {/* Full photo - no text overlay */}
         <div style={{
           backgroundImage: `url(${photos.heroBackground})`,
-          backgroundSize: 'cover',
+          backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
-          minHeight: '100vh',
-          width: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          paddingTop: '2rem',
-          paddingBottom: '2rem',
-          paddingLeft: '1rem',
-          paddingRight: '1rem'
+          minHeight: '450px',
+          width: '100%'
         }}>
-          {/* Title at top */}
-          <div className="text-center">
-            <h1 className="text-2xl font-bold text-gray-800 font-display leading-tight tracking-tight">
-              ВАШЕ НОВЫЙ ПОНЕДЕЛЬНИК<br/>НАЧИНАЕТСЯ ЗДЕСЬ
-            </h1>
-          </div>
+        </div>
 
-          {/* Subtitle at bottom */}
-          <div className="text-center">
-            <p className="text-base text-gray-700 leading-relaxed italic font-display">
-              Начните свой новый понедельник — без лишнего веса
-            </p>
-          </div>
+        {/* Subtitle section */}
+        <div className="px-4 py-6 text-center" style={{
+          backgroundColor: '#F5F1ED'
+        }}>
+          <p className="text-base text-gray-700 leading-relaxed italic font-display">
+            Начните свой новый понедельник — без лишнего веса
+          </p>
         </div>
 
         {/* Bottom section: Medical program description */}

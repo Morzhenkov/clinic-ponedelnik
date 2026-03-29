@@ -515,9 +515,9 @@ export default function Home() {
         backgroundColor: '#F5F1ED'
       }}>
         {/* Top section: Main title */}
-        <div className="px-4 pt-8 pb-4 text-center">
+        <div className="px-4 pt-6 pb-6 text-center">
           <h1 className="text-3xl font-bold text-gray-800 font-display leading-tight tracking-tight">
-            ВАШЕ НОВОЕ ПОНЕДЕЛЬНИК НАЧИНАЕТСЯ ЗДЕСЬ
+            ВАШЕ НОВЫЙ ПОНЕДЕЛЬНИК<br/>НАЧИНАЕТСЯ ЗДЕСЬ
           </h1>
         </div>
 
@@ -531,12 +531,20 @@ export default function Home() {
         }}>
         </div>
 
-        {/* Bottom section: Subtitle */}
-        <div className="px-4 py-8 text-center bg-white/50">
-          <p className="text-base text-gray-700 mb-6 leading-relaxed italic">
+        {/* Middle-bottom: Subtitle text */}
+        <div className="px-4 py-6 text-center" style={{
+          backgroundColor: '#F5F1ED'
+        }}>
+          <p className="text-base text-gray-700 leading-relaxed italic font-display">
             Начните свой новый понедельник — без лишнего веса
           </p>
-          <p className="text-sm text-gray-800 uppercase tracking-widest font-semibold leading-relaxed">
+        </div>
+
+        {/* Bottom section: Medical program description */}
+        <div className="px-4 py-8 text-center" style={{
+          backgroundColor: '#E8DFD7'
+        }}>
+          <p className="text-lg text-gray-800 uppercase tracking-widest font-semibold leading-relaxed font-display">
             МЕДИЦИНСКАЯ ПРОГРАММА<br/>СНИЖЕНИЯ ВЕСА ПОД<br/>КОНТРОЛЕМ ВРАЧА
           </p>
         </div>

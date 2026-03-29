@@ -510,44 +510,47 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Mobile hero - Screen 1: Clean vertical layout */}
-      <section className="sm:hidden relative flex flex-col" style={{
-        backgroundColor: '#F5F1ED'
-      }}>
-        {/* Title section */}
-        <div className="px-4 pt-8 pb-6 text-center">
-          <h1 className="text-3xl font-bold text-gray-900 font-display leading-tight tracking-tight" style={{
-            letterSpacing: '0.02em',
-            lineHeight: '1.2'
-          }}>
-            ВАШ НОВЫЙ<br/>ПОНЕДЕЛЬНИК<br/>НАЧИНАЕТСЯ ЗДЕСЬ
-          </h1>
-        </div>
-
-        {/* Image section - full width, no padding */}
+      {/* Mobile hero - Screen 1: Text overlay on full photo */}
+      <section className="sm:hidden relative flex flex-col">
+        {/* Full photo with text overlay */}
         <div style={{
           backgroundImage: `url(${photos.heroBackground})`,
           backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
           width: '100%',
-          aspectRatio: '1 / 1.1',
-          minHeight: '350px'
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          padding: '2rem 1rem',
+          backgroundColor: '#F5F1ED'
         }}>
+          {/* Title at top - on photo */}
+          <div className="text-center">
+            <h1 className="text-3xl font-bold text-gray-900 font-display leading-tight" style={{
+              textShadow: '2px 2px 6px rgba(255, 255, 255, 0.95)',
+              letterSpacing: '0.02em',
+              lineHeight: '1.15'
+            }}>
+              ВАШ НОВЫЙ<br/>ПОНЕДЕЛЬНИК<br/>НАЧИНАЕТСЯ ЗДЕСЬ
+            </h1>
+          </div>
+
+          {/* Subtitle at bottom - on photo */}
+          <div className="text-center">
+            <p className="text-base text-gray-700 leading-relaxed italic font-display" style={{
+              textShadow: '2px 2px 6px rgba(255, 255, 255, 0.95)'
+            }}>
+              Начните свой новый понедельник — без лишнего веса
+            </p>
+          </div>
         </div>
 
-        {/* Subtitle section */}
-        <div className="px-4 py-6 text-center">
-          <p className="text-base text-gray-700 leading-relaxed italic font-display" style={{
-            fontStyle: 'italic'
-          }}>
-            Начните свой новый понедельник — без лишнего веса
-          </p>
-        </div>
-
-        {/* Offer section */}
+        {/* Offer section - separate below photo */}
         <div className="px-4 py-8 text-center" style={{
-          backgroundColor: '#D9CBB1'
+          backgroundColor: '#D9CBB1',
+          width: '100%'
         }}>
           <p className="text-lg text-gray-900 uppercase tracking-wide font-semibold leading-relaxed font-display" style={{
             letterSpacing: '0.05em'

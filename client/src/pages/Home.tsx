@@ -515,7 +515,7 @@ export default function Home() {
         {/* Title section - white background */}
         <div className="text-center" style={{
           backgroundColor: 'white',
-          padding: '2rem 1rem',
+          padding: '0',
           margin: '0'
         }}>
           <h1 className="text-2xl font-bold text-gray-800 font-display leading-tight tracking-tight">
@@ -538,7 +538,7 @@ export default function Home() {
         {/* Subtitle section - white background */}
         <div className="text-center" style={{
           backgroundColor: 'white',
-          padding: '2rem 1rem',
+          padding: '0',
           margin: '0'
         }}>
           <p className="text-base text-gray-700 leading-relaxed italic font-display">

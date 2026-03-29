@@ -512,26 +512,31 @@ export default function Home() {
 
       {/* Mobile hero - Screen 1: Title top, image center, subtitle bottom */}
       <section className="sm:hidden relative flex flex-col" style={{
-        backgroundColor: '#F5F1ED'
+        backgroundColor: 'white'
       }}>
-        {/* Top section: Main title */}
-        <div className="px-4 pt-6 pb-6 text-center">
+        {/* Top section: Main title on white background */}
+        <div className="px-4 pt-8 pb-8 text-center" style={{
+          backgroundColor: 'white'
+        }}>
           <h1 className="text-3xl font-bold text-gray-800 font-display leading-tight tracking-tight">
             ВАШЕ НОВЫЙ ПОНЕДЕЛЬНИК<br/>НАЧИНАЕТСЯ ЗДЕСЬ
           </h1>
         </div>
 
-        {/* Middle section: Image with subtitle */}
-        <div className="flex-1 relative flex flex-col" style={{
+        {/* Middle section: Image with subtitle overlay */}
+        <div style={{
           backgroundImage: `url(${photos.heroBackground})`,
           backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
-          minHeight: '320px'
+          minHeight: '380px',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'flex-end'
         }}>
-          {/* Subtitle text at bottom of image */}
-          <div className="mt-auto px-4 py-6 text-center" style={{
-            backgroundColor: '#F5F1ED'
+          {/* Subtitle text overlaid at bottom of image */}
+          <div className="px-4 py-6 text-center" style={{
+            backgroundColor: 'rgba(255, 255, 255, 0.9)'
           }}>
             <p className="text-base text-gray-700 leading-relaxed italic font-display">
               Начните свой новый понедельник — без лишнего веса

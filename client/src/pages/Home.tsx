@@ -523,7 +523,7 @@ export default function Home() {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          padding: '2rem 1rem'
+          padding: '0'
         }}>
           {/* Title at top on photo */}
           <div className="text-center">

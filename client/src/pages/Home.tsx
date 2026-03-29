@@ -511,13 +511,17 @@ export default function Home() {
       </section>
 
       {/* Mobile hero - Screen 1: Same as desktop */}
-      <section className="sm:hidden relative py-20 overflow-hidden" style={{
+      <section className="sm:hidden relative overflow-hidden" style={{
         backgroundImage: `url(${photos.heroBackground})`,
-        backgroundSize: 'cover',
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
-        backgroundAttachment: 'fixed'
+        backgroundAttachment: 'fixed',
+        minHeight: '100vh'
       }}>
-        <div className="container relative z-10 flex items-center justify-center min-h-[500px]">
+        <div className="container relative z-10 flex items-center justify-center" style={{
+          minHeight: '100vh'
+        }}>
           <div className="text-center max-w-2xl px-4">
             <h1 className="text-3xl font-bold text-gray-800 mb-6 font-display leading-tight" style={{textShadow: '0 2px 4px rgba(255,255,255,0.3)'}}>
               Ваш новый понедельник начинается здесь

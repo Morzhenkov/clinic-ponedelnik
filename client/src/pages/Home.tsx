@@ -512,33 +512,35 @@ export default function Home() {
 
       {/* Mobile hero - Screen 1: Title top, image center, subtitle bottom */}
       <section className="sm:hidden relative flex flex-col">
-        {/* Top section: Title on white background */}
-        <div className="px-4 py-8 text-center" style={{
-          backgroundColor: 'white'
-        }}>
-          <h1 className="text-3xl font-bold text-gray-800 font-display leading-tight tracking-tight">
-            ВАШЕ НОВЫЙ ПОНЕДЕЛЬНИК<br/>НАЧИНАЕТСЯ ЗДЕСЬ
-          </h1>
-        </div>
-
-        {/* Middle section: Image */}
+        {/* Mobile hero: Title, image, and subtitle all on same photo background */}
         <div style={{
           backgroundImage: `url(${photos.heroBackground})`,
-          backgroundSize: 'contain',
+          backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
-          minHeight: '380px',
-          width: '100%'
+          minHeight: '100vh',
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          paddingTop: '2rem',
+          paddingBottom: '2rem',
+          paddingLeft: '1rem',
+          paddingRight: '1rem'
         }}>
-        </div>
+          {/* Title at top */}
+          <div className="text-center">
+            <h1 className="text-2xl font-bold text-gray-800 font-display leading-tight tracking-tight">
+              ВАШЕ НОВЫЙ ПОНЕДЕЛЬНИК<br/>НАЧИНАЕТСЯ ЗДЕСЬ
+            </h1>
+          </div>
 
-        {/* Subtitle section: Below image on white background */}
-        <div className="px-4 py-6 text-center" style={{
-          backgroundColor: 'white'
-        }}>
-          <p className="text-base text-gray-700 leading-relaxed italic font-display">
-            Начните свой новый понедельник — без лишнего веса
-          </p>
+          {/* Subtitle at bottom */}
+          <div className="text-center">
+            <p className="text-base text-gray-700 leading-relaxed italic font-display">
+              Начните свой новый понедельник — без лишнего веса
+            </p>
+          </div>
         </div>
 
         {/* Bottom section: Medical program description */}

@@ -514,28 +514,28 @@ export default function Home() {
       <section className="sm:hidden relative flex flex-col" style={{
         backgroundColor: 'white'
       }}>
-        {/* Top section: Main title on white background */}
-        <div className="px-4 pt-8 pb-8 text-center" style={{
-          backgroundColor: 'white'
-        }}>
-          <h1 className="text-3xl font-bold text-gray-800 font-display leading-tight tracking-tight">
-            ВАШЕ НОВЫЙ ПОНЕДЕЛЬНИК<br/>НАЧИНАЕТСЯ ЗДЕСЬ
-          </h1>
-        </div>
-
-        {/* Middle section: Image with subtitle overlay */}
+        {/* Full image section with title and subtitle overlays */}
         <div style={{
           backgroundImage: `url(${photos.heroBackground})`,
           backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
-          minHeight: '380px',
+          minHeight: '600px',
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'flex-end'
+          justifyContent: 'space-between',
+          paddingTop: '2rem',
+          paddingBottom: '2rem'
         }}>
-          {/* Subtitle text overlaid at bottom of image */}
-          <div className="px-4 py-6 text-center" style={{
+          {/* Title text at top of image */}
+          <div className="px-4 text-center">
+            <h1 className="text-3xl font-bold text-gray-800 font-display leading-tight tracking-tight">
+              ВАШЕ НОВЫЙ ПОНЕДЕЛЬНИК<br/>НАЧИНАЕТСЯ ЗДЕСЬ
+            </h1>
+          </div>
+
+          {/* Subtitle text at bottom of image */}
+          <div className="px-4 py-4 text-center" style={{
             backgroundColor: 'rgba(255, 255, 255, 0.9)'
           }}>
             <p className="text-base text-gray-700 leading-relaxed italic font-display">

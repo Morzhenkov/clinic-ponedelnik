@@ -521,23 +521,22 @@ export default function Home() {
           </h1>
         </div>
 
-        {/* Middle section: Image */}
-        <div className="flex-1 relative" style={{
+        {/* Middle section: Image with subtitle */}
+        <div className="flex-1 relative flex flex-col" style={{
           backgroundImage: `url(${photos.heroBackground})`,
           backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
           minHeight: '320px'
         }}>
-        </div>
-
-        {/* Middle-bottom: Subtitle text */}
-        <div className="px-4 py-6 text-center" style={{
-          backgroundColor: '#F5F1ED'
-        }}>
-          <p className="text-base text-gray-700 leading-relaxed italic font-display">
-            Начните свой новый понедельник — без лишнего веса
-          </p>
+          {/* Subtitle text at bottom of image */}
+          <div className="mt-auto px-4 py-6 text-center" style={{
+            backgroundColor: '#F5F1ED'
+          }}>
+            <p className="text-base text-gray-700 leading-relaxed italic font-display">
+              Начните свой новый понедельник — без лишнего веса
+            </p>
+          </div>
         </div>
 
         {/* Bottom section: Medical program description */}

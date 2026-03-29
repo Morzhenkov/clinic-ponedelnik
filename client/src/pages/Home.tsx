@@ -510,40 +510,41 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Mobile hero - Screen 1: Title, full photo, subtitle */}
+      {/* Mobile hero - Screen 1: Photo with text overlay */}
       <section className="sm:hidden relative flex flex-col">
-        {/* Title section - white background */}
-        <div className="text-center" style={{
-          backgroundColor: 'white',
-          padding: '0',
-          margin: '0'
-        }}>
-          <h1 className="text-2xl font-bold text-gray-800 font-display leading-tight tracking-tight">
-            ВАШЕ НОВЫЙ ПОНЕДЕЛЬНИК<br/>НАЧИНАЕТСЯ ЗДЕСЬ
-          </h1>
-        </div>
-
-        {/* Photo section */}
+        {/* Photo with text overlay - no white sections */}
         <div style={{
           backgroundImage: `url(${photos.heroBackground})`,
           backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
-          minHeight: '400px',
+          minHeight: '100vh',
           width: '100%',
-          margin: '0'
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          paddingTop: '1rem',
+          paddingBottom: '1rem',
+          paddingLeft: '1rem',
+          paddingRight: '1rem'
         }}>
-        </div>
+          {/* Title at top on photo */}
+          <div className="text-center">
+            <h1 className="text-2xl font-bold text-gray-800 font-display leading-tight tracking-tight" style={{
+              textShadow: '2px 2px 4px rgba(255, 255, 255, 0.9)'
+            }}>
+              ВАШЕ НОВЫЙ ПОНЕДЕЛЬНИК<br/>НАЧИНАЕТСЯ ЗДЕСЬ
+            </h1>
+          </div>
 
-        {/* Subtitle section - white background */}
-        <div className="text-center" style={{
-          backgroundColor: 'white',
-          padding: '0',
-          margin: '0'
-        }}>
-          <p className="text-base text-gray-700 leading-relaxed italic font-display">
-            Начните свой новый понедельник — без лишнего веса
-          </p>
+          {/* Subtitle at bottom on photo */}
+          <div className="text-center">
+            <p className="text-base text-gray-700 leading-relaxed italic font-display" style={{
+              textShadow: '2px 2px 4px rgba(255, 255, 255, 0.9)'
+            }}>
+              Начните свой новый понедельник — без лишнего веса
+            </p>
+          </div>
         </div>
 
         {/* Bottom section: Medical program description */}

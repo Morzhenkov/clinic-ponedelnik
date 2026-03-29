@@ -510,27 +510,35 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Mobile hero - Screen 1: minimalist center layout */}
-      <section className="sm:hidden relative overflow-hidden" style={{
-        backgroundImage: `url(${photos.heroBackground})`,
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'scroll'
+      {/* Mobile hero - Screen 1: Title top, image center, subtitle bottom */}
+      <section className="sm:hidden relative flex flex-col" style={{
+        backgroundColor: '#F5F1ED'
       }}>
-        
-        <div className="relative z-10 flex items-center justify-center" style={{height: 'auto'}}>
-          <div className="text-center py-8">
-            <h1 className="text-2xl font-bold text-gray-800 mb-4 font-display leading-tight" style={{textShadow: '0 2px 4px rgba(255,255,255,0.3)'}}>
-              Ваш новый понедельник начинается здесь
-            </h1>
-            <p className="text-sm text-gray-700 mb-4 leading-relaxed" style={{textShadow: '0 1px 2px rgba(255,255,255,0.3)'}}>
-              Начните свой новый понедельник — без лишнего веса
-            </p>
-            <p className="text-xs text-gray-600 uppercase tracking-widest font-semibold" style={{textShadow: '0 1px 2px rgba(255,255,255,0.3)'}}>
-              Медицинская программа снижения веса под контролем врача
-            </p>
-          </div>
+        {/* Top section: Main title */}
+        <div className="px-4 pt-8 pb-4 text-center">
+          <h1 className="text-3xl font-bold text-gray-800 font-display leading-tight tracking-tight">
+            ВАШЕ НОВОЕ ПОНЕДЕЛЬНИК НАЧИНАЕТСЯ ЗДЕСЬ
+          </h1>
+        </div>
+
+        {/* Middle section: Image */}
+        <div className="flex-1 relative" style={{
+          backgroundImage: `url(${photos.heroBackground})`,
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+          minHeight: '320px'
+        }}>
+        </div>
+
+        {/* Bottom section: Subtitle */}
+        <div className="px-4 py-8 text-center bg-white/50">
+          <p className="text-base text-gray-700 mb-6 leading-relaxed italic">
+            Начните свой новый понедельник — без лишнего веса
+          </p>
+          <p className="text-sm text-gray-800 uppercase tracking-widest font-semibold leading-relaxed">
+            МЕДИЦИНСКАЯ ПРОГРАММА<br/>СНИЖЕНИЯ ВЕСА ПОД<br/>КОНТРОЛЕМ ВРАЧА
+          </p>
         </div>
       </section>
 

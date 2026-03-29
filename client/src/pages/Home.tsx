@@ -510,68 +510,33 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Mobile hero - Screen 1: Exact mockup layout */}
+      {/* Mobile hero - Screen 1: Title top, image center, subtitle bottom */}
       <section className="sm:hidden relative flex flex-col" style={{
-        margin: 0,
-        padding: 0
+        backgroundColor: '#F5F1ED'
       }}>
-        {/* Section 1: Title on white background */}
-        <div style={{
-          backgroundColor: 'white',
-          padding: '2rem 1.5rem',
-          textAlign: 'center',
-          margin: 0
-        }}>
-          <h1 className="text-3xl font-bold text-gray-900 font-display" style={{
-            letterSpacing: '0.02em',
-            lineHeight: '1.2',
-            margin: 0
-          }}>
-            ВАШ НОВЫЙ ПОНЕДЕЛЬНИК<br/>НАЧИНАЕТСЯ ЗДЕСЬ
+        {/* Top section: Main title */}
+        <div className="px-4 pt-8 pb-4 text-center">
+          <h1 className="text-3xl font-bold text-gray-800 font-display leading-tight tracking-tight">
+            ВАШЕ НОВОЕ ПОНЕДЕЛЬНИК НАЧИНАЕТСЯ ЗДЕСЬ
           </h1>
         </div>
 
-        {/* Section 2: Full photo */}
-        <div style={{
+        {/* Middle section: Image */}
+        <div className="flex-1 relative" style={{
           backgroundImage: `url(${photos.heroBackground})`,
           backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
-          backgroundColor: 'white',
-          width: '100%',
-          minHeight: '400px',
-          margin: 0,
-          padding: 0
+          minHeight: '320px'
         }}>
         </div>
 
-        {/* Section 3: Subtitle on white background */}
-        <div style={{
-          backgroundColor: 'white',
-          padding: '1.5rem 1.5rem',
-          textAlign: 'center',
-          margin: 0
-        }}>
-          <p className="text-base text-gray-700 italic font-display" style={{
-            margin: 0,
-            fontStyle: 'italic'
-          }}>
+        {/* Bottom section: Subtitle */}
+        <div className="px-4 py-8 text-center bg-white/50">
+          <p className="text-base text-gray-700 mb-6 leading-relaxed italic">
             Начните свой новый понедельник — без лишнего веса
           </p>
-        </div>
-
-        {/* Section 4: Program offer on beige background */}
-        <div style={{
-          backgroundColor: '#D9CBB1',
-          padding: '2rem 1.5rem',
-          textAlign: 'center',
-          margin: 0
-        }}>
-          <p className="text-lg text-gray-900 uppercase font-semibold font-display" style={{
-            letterSpacing: '0.05em',
-            lineHeight: '1.4',
-            margin: 0
-          }}>
+          <p className="text-sm text-gray-800 uppercase tracking-widest font-semibold leading-relaxed">
             МЕДИЦИНСКАЯ ПРОГРАММА<br/>СНИЖЕНИЯ ВЕСА ПОД<br/>КОНТРОЛЕМ ВРАЧА
           </p>
         </div>

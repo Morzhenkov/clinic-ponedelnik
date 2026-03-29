@@ -510,55 +510,26 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Mobile hero - Screen 1: Title top, image center, subtitle bottom */}
-      {/* Mobile hero - Screen 1: Photo background, no white gaps */}
-      <section className="sm:hidden relative flex flex-col" style={{
+      {/* Mobile hero - Screen 1: Same as desktop */}
+      <section className="sm:hidden relative py-20 overflow-hidden" style={{
         backgroundImage: `url(${photos.heroBackground})`,
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
         backgroundPosition: 'center',
-        backgroundAttachment: 'scroll',
-        minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        padding: 0,
-        margin: 0
+        backgroundAttachment: 'fixed'
       }}>
-        {/* Top section: Main title - no padding */}
-        <div className="text-center" style={{
-          padding: '2rem 1rem 0',
-          margin: 0
-        }}>
-          <h1 className="text-3xl font-bold text-gray-800 font-display leading-tight tracking-tight" style={{
-            textShadow: '2px 2px 4px rgba(255, 255, 255, 0.8)',
-            margin: 0
-          }}>
-            ВАШЕ НОВОЕ ПОНЕДЕЛЬНИК НАЧИНАЕТСЯ ЗДЕСЬ
-          </h1>
+        <div className="container relative z-10 flex items-center justify-center min-h-[500px]">
+          <div className="text-center max-w-2xl px-4">
+            <h1 className="text-3xl font-bold text-gray-800 mb-6 font-display leading-tight" style={{textShadow: '0 2px 4px rgba(255,255,255,0.3)'}}>
+              Ваш новый понедельник начинается здесь
+            </h1>
+            <p className="text-base text-gray-700 mb-6 leading-relaxed" style={{textShadow: '0 1px 2px rgba(255,255,255,0.3)'}}>
+              Начните свой новый понедельник — без лишнего веса
+            </p>
+            <p className="text-sm text-gray-600 uppercase tracking-widest font-semibold" style={{textShadow: '0 1px 2px rgba(255,255,255,0.3)'}}>
+              Медицинская программа снижения веса под контролем врача
+            </p>
+          </div>
         </div>
-
-        {/* Bottom section: Subtitle - no padding */}
-        <div className="text-center" style={{
-          padding: '0 1rem 2rem',
-          margin: 0
-        }}>
-          <p className="text-base text-gray-700 leading-relaxed italic" style={{
-            textShadow: '2px 2px 4px rgba(255, 255, 255, 0.8)',
-            margin: 0
-          }}>
-            Начните свой новый понедельник — без лишнего веса
-          </p>
-        </div>
-      </section>
-
-      {/* Program offer section */}
-      <section className="sm:hidden relative text-center py-8" style={{
-        backgroundColor: '#D9CBB1'
-      }}>
-        <p className="text-sm text-gray-800 uppercase tracking-widest font-semibold leading-relaxed px-4">
-          МЕДИЦИНСКАЯ ПРОГРАММА<br/>СНИЖЕНИЯ ВЕСА ПОД<br/>КОНТРОЛЕМ ВРАЧА
-        </p>
       </section>
 
       {/* Mobile hero - Screen 2: UTP blocks and details */}

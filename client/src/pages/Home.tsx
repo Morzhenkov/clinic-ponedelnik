@@ -510,49 +510,49 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Mobile hero - Screen 1: Photo with text overlay */}
-      <section className="sm:hidden relative flex flex-col">
-        {/* Photo with text overlay - no white sections */}
+      {/* Mobile hero - Screen 1: Clean vertical layout */}
+      <section className="sm:hidden relative flex flex-col" style={{
+        backgroundColor: '#F5F1ED'
+      }}>
+        {/* Title section */}
+        <div className="px-4 pt-8 pb-6 text-center">
+          <h1 className="text-3xl font-bold text-gray-900 font-display leading-tight tracking-tight" style={{
+            letterSpacing: '0.02em',
+            lineHeight: '1.2'
+          }}>
+            ВАШ НОВЫЙ<br/>ПОНЕДЕЛЬНИК<br/>НАЧИНАЕТСЯ ЗДЕСЬ
+          </h1>
+        </div>
+
+        {/* Image section - full width, no padding */}
         <div style={{
           backgroundImage: `url(${photos.heroBackground})`,
           backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
-          minHeight: '100vh',
           width: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          paddingTop: '1rem',
-          paddingBottom: '1rem',
-          paddingLeft: '1rem',
-          paddingRight: '1rem'
+          aspectRatio: '1 / 1.1',
+          minHeight: '350px'
         }}>
-          {/* Title at top on photo */}
-          <div className="text-center">
-            <h1 className="text-2xl font-bold text-gray-800 font-display leading-tight tracking-tight" style={{
-              textShadow: '2px 2px 4px rgba(255, 255, 255, 0.9)'
-            }}>
-              ВАШЕ НОВЫЙ ПОНЕДЕЛЬНИК<br/>НАЧИНАЕТСЯ ЗДЕСЬ
-            </h1>
-          </div>
-
-          {/* Subtitle at bottom on photo */}
-          <div className="text-center">
-            <p className="text-base text-gray-700 leading-relaxed italic font-display" style={{
-              textShadow: '2px 2px 4px rgba(255, 255, 255, 0.9)'
-            }}>
-              Начните свой новый понедельник — без лишнего веса
-            </p>
-          </div>
         </div>
 
-        {/* Bottom section: Medical program description */}
+        {/* Subtitle section */}
+        <div className="px-4 py-6 text-center">
+          <p className="text-base text-gray-700 leading-relaxed italic font-display" style={{
+            fontStyle: 'italic'
+          }}>
+            Начните свой новый понедельник — без лишнего веса
+          </p>
+        </div>
+
+        {/* Offer section */}
         <div className="px-4 py-8 text-center" style={{
-          backgroundColor: '#E8DFD7'
+          backgroundColor: '#D9CBB1'
         }}>
-          <p className="text-lg text-gray-800 uppercase tracking-widest font-semibold leading-relaxed font-display">
-            МЕДИЦИНСКАЯ ПРОГРАММА<br/>СНИЖЕНИЯ ВЕСА ПОД<br/>КОНТРОЛЕМ ВРАЧА
+          <p className="text-lg text-gray-900 uppercase tracking-wide font-semibold leading-relaxed font-display" style={{
+            letterSpacing: '0.05em'
+          }}>
+            МЕДИЦИНСКАЯ<br/>ПРОГРАММА<br/>СНИЖЕНИЯ ВЕСА ПОД<br/>КОНТРОЛЕМ ВРАЧА
           </p>
         </div>
       </section>

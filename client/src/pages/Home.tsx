@@ -511,35 +511,44 @@ export default function Home() {
       </section>
 
       {/* Mobile hero - Screen 1: Title top, image center, subtitle bottom */}
+      {/* Mobile hero - Screen 1: Photo background for entire section */}
       <section className="sm:hidden relative flex flex-col" style={{
-        backgroundColor: '#F5F1ED'
+        backgroundImage: `url(${photos.heroBackground})`,
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        padding: '2rem 1rem'
       }}>
         {/* Top section: Main title */}
-        <div className="px-4 pt-8 pb-4 text-center">
-          <h1 className="text-3xl font-bold text-gray-800 font-display leading-tight tracking-tight">
+        <div className="text-center">
+          <h1 className="text-3xl font-bold text-gray-800 font-display leading-tight tracking-tight" style={{
+            textShadow: '2px 2px 4px rgba(255, 255, 255, 0.8)'
+          }}>
             ВАШЕ НОВОЕ ПОНЕДЕЛЬНИК НАЧИНАЕТСЯ ЗДЕСЬ
           </h1>
         </div>
 
-        {/* Middle section: Image */}
-        <div className="flex-1 relative" style={{
-          backgroundImage: `url(${photos.heroBackground})`,
-          backgroundSize: 'contain',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
-          minHeight: '320px'
-        }}>
-        </div>
-
         {/* Bottom section: Subtitle */}
-        <div className="px-4 py-8 text-center bg-white/50">
-          <p className="text-base text-gray-700 mb-6 leading-relaxed italic">
+        <div className="text-center">
+          <p className="text-base text-gray-700 mb-6 leading-relaxed italic" style={{
+            textShadow: '2px 2px 4px rgba(255, 255, 255, 0.8)'
+          }}>
             Начните свой новый понедельник — без лишнего веса
           </p>
-          <p className="text-sm text-gray-800 uppercase tracking-widest font-semibold leading-relaxed">
-            МЕДИЦИНСКАЯ ПРОГРАММА<br/>СНИЖЕНИЯ ВЕСА ПОД<br/>КОНТРОЛЕМ ВРАЧА
-          </p>
         </div>
+      </section>
+
+      {/* Program offer section */}
+      <section className="sm:hidden relative text-center py-8" style={{
+        backgroundColor: '#D9CBB1'
+      }}>
+        <p className="text-sm text-gray-800 uppercase tracking-widest font-semibold leading-relaxed px-4">
+          МЕДИЦИНСКАЯ ПРОГРАММА<br/>СНИЖЕНИЯ ВЕСА ПОД<br/>КОНТРОЛЕМ ВРАЧА
+        </p>
       </section>
 
       {/* Mobile hero - Screen 2: UTP blocks and details */}

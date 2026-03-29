@@ -512,36 +512,38 @@ export default function Home() {
 
       {/* Mobile hero - Screen 1: Title, full photo, subtitle */}
       <section className="sm:hidden relative flex flex-col">
-        {/* Full photo with text overlay - no fields */}
+        {/* Title section - white background */}
+        <div className="text-center" style={{
+          backgroundColor: 'white',
+          padding: '2rem 1rem',
+          margin: '0'
+        }}>
+          <h1 className="text-2xl font-bold text-gray-800 font-display leading-tight tracking-tight">
+            ВАШЕ НОВЫЙ ПОНЕДЕЛЬНИК<br/>НАЧИНАЕТСЯ ЗДЕСЬ
+          </h1>
+        </div>
+
+        {/* Photo section */}
         <div style={{
           backgroundImage: `url(${photos.heroBackground})`,
           backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
-          minHeight: '100vh',
+          minHeight: '400px',
           width: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          padding: '0'
+          margin: '0'
         }}>
-          {/* Title at top on photo */}
-          <div className="text-center">
-            <h1 className="text-2xl font-bold text-gray-800 font-display leading-tight tracking-tight" style={{
-              textShadow: '1px 1px 3px rgba(255, 255, 255, 0.8)'
-            }}>
-              ВАШЕ НОВЫЙ ПОНЕДЕЛЬНИК<br/>НАЧИНАЕТСЯ ЗДЕСЬ
-            </h1>
-          </div>
+        </div>
 
-          {/* Subtitle at bottom on photo */}
-          <div className="text-center">
-            <p className="text-base text-gray-700 leading-relaxed italic font-display" style={{
-              textShadow: '1px 1px 3px rgba(255, 255, 255, 0.8)'
-            }}>
-              Начните свой новый понедельник — без лишнего веса
-            </p>
-          </div>
+        {/* Subtitle section - white background */}
+        <div className="text-center" style={{
+          backgroundColor: 'white',
+          padding: '2rem 1rem',
+          margin: '0'
+        }}>
+          <p className="text-base text-gray-700 leading-relaxed italic font-display">
+            Начните свой новый понедельник — без лишнего веса
+          </p>
         </div>
 
         {/* Bottom section: Medical program description */}

@@ -518,7 +518,11 @@ export default function Home() {
         backgroundPosition: 'center bottom',
         backgroundAttachment: 'scroll',
         margin: 0,
-        padding: 0
+        padding: 0,
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-end'
       }}>
         {/* Subtitle overlay - positioned at bottom of photo */}
         <div style={{

@@ -520,20 +520,6 @@ export default function Home() {
         margin: 0,
         padding: 0
       }}>
-        {/* Title overlay */}
-        <div style={{
-          paddingTop: '2rem',
-          paddingBottom: '1rem',
-          margin: 0
-        }}>
-          <h1 className="text-2xl font-bold text-gray-800 font-display leading-tight text-center" style={{
-            textShadow: '1px 1px 2px rgba(255,255,255,0.5)',
-            margin: 0
-          }}>
-            ВАШЕ НОВЫЙ ПОНЕДЕЛЬНИК НАЧИНАЕТСЯ ЗДЕСЬ
-          </h1>
-        </div>
-
         {/* Subtitle overlay - positioned at bottom of photo */}
         <div style={{
           paddingTop: '1rem',

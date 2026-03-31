@@ -536,12 +536,13 @@ export default function Home() {
         {/* Photo section */}
         <div style={{
           backgroundImage: `url(${photos.heroBackground})`,
-          backgroundSize: 'cover',
+          backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
           backgroundAttachment: 'scroll',
+          backgroundColor: '#F5F1ED',
           width: '100%',
-          minHeight: '60vh',
+          height: 'auto',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'flex-end',

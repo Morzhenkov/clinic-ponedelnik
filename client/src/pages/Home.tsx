@@ -516,13 +516,18 @@ export default function Home() {
         padding: 0,
         display: 'flex',
         flexDirection: 'column',
-        height: 'auto'
+        height: 'auto',
+        backgroundImage: `url(${photos.heroBackground})`,
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'scroll'
       }}>
         {/* Title section above photo */}
         <div style={{
           padding: '1rem',
           textAlign: 'center',
-          backgroundColor: '#F5F1ED',
+          backgroundColor: 'transparent',
           margin: 0
         }}>
           <h1 className="text-xl font-serif font-bold text-gray-800" style={{
@@ -535,11 +540,6 @@ export default function Home() {
 
         {/* Photo section */}
         <div style={{
-          backgroundImage: `url(${photos.heroBackground})`,
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'scroll',
           width: '100%',
           minHeight: '60vh',
           display: 'flex',

@@ -431,7 +431,8 @@ export default function Home() {
         backgroundImage: `url(${photos.heroBackground})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        backgroundAttachment: 'fixed'
+        backgroundAttachment: 'fixed',
+        display: 'none'
       }}>
         
         <div className="container relative z-10 flex items-center justify-center min-h-[600px]">

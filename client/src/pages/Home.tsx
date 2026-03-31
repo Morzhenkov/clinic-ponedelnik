@@ -520,7 +520,7 @@ export default function Home() {
       }}>
         {/* Title section above photo */}
         <div style={{
-          padding: '2rem 1rem',
+          padding: '1rem',
           textAlign: 'center',
           backgroundColor: '#F5F1ED',
           margin: 0

@@ -427,13 +427,11 @@ export default function Home() {
       </nav>
 
       {/* Hero Section Screen 1 - Desktop: minimalist center layout */}
-      {/* Desktop hero with parallax - HIDDEN */}
-      <section className="relative hidden sm:block py-32 md:py-40 overflow-hidden hidden" style={{
+      <section className="relative hidden sm:block py-32 md:py-40 overflow-hidden" style={{
         backgroundImage: `url(${photos.heroBackground})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        backgroundAttachment: 'fixed',
-        display: 'none'
+        backgroundAttachment: 'fixed'
       }}>
         
         <div className="container relative z-10 flex items-center justify-center min-h-[600px]">
@@ -452,7 +450,9 @@ export default function Home() {
       </section>
 
       {/* Hero Section Screen 2 - Desktop: UTP blocks and details - HIDDEN */}
-      <section className="relative hidden sm:block py-16 md:py-20 overflow-hidden bg-background hidden" style={{display: 'none'}}>
+      <section className="relative hidden sm:block py-16 md:py-20 overflow-hidden bg-background hidden" style={{
+        display: 'none'
+      }}>
         <div className="container">
           <div className="mb-12">
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-8 font-display">Клиника снижения веса на новейших препаратах под контролем врачей без жёстких диет и откатов</h2>

@@ -788,10 +788,10 @@ export default function Home() {
       <section id="programs" className="py-10 sm:py-16 bg-white">
         <div className="container">
           <h2 className="text-2xl sm:text-4xl font-bold text-center mb-2 sm:mb-4 font-display text-primary">
-            Программа похудения
+            Этапы программы снижения веса
           </h2>
           <p className="text-center text-foreground mb-6 sm:mb-12 max-w-2xl mx-auto text-xs sm:text-base">
-            Выберите программу, которая соответствует вашим целям и возможностям
+            Пошаговый путь к результату — от диагностики до закрепления
           </p>
 
           <div className="grid md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-6 sm:mb-12">

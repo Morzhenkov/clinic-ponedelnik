@@ -538,7 +538,7 @@ export default function Home() {
           backgroundImage: `url(${photos.heroBackground})`,
           backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
+          backgroundPosition: 'center top',
           backgroundAttachment: 'scroll',
           flex: 1,
           display: 'flex',

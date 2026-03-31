@@ -5,6 +5,7 @@ import { publicProcedure, router } from "./_core/trpc";
 import { z } from "zod";
 import { createConsultation, getConsultations } from "./db";
 import { storagePut } from "./storage";
+import { sendEmail } from "./_core/email";
 
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
@@ -68,6 +69,31 @@ export const appRouter = router({
           fileKey,
           fileName,
           fileMimeType,
+        });
+
+        // Send email notification to clinic
+        const emailHtml = `
+          <h2>Новая заявка на консультацию</h2>
+          <p><strong>Имя:</strong> ${input.name}</p>
+          <p><strong>Телефон:</strong> ${input.phone}</p>
+          <p><strong>Программа:</strong> ${input.program}</p>
+          ${fileUrl ? `<p><strong>Документ:</strong> <a href="${fileUrl}">${fileName}</a></p>` : ''}
+          <p><strong>Время получения:</strong> ${new Date().toLocaleString('ru-RU')}</p>
+        `;
+
+        const emailText = `
+          Новая заявка на консультацию
+          Имя: ${input.name}
+          Телефон: ${input.phone}
+          Программа: ${input.program}
+          Время получения: ${new Date().toLocaleString('ru-RU')}
+        `;
+
+        await sendEmail({
+          to: "info@ponedelnik.clinic",
+          subject: `Новая заявка на консультацию от ${input.name}`,
+          htmlContent: emailHtml,
+          textContent: emailText,
         });
 
         return {

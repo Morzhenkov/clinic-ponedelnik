@@ -449,10 +449,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Hero Section Screen 2 - Desktop: UTP blocks and details - HIDDEN */}
-      <section className="relative hidden sm:block py-16 md:py-20 overflow-hidden bg-background hidden" style={{
-        display: 'none'
-      }}>
+      {/* Hero Section Screen 2 - Desktop: UTP blocks and details */}
+      <section className="relative hidden sm:block py-16 md:py-20 overflow-hidden bg-background">
         <div className="container">
           <div className="mb-12">
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-8 font-display">Клиника снижения веса на новейших препаратах под контролем врачей без жёстких диет и откатов</h2>

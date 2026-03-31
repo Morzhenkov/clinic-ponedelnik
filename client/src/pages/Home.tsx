@@ -512,30 +512,54 @@ export default function Home() {
 
       {/* Mobile hero - Screen 1: Full photo with text overlay and seamless program section */}
       <section className="sm:hidden relative w-full" style={{
-        backgroundImage: `url(${photos.heroBackground})`,
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center bottom',
-        backgroundAttachment: 'scroll',
         margin: 0,
         padding: 0,
-        height: '100vh',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'flex-end'
+        minHeight: '100vh'
       }}>
-        {/* Subtitle overlay - positioned at bottom of photo */}
+        {/* Title section above photo */}
         <div style={{
-          paddingTop: '1rem',
-          paddingBottom: '2rem',
+          padding: '2rem 1rem',
+          textAlign: 'center',
+          backgroundColor: '#F5F1ED',
           margin: 0
         }}>
-          <p className="text-sm text-gray-700 leading-relaxed italic text-center" style={{
-            textShadow: '1px 1px 2px rgba(255,255,255,0.5)',
+          <h1 className="text-xl font-serif font-bold text-gray-800" style={{
+            margin: 0,
+            lineHeight: '1.3'
+          }}>
+            Ваш новый понедельник начинается здесь
+          </h1>
+        </div>
+
+        {/* Photo section */}
+        <div style={{
+          backgroundImage: `url(${photos.heroBackground})`,
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'scroll',
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'flex-end',
+          margin: 0,
+          padding: 0
+        }}>
+          {/* Subtitle overlay - positioned at bottom of photo */}
+          <div style={{
+            paddingTop: '1rem',
+            paddingBottom: '2rem',
             margin: 0
           }}>
-            Начните свой новый понедельник — без лишнего веса
-          </p>
+            <p className="text-sm text-gray-700 leading-relaxed italic text-center" style={{
+              textShadow: '1px 1px 2px rgba(255,255,255,0.5)',
+              margin: 0
+            }}>
+              Начните свой новый понедельник — без лишнего веса
+            </p>
+          </div>
         </div>
       </section>
 

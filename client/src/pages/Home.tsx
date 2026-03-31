@@ -474,6 +474,7 @@ export default function Home() {
                   "Программы похудения и современные препараты под контролем врача-эндокринолога по вашим анализам",
                   "Пептидная терапия и современные препараты для контроля аппетита",
                   "Восполнение дефицитов витаминов и микроэлементов",
+                  "Лечение причин набора веса, а не временные диеты",
                 ].map((text, idx) => (
                   <div key={idx} className="bg-white p-4 rounded-lg shadow-sm border border-border">
                     <div className="flex gap-3">
@@ -513,7 +514,7 @@ export default function Home() {
       <section className="sm:hidden relative w-full" style={{
         margin: 0,
         padding: 0,
-        display: 'flex',
+        display: 'none',
         flexDirection: 'column',
         height: 'auto',
         backgroundImage: `url(${photos.heroBackground})`,
@@ -567,7 +568,8 @@ export default function Home() {
       <section className="sm:hidden relative text-center" style={{
         backgroundColor: '#D9CBB1',
         margin: 0,
-        padding: '2rem 1rem'
+        padding: '2rem 1rem',
+        display: 'none'
       }}>
         <p className="text-sm text-gray-800 uppercase tracking-widest font-semibold leading-relaxed px-4" style={{
           margin: 0

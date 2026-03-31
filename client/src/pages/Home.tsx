@@ -516,7 +516,7 @@ export default function Home() {
         padding: 0,
         display: 'flex',
         flexDirection: 'column',
-        minHeight: '100vh'
+        height: 'auto'
       }}>
         {/* Title section above photo */}
         <div style={{
@@ -536,11 +536,12 @@ export default function Home() {
         {/* Photo section */}
         <div style={{
           backgroundImage: `url(${photos.heroBackground})`,
-          backgroundSize: 'cover',
+          backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center top',
+          backgroundPosition: 'center',
           backgroundAttachment: 'scroll',
-          flex: 1,
+          width: '100%',
+          aspectRatio: '9 / 16',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'flex-end',

@@ -105,7 +105,6 @@ export default function Home() {
     wellnessResults: "https://d2xsxph8kpxj0f.cloudfront.net/310519663096993096/hdtQvaxiWb9W7weDTCV6tP/wellness-results-CCDrWAnx4WMRuRR4bDSn54.webp",
     transformationSequence: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/RefjzjSMLELhxutl.PNG",
     heroBackground: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/UlMMUYuPeugTFMXq.PNG",
-    mobileHeroImage: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/NWSwZIgDuWdWcAak.png",
   };
 
   // Main programs
@@ -511,21 +510,59 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Mobile hero - Screen 1: Full image with integrated layout */}
+      {/* Mobile hero - Screen 1: Full photo with text overlay and seamless program section */}
       <section className="sm:hidden relative w-full" style={{
         margin: 0,
         padding: 0,
-        backgroundImage: `url(${photos.mobileHeroImage})`,
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'scroll',
-        width: '100%',
-        height: 'auto',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'flex-end'
+        height: 'auto'
       }}>
+        {/* Title section above photo */}
+        <div style={{
+          padding: '1rem',
+          textAlign: 'center',
+          backgroundColor: '#F5F1ED',
+          margin: 0
+        }}>
+          <h1 className="text-xl font-serif font-bold text-gray-800" style={{
+            margin: 0,
+            lineHeight: '1.3'
+          }}>
+            Ваш новый понедельник начинается здесь
+          </h1>
+        </div>
+
+        {/* Photo section */}
+        <div style={{
+          backgroundImage: `url(${photos.heroBackground})`,
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'scroll',
+          backgroundColor: '#F5F1ED',
+          width: '100%',
+          height: 'auto',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'flex-end',
+          margin: 0,
+          padding: 0
+        }}>
+          {/* Subtitle overlay - positioned at bottom of photo */}
+          <div style={{
+            paddingTop: '1rem',
+            paddingBottom: '2rem',
+            margin: 0
+          }}>
+            <p className="text-sm text-gray-700 leading-relaxed italic text-center" style={{
+              textShadow: '1px 1px 2px rgba(255,255,255,0.5)',
+              margin: 0
+            }}>
+              Начните свой новый понедельник — без лишнего веса
+            </p>
+          </div>
+        </div>
       </section>
 
       {/* Program offer section - seamless transition */}

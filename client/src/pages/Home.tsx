@@ -427,11 +427,13 @@ export default function Home() {
       </nav>
 
       {/* Hero Section Screen 1 - Desktop: minimalist center layout */}
-      <section className="relative hidden sm:block py-32 md:py-40 overflow-hidden" style={{
+      {/* Desktop hero with parallax - HIDDEN */}
+      <section className="relative hidden sm:block py-32 md:py-40 overflow-hidden hidden" style={{
         backgroundImage: `url(${photos.heroBackground})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        backgroundAttachment: 'fixed'
+        backgroundAttachment: 'fixed',
+        display: 'none'
       }}>
         
         <div className="container relative z-10 flex items-center justify-center min-h-[600px]">

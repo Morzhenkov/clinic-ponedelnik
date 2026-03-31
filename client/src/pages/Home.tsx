@@ -514,7 +514,7 @@ export default function Home() {
       <section className="sm:hidden relative w-full" style={{
         margin: 0,
         padding: 0,
-        display: 'none',
+        display: 'flex',
         flexDirection: 'column',
         height: 'auto',
         backgroundImage: `url(${photos.heroBackground})`,
@@ -568,8 +568,7 @@ export default function Home() {
       <section className="sm:hidden relative text-center" style={{
         backgroundColor: '#D9CBB1',
         margin: 0,
-        padding: '2rem 1rem',
-        display: 'none'
+        padding: '2rem 1rem'
       }}>
         <p className="text-sm text-gray-800 uppercase tracking-widest font-semibold leading-relaxed px-4" style={{
           margin: 0

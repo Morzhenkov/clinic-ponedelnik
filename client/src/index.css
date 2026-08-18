@@ -201,6 +201,104 @@
 }
 
 @layer components {
+  .public-offer-page {
+    min-height: 100vh;
+    background: var(--background);
+  }
+
+  .public-offer-container {
+    width: min(100% - 2rem, 70ch);
+    margin-inline: auto;
+    padding-block: 2rem 4rem;
+  }
+
+  .public-offer-back {
+    display: inline-block;
+    margin-bottom: 2.5rem;
+    color: var(--primary);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .public-offer-back:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .public-offer-title {
+    margin: 0;
+    color: var(--primary);
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    line-height: 1.1;
+    text-align: center;
+  }
+
+  .public-offer-subtitle {
+    margin: 0.75rem 0 0;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    line-height: 1.25;
+    text-align: center;
+  }
+
+  .public-offer-meta {
+    margin: 1.5rem 0 3rem;
+    color: var(--muted-foreground);
+    font-size: 0.9375rem;
+    text-align: center;
+  }
+
+  .public-offer-body {
+    color: var(--foreground);
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .public-offer-body p {
+    margin: 0 0 1rem;
+  }
+
+  .public-offer-body h2 {
+    margin: 2.25rem 0 0.75rem;
+    color: var(--primary);
+    font-family: 'Inter', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .public-offer-requisites {
+    white-space: pre-line;
+  }
+
+  .public-offer-body a {
+    color: var(--primary);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  @media (max-width: 640px) {
+    .public-offer-container {
+      width: min(100% - 1.5rem, 70ch);
+      padding-block: 1.5rem 3rem;
+    }
+
+    .public-offer-back {
+      margin-bottom: 2rem;
+    }
+
+    .public-offer-meta {
+      margin-bottom: 2.25rem;
+    }
+
+    .public-offer-body {
+      font-size: 0.9375rem;
+      line-height: 1.7;
+    }
+  }
+
   /**
    * Custom container utility that centers content and adds responsive padding.
    *

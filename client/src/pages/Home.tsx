@@ -1352,9 +1352,10 @@ export default function Home() {
           </div>
           <div className="text-center">
             <p className="mb-1 sm:mb-2 text-xs sm:text-sm">© 2025 Клиника медицинского снижения веса «Понедельник»</p>
-            <p className="text-xs opacity-75">
-              Все права защищены. Информация на сайте не является публичной офертой.
-            </p>
+            <p className="text-xs opacity-75">Все права защищены.</p>
+            <a href="/public-offer" className="text-xs opacity-75 hover:opacity-100 transition-opacity">
+              Публичная оферта
+            </a>
             <p className="text-xs opacity-75 mt-2 sm:mt-3">
               Лицензия на осуществление медицинской деятельности: Л041-01137-77/04609253
             </p>

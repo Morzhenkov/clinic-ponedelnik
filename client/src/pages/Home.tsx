@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Check, ChevronDown, MapPin, Clock, Phone, Mail, Menu, X, Upload } from "lucide-react";
 import { toast } from "sonner";
 import { images } from "@/config/images";
-import { GOOGLE_SCRIPT_URL, submitToGoogleSheets, fileToBase64, FORM_TYPES } from "@/config/api";
+import { FORM_TYPES, submitForm } from "@/config/api";
 
 /**
  * Design Philosophy: Medical Minimalism with Warm Humanity
@@ -40,54 +40,29 @@ export default function Home() {
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('🟢 Начало отправки формы');
     setIsUploading(true);
 
     try {
-      let fileBase64 = '';
-      let fileName = '';
+      const form = e.currentTarget as HTMLFormElement;
+      const payload = new FormData(form);
+      payload.set('formType', FORM_TYPES.CONSULTATION);
+      payload.set('program', selectedProgram);
 
-      // Конвертируем файл если есть
-      if (uploadedFile) {
-        console.log('📎 Обработка файла:', uploadedFile.name, uploadedFile.size);
-        fileBase64 = await fileToBase64(uploadedFile);
-        fileName = uploadedFile.name;
-        console.log('📎 Файл конвертирован в base64, длина:', fileBase64?.length || 0);
-      }
-
-      const payload = {
-        name: formData.name,
-        phone: formData.phone,
-        program: selectedProgram,
-        fileName: fileName,
-        fileBase64: fileBase64,
-        formType: FORM_TYPES.CONSULTATION
-      };
-
-      console.log('📦 Отправляемые данные:', payload);
-
-      // Отправляем данные
-      const result = await submitToGoogleSheets(payload);
-      console.log('📬 Результат отправки:', result);
+      const result = await submitForm(payload);
 
       if (result.success) {
-        // Успешная отправка
-        console.log('✅ Форма успешно отправлена');
         setSubmitted(true);
         setFormData({ name: "", phone: "" });
         setUploadedFile(null);
         toast.success("Заявка отправлена! Врач свяжется с вами в течение часа.");
         setTimeout(() => setSubmitted(false), 3000);
       } else {
-        console.error('❌ Ошибка при отправке:', result.error);
-        toast.error("Ошибка при отправке заявки. Пожалуйста, попробуйте снова.");
+        toast.error(result.error || "Ошибка при отправке заявки. Пожалуйста, попробуйте снова.");
       }
 
     } catch (error) {
-      console.error('🔥 Критическая ошибка отправки:', error);
       toast.error("Ошибка при отправке заявки. Пожалуйста, попробуйте снова.");
     } finally {
-      console.log('🟡 Завершение отправки формы');
       setIsUploading(false);
     }
   };
@@ -1074,26 +1049,16 @@ export default function Home() {
               submitButton.textContent = "Отправка...";
 
               try {
-                // Создаем объект для отправки
-                const payload = {
-                  name: formData.get('name') as string,
-                  phone: formData.get('phone') as string,
-                  program: 'Связь с пациентом',
-                  formType: FORM_TYPES.TESTIMONIAL_REQUEST
-                };
+                formData.set('program', 'Связь с пациентом');
+                formData.set('formType', FORM_TYPES.TESTIMONIAL_REQUEST);
+                const result = await submitForm(formData);
 
-                // Отправляем в Google Sheets
-                await fetch(GOOGLE_SCRIPT_URL, {
-                  method: 'POST',
-                  mode: 'no-cors',
-                  headers: {
-                    'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify(payload),
-                });
-
-                toast.success("Заявка отправлена! Мы свяжемся с вами для организации разговора.");
-                form.reset();
+                if (result.success) {
+                  toast.success("Заявка отправлена! Мы свяжемся с вами для организации разговора.");
+                  form.reset();
+                } else {
+                  toast.error(result.error || "Ошибка отправки. Попробуйте еще раз.");
+                }
               } catch {
                 toast.error("Ошибка отправки. Попробуйте еще раз.");
               } finally {
@@ -1101,6 +1066,7 @@ export default function Home() {
                 submitButton.textContent = originalText;
               }
             }} className="space-y-3 sm:space-y-4">
+              <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
               <div>
                 <label className="block text-xs sm:text-sm font-semibold text-foreground mb-1.5 sm:mb-2">Ваше имя *</label>
                 <input
@@ -1190,6 +1156,7 @@ export default function Home() {
           }}>
             <div className="relative z-10">
             <form onSubmit={handleFormSubmit} className="space-y-3 sm:space-y-4">
+              <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
               <div>
                 <label className="block text-xs sm:text-sm font-semibold text-foreground mb-1.5 sm:mb-2">Ваше имя *</label>
                 <input
@@ -1232,6 +1199,7 @@ export default function Home() {
                 <div className="relative">
                   <input
                     type="file"
+                    name="attachment"
                     onChange={handleFileChange}
                     className="hidden"
                     id="file-input"

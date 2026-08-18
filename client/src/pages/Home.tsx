@@ -1,8 +1,9 @@
 
 import { useState } from "react";
 import { Check, ChevronDown, MapPin, Clock, Phone, Mail, Menu, X, Upload } from "lucide-react";
-import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
+import { images } from "@/config/images";
+import { GOOGLE_SCRIPT_URL, submitToGoogleSheets, fileToBase64, FORM_TYPES } from "@/config/api";
 
 /**
  * Design Philosophy: Medical Minimalism with Warm Humanity
@@ -22,20 +23,6 @@ export default function Home() {
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);
 
-  const consultationMutation = trpc.consultations.submit.useMutation({
-    onSuccess: () => {
-      setSubmitted(true);
-      setFormData({ name: "", phone: "" });
-      setUploadedFile(null);
-      toast.success("Заявка отправлена! Врач свяжется с вами в течение часа.");
-      setTimeout(() => setSubmitted(false), 3000);
-    },
-    onError: (error) => {
-      toast.error("Ошибка при отправке заявки. Пожалуйста, попробуйте снова.");
-      console.error(error);
-    },
-  });
-
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -53,59 +40,62 @@ export default function Home() {
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('🟢 Начало отправки формы');
     setIsUploading(true);
 
     try {
-      let fileData: { base64: string; fileName: string; mimeType: string } | undefined;
+      let fileBase64 = '';
+      let fileName = '';
 
+      // Конвертируем файл если есть
       if (uploadedFile) {
-        const reader = new FileReader();
-        await new Promise((resolve, reject) => {
-          reader.onload = () => {
-            const base64String = (reader.result as string).split(",")[1];
-            fileData = {
-              base64: base64String,
-              fileName: uploadedFile.name,
-              mimeType: uploadedFile.type,
-            };
-            resolve(null);
-          };
-          reader.onerror = reject;
-          reader.readAsDataURL(uploadedFile);
-        });
+        console.log('📎 Обработка файла:', uploadedFile.name, uploadedFile.size);
+        fileBase64 = await fileToBase64(uploadedFile);
+        fileName = uploadedFile.name;
+        console.log('📎 Файл конвертирован в base64, длина:', fileBase64?.length || 0);
       }
 
-      await consultationMutation.mutateAsync({
+      const payload = {
         name: formData.name,
         phone: formData.phone,
         program: selectedProgram,
-        fileData,
-      });
+        fileName: fileName,
+        fileBase64: fileBase64,
+        formType: FORM_TYPES.CONSULTATION
+      };
+
+      console.log('📦 Отправляемые данные:', payload);
+
+      // Отправляем данные
+      const result = await submitToGoogleSheets(payload);
+      console.log('📬 Результат отправки:', result);
+
+      if (result.success) {
+        // Успешная отправка
+        console.log('✅ Форма успешно отправлена');
+        setSubmitted(true);
+        setFormData({ name: "", phone: "" });
+        setUploadedFile(null);
+        toast.success("Заявка отправлена! Врач свяжется с вами в течение часа.");
+        setTimeout(() => setSubmitted(false), 3000);
+      } else {
+        console.error('❌ Ошибка при отправке:', result.error);
+        toast.error("Ошибка при отправке заявки. Пожалуйста, попробуйте снова.");
+      }
+
+    } catch (error) {
+      console.error('🔥 Критическая ошибка отправки:', error);
+      toast.error("Ошибка при отправке заявки. Пожалуйста, попробуйте снова.");
     } finally {
+      console.log('🟡 Завершение отправки формы');
       setIsUploading(false);
     }
   };
 
   const closeMobileMenu = () => setMobileMenuOpen(false);
 
-  // CDN URLs for clinic photos
-  const photos = {
-    ivPatient: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/lpIjVeIoDTAQVIOG.webp",
-    doctorOffice: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/TKhJXPaJQWNGgEiB.jpg",
-    doctorConsultation: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/bWASYmIdwgwIxoIl.png",
-    ivDrip: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/kOaBnZlFOmHjIGDc.png",
-    recliners: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/ZIcdmlMlVmVhLyZD.jpg",
-    receptionLogo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/AgaouaSNjfmrDGbN.jpg",
-    receptionDesk: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/iNJVkdeepDsPpcDN.jpg",
-    waitingArea: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/xBiIIyOqnOdmPTVU.jpg",
-    logo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/YmfaYcSJobutlROw.jpg",
-    logoCircle: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/LmXzAEntIIRgShGK.png",
-    logoCircleLight: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/LmXzAEntIIRgShGK.png",
-    heroGenerated: "https://d2xsxph8kpxj0f.cloudfront.net/310519663096993096/hdtQvaxiWb9W7weDTCV6tP/iv-therapy-procedure-HrfhGSzZrzp7Ymjgf9SXUg.webp",
-    wellnessResults: "https://d2xsxph8kpxj0f.cloudfront.net/310519663096993096/hdtQvaxiWb9W7weDTCV6tP/wellness-results-CCDrWAnx4WMRuRR4bDSn54.webp",
-    transformationSequence: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/RefjzjSMLELhxutl.PNG",
-    heroBackground: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/UlMMUYuPeugTFMXq.PNG",
-  };
+  // Локальные изображения
+  const photos = images;
 
   // Main programs
   const programs = [
@@ -117,6 +107,7 @@ export default function Home() {
         "Первая ступень программы снижения веса. На этом этапе врач проводит диагностику, составляет индивидуальный план терапии, запускает процесс снижения веса и подготавливает организм к дальнейшей работе.",
       features: [
         "Консультация врача - назначение и оценка анализов, выявление причин набора веса и составление индивидуального плана терапии",
+        "Диагностика состава тела на аппарате InBody — определение процента жировой и мышечной массы, уровня воды в организме и особенностей метаболизма для точного подбора программы",
         "Пептидная терапия - 4 процедуры. Помогает контролировать аппетит, улучшает метаболизм и запускает процесс снижения веса",
         "Поддержка организма инфузионной терапией - восполнение дефицитов витаминов, микроэлементов и аминокислот",
         "Рекомендации по питанию и образу жизни. План, который поддерживает результат программы",
@@ -134,6 +125,7 @@ export default function Home() {
         "На этом этапе усиливается терапия, корректируются дозировки препаратов и подключаются дополнительные методы поддержки организма.",
       features: [
         "Персональное сопровождение врача - регулярные консультации и корректировка терапии",
+        "Контроль результатов на InBody — отслеживаем изменения состава тела и динамику снижения жировой массы. Каждый этап начинается с повторного анализа для точной корректировки программы",
         "Пептидная терапия с увеличением дозировок - усиление эффекта снижения веса и контроля аппетита",
         "Курс инфузионной терапии для восполнения дефицитов - витамины, микроэлементы и аминокислоты",
         "Бустеры метаболизма - препараты, усиливающие эффективность программы",
@@ -328,7 +320,7 @@ export default function Home() {
           {/* Logo area - original circle icon from brand logo */}
           <a href="#" className="flex items-center gap-2.5 flex-shrink-0">
             <img
-              src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/eFjoSEfsOJNdgKDH.svg"
+              src={images.logoNav}
               alt="Понедельник"
               className="h-28 w-28 sm:h-32 sm:w-32 object-contain"
             />
@@ -426,210 +418,233 @@ export default function Home() {
         )}
       </nav>
 
-      {/* Hero Section Screen 1 - Desktop: minimalist center layout */}
-      <section className="relative hidden sm:block py-32 md:py-40 overflow-hidden" style={{
-        backgroundImage: `url(${photos.heroBackground})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed'
-      }}>
-        
-        <div className="container relative z-10 flex items-center justify-center min-h-[600px]">
-          <div className="text-center max-w-3xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-6 font-display leading-tight" style={{textShadow: '0 2px 4px rgba(255,255,255,0.3)'}}>
+      {/* Desktop Hero Sections - only visible on sm and above */}
+      <div className="hidden sm:block">
+        {/* Hero Section Screen 1 - Desktop: minimalist center layout */}
+        <section className="relative py-32 md:py-40 overflow-hidden" style={{
+          backgroundImage: `url(${photos.heroBackground})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed'
+        }}>
+
+          <div className="container relative z-10 flex items-center justify-center min-h-[600px]">
+            <div className="text-center max-w-3xl">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-6 font-display leading-tight" style={{textShadow: '0 2px 4px rgba(255,255,255,0.3)'}}>
+                Ваш новый понедельник начинается здесь
+              </h1>
+              <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed" style={{textShadow: '0 1px 2px rgba(255,255,255,0.3)'}}>
+                Начните свой новый понедельник — без лишнего веса
+              </p>
+              <p className="text-base md:text-lg text-gray-600 uppercase tracking-widest font-semibold" style={{textShadow: '0 1px 2px rgba(255,255,255,0.3)'}}>
+                Медицинская программа снижения веса под контролем врача
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Hero Section Screen 2 - Desktop: UTP blocks and details */}
+        <section className="relative py-16 md:py-20 overflow-hidden bg-background">
+          <div className="container">
+            <div className="mb-12">
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-8 font-display">Клиника снижения веса на новейших препаратах под контролем врачей без жёстких диет и откатов</h2>
+              <p className="text-base md:text-lg text-foreground/80 mb-8 leading-relaxed">
+                Диагностика, пептидная терапия и восполнение дефицитов с клинически протестированными протоколами инфузионной терапии и питания
+              </p>
+
+              {/* Patient results statistic */}
+              <div className="mb-8 p-4 bg-primary/10 border-l-4 border-primary rounded">
+                <p className="text-base text-foreground font-semibold">
+                  Пациенты клиники в среднем теряют 6–15 кг за курс программы
+                </p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-8 lg:gap-12 items-start">
+              {/* Left column - UTP blocks */}
+              <div>
+                <div className="grid grid-cols-1 gap-4 mb-8">
+                  {[
+                    "Программы похудения и современные препараты под контролем врача-эндокринолога по вашим анализам",
+                    "Пептидная терапия и современные препараты для контроля аппетита",
+                    "Восполнение дефицитов витаминов и микроэлементов",
+                    "Лечение причин набора веса, а не временные диеты",
+                  ].map((text, idx) => (
+                    <div key={idx} className="bg-white p-4 rounded-lg shadow-sm border border-border">
+                      <div className="flex gap-3">
+                        <div className="w-6 h-6 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-white text-xs font-bold mt-0.5">
+                          ✓
+                        </div>
+                        <p className="text-sm text-foreground leading-snug">{text}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right column - additional info */}
+              <div>
+                <p className="text-foreground/80 text-base mb-6 leading-relaxed italic">
+                  Многие пациенты приходят к нам после того, как слышали о препаратах семаглутида и тирзепатида (Оземпик, Мунжаро и аналоги).
+                  <br />
+                  <br />
+                  Мы подбираем терапию индивидуально — с учётом анализов, состояния организма и целей пациента.
+                </p>
+
+                <div className="flex flex-row gap-3">
+                  <a href="#programs" className="px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold transition-colors text-center text-base">
+                    Подобрать программу
+                  </a>
+                  <a href="#consultation" className="px-6 py-3 border-2 border-primary text-primary hover:bg-primary/5 rounded-lg font-semibold transition-colors text-center text-base">
+                    Записаться
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      {/* Mobile Hero Sections - only visible below sm */}
+      <div className="sm:hidden">
+        {/* Mobile hero - Screen 1: Full photo with text overlay and seamless program section */}
+        <section className="relative w-full" style={{
+          margin: 0,
+          padding: 0,
+          display: 'flex',
+          flexDirection: 'column',
+          height: 'auto',
+          backgroundColor: 'rgb(251, 248, 245)',
+        }}>
+          {/* Title section above photo */}
+          <div style={{
+            padding: '1.5rem 1rem 1rem',
+            textAlign: 'center',
+            backgroundColor: 'rgb(251, 248, 245)',
+            margin: 0,
+          }}>
+            <h1 className="text-2xl font-bold text-gray-800 font-display uppercase" style={{
+              margin: 0,
+              lineHeight: '1.3'
+            }}>
               Ваш новый понедельник начинается здесь
             </h1>
-            <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed" style={{textShadow: '0 1px 2px rgba(255,255,255,0.3)'}}>
-              Начните свой новый понедельник — без лишнего веса
-            </p>
-            <p className="text-base md:text-lg text-gray-600 uppercase tracking-widest font-semibold" style={{textShadow: '0 1px 2px rgba(255,255,255,0.3)'}}>
-              Медицинская программа снижения веса под контролем врача
-            </p>
           </div>
-        </div>
-      </section>
 
-      {/* Hero Section Screen 2 - Desktop: UTP blocks and details */}
-      <section className="relative hidden sm:block py-16 md:py-20 overflow-hidden bg-background">
-        <div className="container">
-          <div className="mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-8 font-display">Клиника снижения веса на новейших препаратах под контролем врачей без жёстких диет и откатов</h2>
-            <p className="text-base md:text-lg text-foreground/80 mb-8 leading-relaxed">
+          {/* Photo section with overlay text */}
+          <div style={{
+            width: '100%',
+            minHeight: '40vh',
+            position: 'relative',
+            margin: 0,
+            padding: 0,
+          }}>
+            {/* Background image */}
+            <div style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundImage: `url(${photos.heroBackground})`,
+              backgroundSize: 'contain',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'top center',
+              zIndex: 1
+            }} />
+            {/* Overlay text positioned at bottom of image */}
+            <div style={{
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              right: 0,
+              paddingTop: '1rem',
+              paddingBottom: '1.5rem',
+              paddingLeft: '1rem',
+              paddingRight: '1rem',
+              backgroundColor: 'rgb(251, 248, 245)',
+              zIndex: 2,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+              <p className="text-base text-gray-800 leading-relaxed italic text-center font-medium" style={{
+                margin: 0,
+              }}>
+                Начните свой новый понедельник — без лишнего веса
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Program offer section - seamless transition */}
+        <section className="relative text-center" style={{
+          background: 'linear-gradient(to bottom, #f2edea, #f3eae3)',
+          margin: 0,
+          padding: '1.75rem 1rem',
+          display: 'block'
+        }}>
+          <p className="text-base text-gray-800 uppercase tracking-widest font-bold leading-relaxed px-4" style={{
+            margin: 0,
+            letterSpacing: '0.1em'
+          }}>
+            МЕДИЦИНСКАЯ ПРОГРАММА<br/>СНИЖЕНИЯ ВЕСА ПОД<br/>КОНТРОЛЕМ ВРАЧА
+          </p>
+        </section>
+
+        {/* Mobile hero - Screen 2: UTP blocks and details */}
+        <section className="relative py-8 overflow-hidden bg-background">
+          <div className="container px-4">
+            <h2 className="text-lg font-bold text-foreground mb-4 font-display">Клиника снижения веса на новейших препаратах под контролем врачей без жёстких диет и откатов</h2>
+            <p className="text-xs text-foreground/80 mb-4 leading-relaxed">
               Диагностика, пептидная терапия и восполнение дефицитов с клинически протестированными протоколами инфузионной терапии и питания
             </p>
-            
+
             {/* Patient results statistic */}
-            <div className="mb-8 p-4 bg-primary/10 border-l-4 border-primary rounded">
-              <p className="text-base text-foreground font-semibold">
+            <div className="mb-4 p-3 bg-primary/10 border-l-4 border-primary rounded">
+              <p className="text-xs text-foreground font-semibold">
                 Пациенты клиники в среднем теряют 6–15 кг за курс программы
               </p>
             </div>
-          </div>
-          
-          <div className="grid grid-cols-2 gap-8 lg:gap-12 items-start">
-            {/* Left column - UTP blocks */}
-            <div>
-              <div className="grid grid-cols-1 gap-4 mb-8">
-                {[
-                  "Программы похудения и современные препараты под контролем врача-эндокринолога по вашим анализам",
-                  "Пептидная терапия и современные препараты для контроля аппетита",
-                  "Восполнение дефицитов витаминов и микроэлементов",
-                  "Лечение причин набора веса, а не временные диеты",
-                ].map((text, idx) => (
-                  <div key={idx} className="bg-white p-4 rounded-lg shadow-sm border border-border">
-                    <div className="flex gap-3">
-                      <div className="w-6 h-6 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-white text-xs font-bold mt-0.5">
-                        ✓
-                      </div>
-                      <p className="text-sm text-foreground leading-snug">{text}</p>
+
+            {/* UTP blocks */}
+            <div className="space-y-3 mb-6">
+              {[
+                "Программы похудения и современные препараты под контролем врача-эндокринолога по вашим анализам",
+                "Пептидная терапия и современные препараты для контроля аппетита",
+                "Восполнение дефицитов витаминов и микроэлементов",
+                "Лечение причин набора веса, а не временные диеты",
+              ].map((text, idx) => (
+                <div key={idx} className="bg-white p-3 rounded-lg shadow-sm border border-border">
+                  <div className="flex gap-2 items-start">
+                    <div className="w-5 h-5 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-white text-[10px] font-bold mt-0.5">
+                      ✓
                     </div>
+                    <p className="text-[11px] text-foreground leading-snug">{text}</p>
                   </div>
-                ))}
-              </div>
-            </div>
-            
-            {/* Right column - additional info */}
-            <div>
-              <p className="text-foreground/80 text-base mb-6 leading-relaxed italic">
-                Многие пациенты приходят к нам после того, как слышали о препаратах семаглутида и тирзепатида (Оземпик, Мунжаро и аналоги).
-                <br />
-                <br />
-                Мы подбираем терапию индивидуально — с учётом анализов, состояния организма и целей пациента.
-              </p>
-              
-              <div className="flex flex-row gap-3">
-                <a href="#programs" className="px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold transition-colors text-center text-base">
-                  Подобрать программу
-                </a>
-                <a href="#consultation" className="px-6 py-3 border-2 border-primary text-primary hover:bg-primary/5 rounded-lg font-semibold transition-colors text-center text-base">
-                  Записаться
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Mobile hero - Screen 1: Full photo with text overlay and seamless program section */}
-      <section className="sm:hidden relative w-full" style={{
-        margin: 0,
-        padding: 0,
-        display: 'none',
-        flexDirection: 'column',
-        height: 'auto',
-        backgroundImage: `url(${photos.heroBackground})`,
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'scroll'
-      }}>
-        {/* Title section above photo */}
-        <div style={{
-          padding: '1rem',
-          textAlign: 'center',
-          backgroundColor: 'transparent',
-          margin: 0
-        }}>
-          <h1 className="text-xl font-serif font-bold text-gray-800" style={{
-            margin: 0,
-            lineHeight: '1.3'
-          }}>
-            Ваш новый понедельник начинается здесь
-          </h1>
-        </div>
-
-        {/* Photo section */}
-        <div style={{
-          width: '100%',
-          minHeight: '60vh',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'flex-end',
-          margin: 0,
-          padding: 0
-        }}>
-          {/* Subtitle overlay - positioned at bottom of photo */}
-          <div style={{
-            paddingTop: '1rem',
-            paddingBottom: '2rem',
-            margin: 0
-          }}>
-            <p className="text-sm text-gray-700 leading-relaxed italic text-center" style={{
-              textShadow: '1px 1px 2px rgba(255,255,255,0.5)',
-              margin: 0
-            }}>
-              Начните свой новый понедельник — без лишнего веса
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Program offer section - seamless transition */}
-      <section className="sm:hidden relative text-center" style={{
-        backgroundColor: '#D9CBB1',
-        margin: 0,
-        padding: '2rem 1rem',
-        display: 'none'
-      }}>
-        <p className="text-sm text-gray-800 uppercase tracking-widest font-semibold leading-relaxed px-4" style={{
-          margin: 0
-        }}>
-          МЕДИЦИНСКАЯ ПРОГРАММА<br/>СНИЖЕНИЯ ВЕСА ПОД<br/>КОНТРОЛЕМ ВРАЧА
-        </p>
-      </section>
-
-      {/* Mobile hero - Screen 2: UTP blocks and details */}
-      <section className="sm:hidden relative py-8 overflow-hidden bg-background">
-        <div className="container px-4">
-          <h2 className="text-lg font-bold text-foreground mb-4 font-display">Клиника снижения веса на новейших препаратах под контролем врачей без жёстких диет и откатов</h2>
-          <p className="text-xs text-foreground/80 mb-4 leading-relaxed">
-            Диагностика, пептидная терапия и восполнение дефицитов с клинически протестированными протоколами инфузионной терапии и питания
-          </p>
-          
-          {/* Patient results statistic */}
-          <div className="mb-4 p-3 bg-primary/10 border-l-4 border-primary rounded">
-            <p className="text-xs text-foreground font-semibold">
-              Пациенты клиники в среднем теряют 6–15 кг за курс программы
-            </p>
-          </div>
-          
-          {/* UTP blocks */}
-          <div className="space-y-3 mb-6">
-            {[
-              "Программы похудения и современные препараты под контролем врача-эндокринолога по вашим анализам",
-              "Пептидная терапия и современные препараты для контроля аппетита",
-              "Восполнение дефицитов витаминов и микроэлементов",
-              "Лечение причин набора веса, а не временные диеты",
-            ].map((text, idx) => (
-              <div key={idx} className="bg-white p-3 rounded-lg shadow-sm border border-border">
-                <div className="flex gap-2 items-start">
-                  <div className="w-5 h-5 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-white text-[10px] font-bold mt-0.5">
-                    ✓
-                  </div>
-                  <p className="text-[11px] text-foreground leading-snug">{text}</p>
                 </div>
-              </div>
-            ))}
-          </div>
-          
-          {/* Additional info */}
-          <p className="text-foreground/80 text-xs mb-4 leading-relaxed italic">
-            Многие пациенты приходят к нам после того, как слышали о препаратах семаглутида и тирзепатида (Оземпик, Мунжаро и аналоги).
-            <br />
-            <br />
-            Мы подбираем терапию индивидуально — с учётом анализов, состояния организма и целей пациента.
-          </p>
+              ))}
+            </div>
 
-          <div className="flex gap-2">
-            <a href="#programs" className="flex-1 px-3 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold transition-colors text-center text-xs">
-              Подобрать программу
-            </a>
-            <a href="#consultation" className="flex-1 px-3 py-2 border-2 border-primary text-primary hover:bg-primary/5 rounded-lg font-semibold transition-colors text-center text-xs">
-              Записаться
-            </a>
+            {/* Additional info */}
+            <p className="text-foreground/80 text-xs mb-4 leading-relaxed italic">
+              Многие пациенты приходят к нам после того, как слышали о препаратах семаглутида и тирзепатида (Оземпик, Мунжаро и аналоги).
+              <br />
+              <br />
+              Мы подбираем терапию индивидуально — с учётом анализов, состояния организма и целей пациента.
+            </p>
+
+            <div className="flex gap-2">
+              <a href="#programs" className="flex-1 px-3 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold transition-colors text-center text-xs">
+                Подобрать программу
+              </a>
+              <a href="#consultation" className="flex-1 px-3 py-2 border-2 border-primary text-primary hover:bg-primary/5 rounded-lg font-semibold transition-colors text-center text-xs">
+                Записаться
+              </a>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
       {/* Clinic Gallery Strip */}
       <section className="py-6 sm:py-10 bg-white">
@@ -645,7 +660,7 @@ export default function Home() {
               <img src={photos.recliners} alt="Кресла для процедур" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
             </div>
             <div className="aspect-[4/3] rounded-lg overflow-hidden">
-              <img src={photos.waitingArea} alt="Зона ожидания" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+              <img src={photos.simulator} alt="Тренажер" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
             </div>
           </div>
         </div>
@@ -990,7 +1005,7 @@ export default function Home() {
           <p className="text-center text-foreground mb-6 sm:mb-12 max-w-2xl mx-auto text-xs sm:text-base">
             За курс программы пациенты обычно достигают:
           </p>
-          
+
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 max-w-3xl mx-auto mb-6 sm:mb-8">
             {[
               "Снижение веса на 6–30 кг",
@@ -1006,27 +1021,21 @@ export default function Home() {
           </div>
 
           <div className="rounded-xl overflow-hidden max-w-4xl mx-auto">
-            <picture>
-              <source media="(max-width: 640px)" srcSet="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/onfaxAicWJWqkGsg.jpg" />
-              <source media="(max-width: 1024px)" srcSet="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/QnzGtLmrDqkLIppq.jpg" />
-              <img
-                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/SohOikkoRfqNVvXJ.jpg"
-                alt="Результаты пациентов - до и после"
-                className="w-full h-auto rounded-xl object-cover"
-              />
-            </picture>
+            <img
+              src={images.results1}
+              alt="Результаты пациентов - до и после"
+              className="w-full h-auto rounded-xl object-cover"
+              loading="lazy"
+            />
           </div>
-          
+
           <div className="rounded-xl overflow-hidden max-w-4xl mx-auto mt-6 sm:mt-8">
-            <picture>
-              <source media="(max-width: 640px)" srcSet="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/ZsZiAXgFQxEWPXNa.jpg" />
-              <source media="(max-width: 1024px)" srcSet="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/uJabHgjSMXfzuZWP.jpg" />
-              <img
-                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/rscHNCjsmILdRngU.jpg"
-                alt="Результаты пациентов - до и после"
-                className="w-full h-auto rounded-xl object-cover"
-              />
-            </picture>
+            <img
+              src={images.results2}
+              alt="Результаты пациентов - до и после"
+              className="w-full h-auto rounded-xl object-cover"
+              loading="lazy"
+            />
           </div>
 
           <p className="text-center text-xs sm:text-sm text-foreground/70 mt-4 sm:mt-6 italic">
@@ -1046,18 +1055,57 @@ export default function Home() {
           </p>
 
           <div className="bg-background rounded-xl p-5 sm:p-8 shadow-md relative overflow-hidden" style={{
-            backgroundImage: 'url(https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/fEvVmzzKUNjGHVAp.png)',
+            backgroundImage: `url(${images.formBackground})`,
             backgroundPosition: 'right bottom',
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'clamp(150px, 30vw, 300px)',
             backgroundAttachment: 'local',
           }}>
             <div className="relative z-10">
-            <form onSubmit={handleFormSubmit} className="space-y-3 sm:space-y-4">
+            <form onSubmit={async (e) => {
+              e.preventDefault();
+              const form = e.target as HTMLFormElement;
+              const formData = new FormData(form);
+
+              // Показываем статус отправки
+              const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+              const originalText = submitButton.textContent;
+              submitButton.disabled = true;
+              submitButton.textContent = "Отправка...";
+
+              try {
+                // Создаем объект для отправки
+                const payload = {
+                  name: formData.get('name') as string,
+                  phone: formData.get('phone') as string,
+                  program: 'Связь с пациентом',
+                  formType: FORM_TYPES.TESTIMONIAL_REQUEST
+                };
+
+                // Отправляем в Google Sheets
+                await fetch(GOOGLE_SCRIPT_URL, {
+                  method: 'POST',
+                  mode: 'no-cors',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(payload),
+                });
+
+                toast.success("Заявка отправлена! Мы свяжемся с вами для организации разговора.");
+                form.reset();
+              } catch {
+                toast.error("Ошибка отправки. Попробуйте еще раз.");
+              } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = originalText;
+              }
+            }} className="space-y-3 sm:space-y-4">
               <div>
                 <label className="block text-xs sm:text-sm font-semibold text-foreground mb-1.5 sm:mb-2">Ваше имя *</label>
                 <input
                   type="text"
+                  name="name"
                   placeholder="Имя"
                   className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-sm sm:text-base"
                   required
@@ -1067,6 +1115,7 @@ export default function Home() {
                 <label className="block text-xs sm:text-sm font-semibold text-foreground mb-1.5 sm:mb-2">Телефон *</label>
                 <input
                   type="tel"
+                  name="phone"
                   placeholder="+7 (999) 999-99-99"
                   className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-sm sm:text-base"
                   required
@@ -1133,7 +1182,7 @@ export default function Home() {
           </p>
 
           <div className="bg-background rounded-xl p-5 sm:p-8 shadow-md relative overflow-hidden" style={{
-            backgroundImage: 'url(https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/fEvVmzzKUNjGHVAp.png)',
+            backgroundImage: `url(${images.formBackground})`,
             backgroundPosition: 'right bottom',
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'clamp(150px, 30vw, 300px)',
@@ -1196,17 +1245,17 @@ export default function Home() {
                     {uploadedFile ? (
                       <span className="text-foreground font-medium">{uploadedFile.name}</span>
                     ) : (
-                      <span className="text-foreground/70">Выберите файл или перетащите сюда</span>
+                      <span className="text-foreground/70">Выберите файл</span>
                     )}
                   </label>
                 </div>
               </div>
               <button
                 type="submit"
-                disabled={isUploading || consultationMutation.isPending}
+                disabled={isUploading}
                 className="w-full px-6 py-2.5 sm:py-3 bg-primary hover:bg-primary/90 disabled:bg-primary/50 text-white rounded-lg font-semibold transition-colors text-sm sm:text-base"
               >
-                {isUploading || consultationMutation.isPending ? "Отправка..." : "Получить консультацию"}
+                {isUploading ? "Отправка..." : "Получить консультацию"}
               </button>
               {submitted && (
                 <p className="text-center text-primary text-xs sm:text-sm">Спасибо! Врач свяжется с вами в ближайшее время.</p>
@@ -1285,7 +1334,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4 sm:mb-6 pb-4 sm:pb-6 border-b border-white/20">
             <div className="flex items-center gap-3">
               <img
-                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663096993096/lZBYIAbLnvciebLy.png"
+                src={images.logoFooter}
                 alt="Понедельник"
                 className="h-16 w-16 sm:h-20 sm:w-20 object-contain"
               />

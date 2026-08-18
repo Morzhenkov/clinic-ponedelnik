@@ -49,20 +49,20 @@
   --primary-foreground: #F5F1ED;
   --sidebar-primary: #1B5E3F;
   --sidebar-primary-foreground: #F5F1ED;
-  
+
   /* Accent: Soft Gold - warmth, care, human touch */
   --accent: #D4A574;
   --accent-foreground: #1B5E3F;
-  
+
   /* Chart colors - green palette */
   --chart-1: #2D7A52;
   --chart-2: #1B5E3F;
   --chart-3: #0D4C2F;
   --chart-4: #1B5E3F;
   --chart-5: #0D4C2F;
-  
+
   --radius: 0.5rem;
-  
+
   /* Background: Warm Beige */
   --background: #F5F1ED;
   --foreground: #2C2C2C;
@@ -70,22 +70,22 @@
   --card-foreground: #2C2C2C;
   --popover: #FFFFFF;
   --popover-foreground: #2C2C2C;
-  
+
   /* Secondary: Light Gray-Beige */
   --secondary: #E8E4DF;
   --secondary-foreground: #2C2C2C;
   --muted: #E8E4DF;
   --muted-foreground: #666666;
-  
+
   /* Destructive: Warm red (medical alert) */
   --destructive: #D97757;
   --destructive-foreground: #FFFFFF;
-  
+
   /* Borders and inputs */
   --border: #E8E4DF;
   --input: #FFFFFF;
   --ring: #D4A574;
-  
+
   /* Sidebar */
   --sidebar: #FFFFFF;
   --sidebar-foreground: #2C2C2C;
@@ -93,6 +93,12 @@
   --sidebar-accent-foreground: #1B5E3F;
   --sidebar-border: #E8E4DF;
   --sidebar-ring: #D4A574;
+
+  /* Chat colors */
+  --chat--color--primary: #1B5E3F;
+  --chat--color--secondary: #D4A574;
+  --chat--color--message--bot: #F5F1ED;
+  --chat--color--text: #1B5E3F;
 }
 
 .dark {
